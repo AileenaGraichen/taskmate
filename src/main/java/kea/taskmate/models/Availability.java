@@ -18,26 +18,23 @@ public class Availability {
         return date;
     }
 
-    public Date setDate(Date date) {
+    public void setDate(Date date) {
         this.date = date;
-        return date;
     }
 
     public int getUserId() {
         return userId;
     }
 
-    public int setUserId(int userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
-        return userId;
     }
 
     public float getAvailableHours() {
         return availableHours;
     }
 
-    public float setAvailableHours(float availableHours) {
+    public void setAvailableHours(float availableHours) {
         this.availableHours = availableHours;
-        return availableHours;
     }
 }

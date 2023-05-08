@@ -6,7 +6,7 @@ public class ActivityAssignment {
     private float hoursAssigned;
 
     public ActivityAssignment(){}
-    public ActivityAssignment(int activityId, int userId, float hoursAssigned){
+    public ActivityAssignment(int userId, int activityId, float hoursAssigned){
         this.activityId = activityId;
         this.userId = userId;
         this.hoursAssigned = hoursAssigned;
@@ -35,6 +35,5 @@ public class ActivityAssignment {
     public void setHoursAssigned(float hoursAssigned) {
         this.hoursAssigned = hoursAssigned;
     }
-
 
 }

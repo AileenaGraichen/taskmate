@@ -21,44 +21,39 @@ public class Task {
         return id;
     }
 
-    public int setId(int id) {
+    public void setId(int id) {
         this.id = id;
-        return id;
     }
 
     public int getActivityId() {
         return activityId;
     }
 
-    public int setActivityId(int activityId) {
+    public void setActivityId(int activityId) {
         this.activityId = activityId;
-        return activityId;
     }
 
     public String getTaskName() {
         return taskName;
     }
 
-    public String setTaskName(String taskName) {
+    public void setTaskName(String taskName) {
         this.taskName = taskName;
-        return taskName;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public String setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
-        return description;
     }
 
     public float getDurationInHours() {
         return durationInHours;
     }
 
-    public float setDurationInHours(float durationInHours) {
+    public void setDurationInHours(float durationInHours) {
         this.durationInHours = durationInHours;
-        return durationInHours;
     }
 }

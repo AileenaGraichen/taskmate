@@ -1,6 +1,6 @@
 package kea.taskmate.models;
 
-import java.util.Date;
+import java.sql.*;
 
 public class Project {
     private int id;

@@ -8,7 +8,9 @@ public class TeamMember {
     public TeamMember() {
     }
 
-    public TeamMember(String role) {
+    public TeamMember(int projectId, int userId, String role) {
+        this.projectId = projectId;
+        this.userId = userId;
         this.role = role;
     }
 

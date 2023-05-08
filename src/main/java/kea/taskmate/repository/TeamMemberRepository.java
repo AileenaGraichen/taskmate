@@ -32,7 +32,8 @@ public class TeamMemberRepository {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()){
-                TeamMember teamMember = new TeamMember(rs.getString(3));
+
+                TeamMember teamMember = new TeamMember(rs.getInt(1), rs.getInt(2), rs.getString(3));
                 teamMember.setProjectId(projectId);
                 teamMember.setUserId(rs.getInt(1));
                 listOfTeamMembers.add(teamMember);

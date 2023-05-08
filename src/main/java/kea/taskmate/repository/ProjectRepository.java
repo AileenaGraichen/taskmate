@@ -15,16 +15,16 @@ public class ProjectRepository {
     @Value("${spring.datasource.url}")
     private String DB_URL;
     @Value("${spring.datasource.username}")
-    private String UID;
+    private String USERNAME;
     @Value("${spring.datasource.password}")
-    private String PWD;
+    private String PASSWORD;
 
 
     public List<Project> getProjectsByUserId(int userId){
+        final String QUERY = "SELECT * FROM taskmate.project WHERE id = ?";
         List<Project> list = new ArrayList<>();
         try{
-            final String QUERY = "SELECT * FROM taskmate.project WHERE id = ?";
-            Connection connection = ConnectionManager.getConnection(DB_URL, UID, PWD);
+            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
             preparedStatement.setInt(1, userId);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -51,7 +51,7 @@ public class ProjectRepository {
         Project project = new Project();
         project.setId(projectId);
         try{
-            Connection connection = ConnectionManager.getConnection(DB_URL, UID, PWD);
+            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_QUERY);
 
             preparedStatement.setInt(1, projectId);
@@ -77,8 +77,53 @@ public class ProjectRepository {
     }
 
     // DO IT !!
-    public void addProject(Project project){}
-    public void updateProject(Project project){}
-    public void deleteProject(Project project){}
+    public void addProject(Project project){
+        final String CREATE_QUERY = "INSERT INTO taskmate.project(project_name, description, start_date, end_date) VALUES  (?, ?, ?, ?)";
+        try{
+            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(CREATE_QUERY);
+
+            preparedStatement.setString(1, project.getProjectName());
+            preparedStatement.setString(2, project.getDescription());
+            preparedStatement.setDate(3, project.getStartDate());
+            preparedStatement.setDate(4, project.getEndDate());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e){
+            System.out.println("Could not create project.");
+            e.printStackTrace();
+        }
+    }
+    public void updateProject(Project project){
+        final String UPDATE_QUERY = "UPDATE taskmate.project SET project_name = ?, description = ?, start_date = ?, end_date = ? WHERE id = ?";
+        try{
+            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY);
+
+            preparedStatement.setString(1, project.getProjectName());
+            preparedStatement.setString(2, project.getDescription());
+            preparedStatement.setDate(3, project.getStartDate());
+            preparedStatement.setDate(4, project.getEndDate());
+
+            preparedStatement.executeUpdate();
+
+        }catch (SQLException e){
+            System.out.println("Could not update project.");
+            e.printStackTrace();
+        }
+    }
+    public void deleteProject(int id){
+        final String DELETE_QUERY = "DELETE FROM taskmate.project WHERE id = ?";
+        try {
+            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_QUERY);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Could not delete project.");
+            e.printStackTrace();
+        }
+    }
 }
 

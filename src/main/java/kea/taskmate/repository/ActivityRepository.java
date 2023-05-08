@@ -17,9 +17,9 @@ public class ActivityRepository {
     @Value("${spring.datasource.url}")
     private String DB_URL;
     @Value("${spring.datasource.username}")
-    private String UID;
+    private String USERNAME;
     @Value("${spring.datasource.password}")
-    private String PWD;
+    private String PASSWORD;
 
 
     public Activity getActivityById(int activityId) {
@@ -27,7 +27,7 @@ public class ActivityRepository {
         Activity activity = new Activity();
         activity.setId(activityId);
         try{
-            Connection connection = ConnectionManager.getConnection(DB_URL, UID, PWD);
+            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_QUERY);
 
             preparedStatement.setInt(1, activityId);
@@ -54,7 +54,7 @@ public class ActivityRepository {
         List<Activity> list = new ArrayList<>();
         try{
             final String QUERY = "SELECT * FROM taskmate.activity WHERE id = ?";
-            Connection connection = ConnectionManager.getConnection(DB_URL, UID, PWD);
+            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -78,7 +78,7 @@ public class ActivityRepository {
 
     public void addActivity(Activity activity){
         try{
-            Connection connection = ConnectionManager.getConnection(DB_URL, UID, PWD);
+            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
             final String CREATE_QUERY = "INSERT INTO taskmate.activity(section_id, activity_name, description, duration) VALUES  (?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(CREATE_QUERY);
 
@@ -97,7 +97,7 @@ public class ActivityRepository {
     public void updateActivity(Activity activity){
         final String UPDATE_QUERY = "UPDATE taskmate.activity SET activity_name = ?, description = ?, duration = ? WHERE id = ?";
         try{
-            Connection connection = ConnectionManager.getConnection(DB_URL, UID, PWD);
+            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY);
 
             preparedStatement.setString(1, activity.getActivityName());
@@ -116,7 +116,7 @@ public class ActivityRepository {
     public void deleteActivityByID(int id) {
         final String DELETE_QUERY = "DELETE FROM taskmate.activity WHERE id = ?";
         try {
-            Connection connection = ConnectionManager.getConnection(DB_URL, UID, PWD);
+            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_QUERY);
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();

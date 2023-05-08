@@ -2,12 +2,20 @@ package kea.taskmate.models;
 
 
 public class Activity {
-
     private int id;
     private int sectionId;
     private String activityName;
     private String description;
     private float durationInHours;
+
+    public Activity(){}
+
+    public Activity(int sectionId, String activityName, String description, float durationInHours){
+        this.sectionId = sectionId;
+        this.activityName = activityName;
+        this.description = description;
+        this.durationInHours = durationInHours;
+    }
 
     public int getSectionId() {
         return sectionId;
@@ -49,16 +57,6 @@ public class Activity {
         this.durationInHours = durationInHours;
     }
 
-
-    //empty constructor - no touchy
-    public Activity(){}
-
-    public Activity(int sectionId, String activityName, String description, float durationInHours){
-        this.sectionId = sectionId;
-        this.activityName = activityName;
-        this.description = description;
-        this.durationInHours = durationInHours;
-    }
 }
 
 
