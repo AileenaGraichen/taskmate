@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+  <form class="edit-profile-form" th:action="@{/update-profile}" method="post">
+    <h2 class="profile-header">Personal</h2>
+    <h4>First name:</h4>
+    <input type="text" placeholder="First name" name="fristName" th:value="${session.user.getFirstName()}">
+    <h4>Last name:</h4>
+    <input type="text" placeholder="Last name" name="lastName" th:value="${session.user.getLastName()}">
+    <h4>Email:</h4>
+    <input type="text" placeholder="Email" name="email" th:value="${session.user.getEmail()}">
+    <button class="button-30" type="submit">Update Info</button>
+  </form>
+</body>
+</html>

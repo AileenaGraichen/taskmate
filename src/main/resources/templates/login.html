@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+</head>
+<body>
+  <form th:fragment="login-form" class="" action="/login" th:action="@{/login}" method="POST">
+    <div class="">
+      <input type="email" id="email" placeholder="Email" name="email" required>
+      <input type="password" id="password" placeholder="Password" name="password" required>
+    </div>
+    <div class="">
+      <button class="" type="submit" >LOGIN</button>
+    </div>
+  </form>
+
+  <div>
+    <a th:href="@{/logout}"><button class="button-30">Logout</button></a>
+  </div>
+
+  <div th:fragment="delete-profile-popup" class="delete-popup">
+    <h1 class="form-header">Are you sure you want to delete your profile?</h1>
+    <div class="form-buttons">
+      <a th:href="@{/delete-user}" class="sureDeleteButton button-30">Delete Profile</a>
+      <button class="sureDeleteCancel button-30" onclick="closeDeleteProfilePopUp()">Cancel</button>
+    </div>
+  </div>
+</body>
+</html>

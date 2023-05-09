@@ -121,6 +121,34 @@ public class UserRepository {
         return user;
     }
 
+    public User getUserByEmailAndPassword(String eMail, String passWord){
+        //SQL QUERY
+        final String FIND_QUERY = "SELECT * FROM taskmate.user WHERE password = ? AND email = ?";
+        User user = new User();
+        user.setEmail(eMail);
+        try {
+            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
+
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_QUERY);
+            preparedStatement.setString(1, passWord);
+            preparedStatement.setString(2, eMail);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            resultSet.next();
+            int id = resultSet.getInt(1);
+            String firstName = resultSet.getString(2);
+            String lastName = resultSet.getString(3);
+            user.setId(id);
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
+
+        } catch (SQLException e){
+            System.out.println("Error - Password");
+            e.printStackTrace();
+        }
+        return user;
+    }
+
     public void deleteUserById(int userId){
         final String QUERY = "DELETE FROM taskmate.user WHERE id = ?";
         try{
