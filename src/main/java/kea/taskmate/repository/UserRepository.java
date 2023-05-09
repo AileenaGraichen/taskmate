@@ -4,7 +4,6 @@ import kea.taskmate.models.User;
 import kea.taskmate.utility.ConnectionManager;
 import kea.taskmate.utility.PasswordEncrypter;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
