@@ -15,7 +15,7 @@ import java.util.List;
 
 @Repository
 public class TeamMemberRepository {
-    @Value("$spring.datasource.url")
+    @Value("${spring.datasource.url}")
     private String DB_URL;
     @Value("${spring.datasource.username}")
     private String USERNAME;

@@ -1,0 +1,11 @@
+#register-form {
+    display: none;
+}
+
+#login-form {
+    display: block;
+}
+
+button {
+    color: yellow;
+}
