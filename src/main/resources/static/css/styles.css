@@ -1,3 +1,24 @@
+:root {
+    --heading: "Geneva", 900;
+    --sub-heading: "Helvetica", 700;
+    --text: "Helvetica", 400;
+    --background-color: #F0F1F4;
+    --complementary-color: #F5F4F5;
+    --primary-color: #38344E;
+    --secondary-color: #EDA284;
+    --tertiary-color: #D2BCE2;
+    --off-color: #B2B4B7;
+    --box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    --border: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+/* CSS Resets */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 #register-form {
     display: none;
 }
