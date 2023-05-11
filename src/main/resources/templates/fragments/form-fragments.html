@@ -33,21 +33,22 @@
     <div class="">
         <input type="text" placeholder="Project Name" name="project-name" required>
         <input type="text" placeholder="Description" name="description">
-        <input type="date" placeholder="Start Date" name="start-date">
-        <input type="date" placeholder="End Date" name="end-date">
+        <label for="start-date">Start Date</label>
+        <input type="date" id="start-date" placeholder="Start Date" name="start-date">
+        <label for="End-date">End Date</label>
+        <input type="date" id="end-date" placeholder="End Date" name="end-date">
     </div>
     <div>
         <button class="" type="submit">Create</button>
     </div>
 </form>
 
-<form th:fragment="update-project-form (id, projectName, description, startDate, endDate)" class="" action="/update-project" th:action="@{/update-project}" method="post">
+<form th:fragment="update-project-form" class="" action="/update-project" th:action="@{/update-project}" method="post">
     <div class="">
-        <input type="hidden" name="project-id" th:value="${id}">
-        <input type="text" placeholder="Project Name" name="project-name" th:value="${projectName}">
-        <input type="text" placeholder="Description" name="description" th:value="${description}">
-        <input type="date" placeholder="Start Date" name="start-date" th:value="${startDate}">
-        <input type="date" placeholder="End Date" name="end-date" th:value="${endDate}">
+        <input type="text" placeholder="Project Name" name="project-name" th:value="${session.project.projectName}">
+        <input type="text" placeholder="Description" name="description" th:value="${session.project.description}">
+        <input type="date" placeholder="Start Date" name="start-date" th:value="${session.project.startDate}">
+        <input type="date" placeholder="End Date" name="end-date" th:value="${session.project.endDate}">
     </div>
     <div>
         <button class="" type="submit">Update</button>

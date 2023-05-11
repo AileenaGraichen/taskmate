@@ -131,21 +131,6 @@ public class MainController {
         return "redirect:/projects";
     }
 
-    @PostMapping("/update-project")
-    public String updateProject(@RequestParam("project-name") String projectName,
-                                @RequestParam("description") String description,
-                                @RequestParam("start-date") Date startDate,
-                                @RequestParam("end-date") Date endDate,
-                                HttpSession session){
-        Project project = (Project) session.getAttribute("project");
-        project.setProjectName(projectName);
-        project.setDescription(description);
-        project.setStartDate(startDate);
-        project.setEndDate(endDate);
-        projectRepository.updateProject(project);
-        return "redirect:/project-page/"+project.getId();
-    }
-
     //Shows sections in a project
     @GetMapping("/project-page/{projectId}")
     public String getProjectPage(@PathVariable("projectId") int projectId,
@@ -154,6 +139,23 @@ public class MainController {
         session.setAttribute("listOfSections", listOfSections);
         session.setAttribute("project", projectRepository.getProjectById(projectId));
         return "project-page";
+    }
+
+    @PostMapping("/update-project")
+    public String updateProject(@RequestParam("project-name") String projectName,
+                                @RequestParam("description") String description,
+                                @RequestParam("start-date") Date startDate,
+                                @RequestParam("end-date") Date endDate,
+                                HttpSession session){
+
+        Project project = (Project) session.getAttribute("project");
+        project.setProjectName(projectName);
+        project.setDescription(description);
+        project.setStartDate(startDate);
+        project.setEndDate(endDate);
+        projectRepository.updateProject(project);
+
+        return "redirect:/project-page/"+project.getId();
     }
 
     @PostMapping("/create-section")

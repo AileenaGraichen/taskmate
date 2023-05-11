@@ -5,5 +5,8 @@
     <title>Project Page</title>
 </head>
 <body>
+    <div th:insert="fragments/form-fragments :: update-project-form" th:with="project=${session.project}"></div>
+
+    <div th:text="${session.project.getId()}"></div>
 </body>
 </html>

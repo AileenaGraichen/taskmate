@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Projects</title>
 </head>
 <body>
-
+    <div th:insert="fragments/form-fragments :: create-project-form"></div>
+    <div th:each="project : ${session.projectsList}">
+        <a th:href="@{'/project-page/'+${project.getId()}}">
+            <span th:text="${project.projectName}"></span>
+        </a>
+    </div>
 </body>
 </html>

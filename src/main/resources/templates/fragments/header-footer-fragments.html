@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+  <nav th:fragment="header">
+    <div class="logo">
+        <a th:href="@{/}">
+          LOGOIMAGE
+        </a>
+    </div>
+    <ul class="header-links">
+      <li><a th:href="@{/login}">Login</a></li>
+      <li><a>Contact</a></li>
+    </ul>
+  </nav>
+
+  <nav th:fragment="side-navigation">
+    <div class="side-logo">
+      <a th:href="@{/}">
+        LOGOIMAGE
+      </a>
+    </div>
+    <div class="navigation-links">
+      <li><a th:href="@{/dashboard}">Dashboard</a></li>
+      <li><a th:href="@{/projects}">Projects</a></li>
+      <li><a th:href="@{/profile}">Profile</a></li>
+      <li><a th:href="@{/logout}">Logout</a></li>
+    </div>
+  </nav>
+
+</body>
+</html>

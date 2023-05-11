@@ -21,7 +21,7 @@ public class ProjectRepository {
 
 
     public List<Project> getProjectsByUserId(int userId){
-        final String QUERY = "SELECT * FROM taskmate.project WHERE id = ?";
+        final String QUERY = "SELECT * FROM taskmate.project WHERE user_id = ?";
         List<Project> list = new ArrayList<>();
         try{
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
@@ -59,12 +59,15 @@ public class ProjectRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             resultSet.next();
-            int sectionId;
-            String projectName = resultSet.getString(2);
-            String description = resultSet.getString(3);
-            Date startDate = resultSet.getDate(4);
-            Date endDate = resultSet.getDate(5);
+            int id = resultSet.getInt(1);
+            int userId = resultSet.getInt(2);
+            String projectName = resultSet.getString(3);
+            String description = resultSet.getString(4);
+            Date startDate = resultSet.getDate(5);
+            Date endDate = resultSet.getDate(6);
 
+            project.setId(id);
+            project.setUserId(userId);
             project.setProjectName(projectName);
             project.setDescription(description);
             project.setStartDate(startDate);
@@ -78,15 +81,16 @@ public class ProjectRepository {
 
     // DO IT !!
     public void addProject(Project project){
-        final String CREATE_QUERY = "INSERT INTO taskmate.project(project_name, description, start_date, end_date) VALUES  (?, ?, ?, ?)";
+        final String CREATE_QUERY = "INSERT INTO taskmate.project(user_id, project_name, description, start_date, end_date) VALUES  (?, ?, ?, ?, ?)";
         try{
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(CREATE_QUERY);
 
-            preparedStatement.setString(1, project.getProjectName());
-            preparedStatement.setString(2, project.getDescription());
-            preparedStatement.setDate(3, project.getStartDate());
-            preparedStatement.setDate(4, project.getEndDate());
+            preparedStatement.setInt(1, project.getUserId());
+            preparedStatement.setString(2, project.getProjectName());
+            preparedStatement.setString(3, project.getDescription());
+            preparedStatement.setDate(4, project.getStartDate());
+            preparedStatement.setDate(5, project.getEndDate());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e){
@@ -104,6 +108,7 @@ public class ProjectRepository {
             preparedStatement.setString(2, project.getDescription());
             preparedStatement.setDate(3, project.getStartDate());
             preparedStatement.setDate(4, project.getEndDate());
+            preparedStatement.setInt(5, project.getId());
 
             preparedStatement.executeUpdate();
 

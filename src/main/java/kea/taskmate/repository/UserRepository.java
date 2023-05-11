@@ -124,12 +124,11 @@ public class UserRepository {
         //SQL QUERY
         final String FIND_QUERY = "SELECT * FROM taskmate.user WHERE email = ?";
         User user = new User();
-        user.setEmail(eMail);
         try {
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_QUERY);
             preparedStatement.setString(1, eMail);
+
             ResultSet resultSet = preparedStatement.executeQuery();
 
             resultSet.next();
@@ -140,6 +139,7 @@ public class UserRepository {
             user.setId(id);
             user.setFirstName(firstName);
             user.setLastName(lastName);
+            user.setEmail(email);
 
         } catch (SQLException e){
             System.out.println("Error - Password");
