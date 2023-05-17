@@ -127,6 +127,10 @@ input[type="email"], input[type="password"], input[type="text"]{
     left: 5em;
 }
 
+a:hover, a:visited, a:link, a:active {
+    text-decoration: none;
+}
+
 #register-form {
     display: none;
 }

@@ -1,0 +1,114 @@
+/* PROJECTS */
+#projects, #sections {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--background-color);
+    font-family: var(--sub-heading);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin-top: 6rem;
+    min-height: 100vh;
+    min-width: 100%;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding: 1.25rem;
+}
+
+.hero {
+    width: 100%;
+}
+
+.top-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    margin: 0 1rem 2rem 1rem;
+}
+
+.topRightSection {
+    display: flex;
+}
+
+.add-project, .project, .add-section, .section {
+    display: flex;
+    height: 10rem;
+    width: 12.5rem;
+    min-height: 9.375rem;
+    min-width: 9.375rem;
+    margin: 1rem;
+    background: var(--complementary-color);
+    border-radius: 10px;
+    border-color: var(--complementary-color);
+    align-items: center;
+    justify-content: center;
+
+    font-family: helvetica, sans-serif;
+    font-size: 5.5mm;
+    -webkit-text-fill-color: var(--primary-color);
+}
+
+.add-project img, .add-section img {
+    width: 3rem;
+    height: 3rem;
+}
+
+h4, h1 {
+    display: flex;
+    font-family: geneva, sans-serif;
+    font-size: 6.5mm;
+    color: var(--primary-color);
+}
+
+.p-row1, .pp-row1 {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.p-row2, .pp-row2 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.topRightSection button, .topLeftSection button, .p-row1 button {
+    display: flex;
+    height: 2rem;
+    min-width: 5rem;
+    margin: 0.5rem;
+    background: var(--secondary-color);
+    border-radius: 10px;
+    border-color: var(--secondary-color);
+    align-items: center;
+    justify-content: center;
+    -webkit-text-fill-color: var(--primary-color);
+    font-family: var(--sub-heading);
+}
+
+/*##########################*/
+/* EDIT-PROJECT-POPUP-FORM */
+#edit-project-form {
+    display: none;
+}
+
+#create-project-form {
+    display: none;
+}
+
+/* EDIT-SECTION-POPUP-FORM */
+#edit-section-form {
+    display: none;
+}
+
+#create-section-form {
+    display: none;
+}
