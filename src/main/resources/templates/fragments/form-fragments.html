@@ -29,19 +29,21 @@
     </div>
 </form>
 
-<form th:fragment="create-project-form" class="" action="/create-project" th:action="@{/create-project}" method="post">
-    <div class="">
-        <input type="text" placeholder="Project Name" name="project-name" required>
-        <input type="text" placeholder="Description" name="description">
-        <label for="start-date">Start Date</label>
-        <input type="date" id="start-date" placeholder="Start Date" name="start-date">
-        <label for="End-date">End Date</label>
-        <input type="date" id="end-date" placeholder="End Date" name="end-date">
-    </div>
-    <div>
-        <button class="" type="submit">Create</button>
-    </div>
-</form>
+<div id="create-project-form">
+    <form th:fragment="create-project-form" class="" action="/create-project" th:action="@{/create-project}" method="POST">
+        <div class="">
+            <input type="text" placeholder="Project Name" name="project-name" required>
+            <input type="text" placeholder="Description" name="description">
+            <label for="start-date">Start Date</label>
+            <input type="date" id="start-date" placeholder="Start Date" name="start-date">
+            <label for="End-date">End Date</label>
+            <input type="date" id="end-date" placeholder="End Date" name="end-date">
+        </div>
+        <div>
+            <button class="" type="submit" th:href="@{/projects}">Create</button>
+        </div>
+    </form>
+</div>
 
 <form th:fragment="update-project-form" class="" action="/update-project" th:action="@{/update-project}" method="post">
     <div class="">

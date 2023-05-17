@@ -3,13 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Projects</title>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/page.css" th:href="@{/css/page.css}"/>
+    <script type="text/javascript" src="../static/javascript/script.js" th:src="@{/javascript/script.js}"></script>
 </head>
 <body>
-    <div th:insert="fragments/form-fragments :: create-project-form"></div>
-    <div th:each="project : ${session.projectsList}">
-        <a th:href="@{'/project-page/'+${project.getId()}}">
-            <span th:text="${project.projectName}"></span>
+    <div class="p-row1">
+        <a th:href="@{/dashboard}">
+            <button><img class="right-arrow-img" th:src="@{images/arrow_right.png}" alt="" src="">Dashboard</button>
         </a>
+        <h4>All your projects</h4>
+    </div>
+    <div class="p-row2">
+        <button onclick="openCreateProjectForm()" class="add-project">
+            <!a href="../fragments/form-fragments/create-project-form">
+                <img th:src="@{images/arrow-right.svg}" alt="Add project" src="">
+            <!/a>
+        </button>
+        <div th:each="project : ${session.projectsList}">
+            <a href="" th:href="@{'/project-page/'+${project.getId()}}">
+                <button class="project" th:text="${project.projectName}"></button>
+            </a>
+        </div>
     </div>
 </body>
 </html>
