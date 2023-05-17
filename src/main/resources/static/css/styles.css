@@ -1,5 +1,5 @@
 :root {
-    --heading: "Geneva", 900;
+    --heading: "Geneva", 900, white;
     --sub-heading: "Helvetica", 700;
     --text: "Helvetica", 400;
     --background-color: #F0F1F4;
@@ -8,8 +8,9 @@
     --secondary-color: #EDA284;
     --tertiary-color: #D2BCE2;
     --off-color: #B2B4B7;
-    --box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    --box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
     --border: 1px solid rgba(255, 255, 255, 0.02);
+    --border-radius: 10px;
 }
 
 /* CSS Resets */
@@ -17,6 +18,113 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+}
+
+h1{
+    font-family: Helvetica sans-serif;
+    font-size: large;
+}
+
+#background_image {
+    background-image: url("../images/Background_FrontPage.svg");
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.2;
+}
+
+ul{
+    list-style-type: none;
+}
+
+.container{
+    margin-top: 7em;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.container-login{
+    /*margin-top: 7em;*/
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 7em 15em 2em;
+}
+
+.form-container{
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Helvetica, sans-serif;
+}
+
+a #login-link, #register{
+    cursor: pointer;
+}
+
+.hover-link::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: width .5s;
+}
+
+.hover-link:hover::after {
+    width: 100%;
+    transition: width .5s;
+}
+
+input[type="email"], input[type="password"], input[type="text"]{
+    border: none;
+    background: var(--complementary-color);
+    border-bottom: 2px solid var(--primary-color);
+    margin: 1em 2em 1em;
+    font-family: Helvetica, sans-serif;
+    font-size: var(--heading);
+}
+
+.box{
+    background-color: var(--complementary-color);
+    box-shadow: var(--box-shadow);
+    font-family: var(--heading);
+    border: var(--border);
+    padding: 10em;
+    border-radius: var(--border-radius);
+}
+
+#frontPageVideo{
+    border-radius: var(--border-radius);
+}
+
+.header-box{
+    position: sticky;
+    display: flex;
+    flex-direction: row;
+    background-color: var(--primary-color);
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--box-shadow);
+    border: var(--border);
+}
+
+.logo img{
+    position: relative;
+    height: 5em;
+    left: 5em;
 }
 
 #register-form {
@@ -27,6 +135,42 @@
     display: block;
 }
 
-button {
-    color: yellow;
+.button-header {
+    font-family: Helvetica, serif;
+    margin: 10px;
+    padding: 15px 30px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    border-radius: 10px;
+    border: 0px;
+    box-shadow: var(--box-shadow);
+    background-image: linear-gradient(45deg, var(--secondary-color) 0%, #f1c2ae 51%, var(--secondary-color)  100%);
+    cursor: pointer;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    display: inline-block; /* make the buttons display inline */
+    text-decoration: none; /* remove the underline from the link */
+    border-bottom: none;
+}
+
+.button-header:hover {
+    background-position: right center;
+    /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+}
+
+.button-header:active {
+    transform: scale(0.95);
+}
+.header-links {
+    display: flex;
+    justify-content: center; /* optional: align buttons in the center horizontally */
+}
+
+.header-links li {
+    margin-right: 10px; /* optional: add some space between the buttons */
 }

@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
 </head>
 <body>
-
   <nav th:fragment="header">
-    <div class="logo">
-        <a th:href="@{/}">
-          LOGOIMAGE
-        </a>
+    <div class="header-box">
+      <div class="logo">
+          <a id="Logo" th:href="@{/}"> <img src ="../../static/images/TaskMate_logo.png" th:src="@{/images/TaskMate_logo.png}" alt="Logo"></a>
+      </div>
+      <ul class="header-links">
+        <li><a class="button-header" th:href="@{/login}">Login</a></li>
+        <li><a class="button-header">Contact</a></li>
+      </ul>
     </div>
-    <ul class="header-links">
-      <li><a th:href="@{/login}">Login</a></li>
-      <li><a>Contact</a></li>
-    </ul>
   </nav>
 
   <nav th:fragment="side-navigation">
