@@ -49,22 +49,24 @@ public class TaskRepository {
         return task;
     }
 
-    public List<Task> getTaskListById(int id){
-        final String QUERY = "SELECT * FROM taskmate.task WHERE id = ?";
+    public List<Task> getTaskListById(int activityId){
+        final String QUERY = "SELECT * FROM taskmate.task WHERE activity_id = ?";
         List<Task> list = new ArrayList<>();
         try{
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
-            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(1, activityId);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                int sectionId = resultSet.getInt(2);
+                int id = resultSet.getInt(1);
                 String taskName = resultSet.getString(3);
                 String description = resultSet.getString(4);
                 float durationInHours = resultSet.getFloat(5);
-                Task task = new Task(sectionId, taskName, description, durationInHours);
+                int status = resultSet.getInt(6);
+                Task task = new Task(activityId, taskName, description, durationInHours);
                 task.setId(id);
+                task.setStatus(status);
                 list.add(task);
             }
 

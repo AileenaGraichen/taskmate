@@ -3,8 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" src="../static/javascript/chartsStyles.js" th:src="@{/javascript/chartsStyles.js}"></script>
+    <script type="text/javascript" src="../static/javascript/script.js" th:src="@{/javascript/script.js}"></script>
+    <link rel="stylesheet" type="text/css" href="../static/css/dashboard.css" th:href="@{/css/dashboard.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body>
-    <a th:href="@{/projects}">Projects</a>
+<body onload="progressBar(); showOverview()">
+
+    <div th:insert="fragments/header-footer-fragments :: side-navigation"></div>
+
+    <div id="dashboard" class="page-wrapper">
+        <div class="overview-wrapper" th:each="overview : ${projectOverviews}">
+            <div class="dashboard-top">
+                <div class="pieChart">
+                    <canvas th:id="'myChart' + ${overview.project.id}"></canvas>
+                    <script>
+                        generatePieChart([[${overview.projectStatus.done}]], [[${overview.projectStatus.inProgress}]], [[${overview.projectStatus.notStarted}]], [[${overview.project.id}]]);
+                        function generatePieChart(done, inProgress, notStarted, id) {
+                            new Chart("myChart"+id, {
+                                type: "pie",
+                                data: {
+                                    labels: ['Done', 'In Progress', 'Not Started'],
+                                    datasets: [{
+                                        data: [done, inProgress, notStarted],
+                                        backgroundColor: ['#2adece', '#dd3b79', '#ff766b'],
+                                        borderWidth:1
+                                    }]
+                                }
+                            });
+                        }
+                    </script>
+                </div>
+                <div class="project-info">
+                    <h1 th:text="${overview.project.projectName}"></h1>
+                    <div class="myProgress">
+                        <div class="myBar"  th:data-progress="${overview.projectStatus.persentageDone}"></div><span th:text="${overview.projectStatus.persentageDone+'%'}"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-bottom">
+                <div class="list activity-list">
+                    <h2>Activities</h2>
+                    <div class="list-item" th:each="activity : ${overview.activities}" th:switch="${activity.status}">
+                        <span th:text="${activity.activityName}"></span>
+                        <span th:text="'Duration: '+${activity.durationInHours}"></span>
+                        <p th:case="0">Not Started</p>
+                        <p th:case="1">In Progress</p>
+                        <p th:case="2">Done</p>
+                    </div>
+                </div>
+                <div class="list task-list">
+                    <h2>Tasks</h2>
+                    <div th:each="task : ${overview.tasks}">
+                        <span th:text="${task.taskName}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

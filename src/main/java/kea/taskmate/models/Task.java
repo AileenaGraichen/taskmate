@@ -6,6 +6,7 @@ public class Task {
     private String taskName;
     private String description;
     private float durationInHours;
+    private int Status;
 
     public Task() {
     }
@@ -55,5 +56,13 @@ public class Task {
 
     public void setDurationInHours(float durationInHours) {
         this.durationInHours = durationInHours;
+    }
+
+    public int getStatus() {
+        return Status;
+    }
+
+    public void setStatus(int status) {
+        Status = status;
     }
 }

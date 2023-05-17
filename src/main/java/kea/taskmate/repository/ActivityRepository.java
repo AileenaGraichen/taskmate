@@ -50,22 +50,24 @@ public class ActivityRepository {
 
     }
 
-    public List<Activity> getActivityListById(int id){
+    public List<Activity> getActivityListById(int secId){
         List<Activity> list = new ArrayList<>();
         try{
-            final String QUERY = "SELECT * FROM taskmate.activity WHERE id = ?";
+            final String QUERY = "SELECT * FROM taskmate.activity WHERE section_id = ?";
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
-            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(1, secId);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                int sectionId = resultSet.getInt(2);
+                int id = resultSet.getInt(1);
                 String activityName = resultSet.getString(3);
                 String description = resultSet.getString(4);
                 float durationInHours = resultSet.getFloat(5);
-                Activity activity = new Activity(sectionId, activityName, description, durationInHours);
+                int status = resultSet.getInt(6);
+                Activity activity = new Activity(secId, activityName, description, durationInHours);
                 activity.setId(id);
+                activity.setStatus(status);
                 list.add(activity);
             }
 
@@ -79,7 +81,7 @@ public class ActivityRepository {
     public void addActivity(Activity activity){
         try{
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            final String CREATE_QUERY = "INSERT INTO taskmate.activity(section_id, activity_name, description, duration) VALUES  (?, ?, ?, ?)";
+            final String CREATE_QUERY = "INSERT INTO taskmate.activity(section_id, activity_name, description, duration, status) VALUES  (?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(CREATE_QUERY);
 
             preparedStatement.setInt(1, activity.getSectionId());
@@ -109,6 +111,23 @@ public class ActivityRepository {
 
         }catch (SQLException e){
             System.out.println("Could not update activity.");
+            e.printStackTrace();
+        }
+    }
+
+    public void updateActivityStatus(Activity activity){
+        final String UPDATE_QUERY = "UPDATE taskmate.activity SET status = ? WHERE id = ?";
+        try{
+            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY);
+
+            preparedStatement.setInt(1, activity.getStatus());
+            preparedStatement.setInt(2, activity.getId());
+
+            preparedStatement.executeUpdate();
+
+        }catch (SQLException e){
+            System.out.println("Could not update activity status");
             e.printStackTrace();
         }
     }
