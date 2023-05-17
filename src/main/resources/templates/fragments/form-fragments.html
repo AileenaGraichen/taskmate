@@ -8,24 +8,28 @@
 <body>
 
 <form th:fragment="register" class="" action="/register" th:action="@{/register}" method="POST">
-    <div class="">
+    <div class="form-container">
+            <h1>Register</h1>
             <input type="text" placeholder="First Name" name="first-name" required>
             <input type="text" placeholder="Last Name" name="last-name" required>
             <input type="email" placeholder="Email" name="email" required>
             <input type="password" placeholder="Password" name="password" required>
+            <a id="register" class="hover-link" onclick="showLoginForm()">Already have an account? Login here.</a>
     </div>
-    <div class="">
-        <button class="" type="submit">REGISTER</button>
+    <div class="form-container">
+        <button class="button-header" type="submit">REGISTER</button>
     </div>
 </form>
 
 <form th:fragment="login-form" class="" action="/login" th:action="@{/login}" method="POST">
-    <div class="">
-        <input type="email" id="email" placeholder="Email" name="email" required>
+    <div class="form-container">
+        <h1>Login</h1>
+        <input label="E-Mail" type="email" id="email" placeholder="Email" name="email" required>
         <input type="password" id="password" placeholder="Password" name="password" required>
+        <a id="login-link" class="hover-link" onclick="showRegisterForm()">No account yet? Register here.</a>
     </div>
-    <div class="">
-        <button class="" type="submit" th:href="@{/projects}">LOGIN</button>
+    <div class="form-container">
+        <button class="button-header" type="submit" th:href="@{/projects}">LOGIN</button>
     </div>
 </form>
 

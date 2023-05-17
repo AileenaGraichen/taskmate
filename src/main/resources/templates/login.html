@@ -5,17 +5,34 @@
     <title>login</title>
     <link rel="stylesheet" type="text/css" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
     <script type="text/javascript" src="../static/javascript/script.js" th:src="@{/javascript/script.js}"></script>
+    <!-- Favicons -->
+    <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="../static/images/TaskMate_favicon.png" th:href="@{images/TaskMate_favicon.png}"
+    />
+    <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="../static/images/TaskMate_favicon.png" th:href="@{images/TaskMate_favicon.png}"
+    />
 </head>
 <body>
+<div th:insert="fragments/header-footer-fragments :: header"></div>
+<div id="background_image"></div>
+<div class="container-login">
+    <div class="box">
+        <!-- <button class="button-header" onclick="showLoginForm()">Login</button> -->
+        <!-- <button class="button-header" onclick="showRegisterForm()">Register</button> -->
+        <div>
+            <div id="login-form" th:insert="fragments/form-fragments :: login-form"></div>
 
-<div>
-    <button onclick="showLoginForm()">Login</button>
-    <button onclick="showRegisterForm()">Register</button>
-    <div>
-        <div id="login-form" th:insert="fragments/form-fragments :: login-form"></div>
-        <div id="register-form" th:insert="fragments/form-fragments :: register"></div>
+            <div id="register-form" th:insert="fragments/form-fragments :: register"></div>
+
+        </div>
     </div>
 </div>
-    <a th:href="@{/projects}">Go to projects</a>
+    <!-- <a th:href="@{/projects}">Go to projects</a> -->
 </body>
 </html>

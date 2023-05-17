@@ -3,8 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>TaskMate</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
+    <!-- Favicons -->
+    <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="../static/images/TaskMate_favicon.png" th:href="@{images/TaskMate_favicon.png}"
+    />
+    <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="../static/images/TaskMate_favicon.png" th:href="@{images/TaskMate_favicon.png}"
+    />
 </head>
 <body>
 <div th:insert="fragments/header-footer-fragments :: header"></div>
+<div id="background_image"></div>
+<div class="container">
+    <video id="frontPageVideo" width="720" height="576" autoplay loop muted>
+        <source src="../static/images/TaskMate.mp4" th:src="@{/images/TaskMate.mp4}" type="video/mp4">
+    </video>
+    <div class="box"><h1>Bringing your ideas to life. One project at a time.</h1></div>
+</div>
 </body>
 </html>
