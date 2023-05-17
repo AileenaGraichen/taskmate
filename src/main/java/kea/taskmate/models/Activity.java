@@ -7,6 +7,7 @@ public class Activity {
     private String activityName;
     private String description;
     private float durationInHours;
+    private int status;
 
     public Activity(){}
 
@@ -57,6 +58,13 @@ public class Activity {
         this.durationInHours = durationInHours;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 }
 
 

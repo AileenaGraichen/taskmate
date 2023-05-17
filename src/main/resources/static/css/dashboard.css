@@ -1,0 +1,240 @@
+/* SIDE NAVIGATION BAR */
+
+body {
+    background: var(--background-color);
+}
+
+.primary-nav {
+    position: fixed;
+    top: 0;
+    z-index: 999;
+}
+
+.menu {
+    position: absolute;
+    display: block;
+    left: 0;
+    top: 0;
+    width: 250px;
+    transition: all 0.45s cubic-bezier(0.77, 0, 0.175, 1);
+    background-color: var(--complementary-color);
+    z-index: 999;
+}
+
+.menu ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.open-panel {
+    border: none;
+    background-color:#fff;
+    padding: 0;
+}
+
+.hamburger {
+    background: var(--primary-color);
+    position: relative;
+    display: block;
+    text-align: center;
+    padding: 13px 0;
+    width: 50px;
+    height: 73px;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.hamburger:before {
+    content:"\2630"; /* hamburger icon */
+    display: block;
+    color: #fff;
+    line-height: 32px;
+    font-size: 16px;
+}
+
+.primary-nav .menu li {
+    position: relative;
+}
+
+.menu .icon {
+    position: absolute;
+    top: 12px;
+    right: 10px;
+    pointer-events: none;
+    width: 24px;
+    height: 24px;
+    color: var(--secondary-color);
+}
+
+.menu a {
+    display: block;
+    white-space: nowrap;
+    padding: 1em;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.menu a:hover {
+    color: var(--off-color);
+}
+
+.menu {
+    margin-bottom: 3em;
+}
+
+.menu-dropdown li .icon {
+    color: var(--secondary-color);
+}
+
+.menu-dropdown {
+    top: 0;
+    overflow-y: auto;
+}
+
+.overflow-container {
+    position: relative;
+    height: 100vh;
+    overflow-y: auto;
+    border-top: 73px solid #fff;
+    z-index: -1;
+    display:block;
+}
+
+.menu a.logotype {
+    position: absolute!important;
+    top: 11px;
+    left: 55px;
+    display: block;
+    font-family: 'Work Sans', sans-serif;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: #000;
+    font-size: 21px;
+    padding: 10px;
+}
+
+/* DASHBOARD STYLES*/
+
+.page-wrapper {
+    margin: 100px 100px 100px 300px;
+    height: 100vh;
+    transition: margin-left 0.45s cubic-bezier(0.77, 0, 0.175, 1);
+    background-color: var(--complementary-color);
+}
+
+.overview-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-top {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    background-color: var(--complementary-color);
+    box-shadow: var(--box-shadow);
+    height: 50%;
+    border-radius: 10px;
+}
+
+.dashboard-bottom {
+    display: flex;
+    justify-content: space-around;
+    height: 50%;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--complementary-color);
+    box-shadow: var(--box-shadow);
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.list div, h2 {
+    padding-bottom: 1rem;
+}
+
+.list-item {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.list-item span, p {
+    width: 30%;
+}
+
+.activity-list {
+    margin: 1rem 1rem 1rem 0;
+}
+
+.task-list {
+    margin: 1rem 0 1rem 1rem;
+}
+
+.pieChart {
+    margin: 20px;
+    height: 350px;
+    width: 350px;
+}
+
+.project-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50%;
+}
+
+/* PROGRESS BAR */
+.progress {
+    height: 100%;
+    background-color: #4CAF50;
+    border-radius: 10px;
+    width: 0;
+    transition: width 0.5s ease-in-out;
+}
+
+.myProgress {
+    width: 100%;
+    height: 20px;
+    background-color: #ccc;
+    border-radius: 10px;
+    display: flex;
+}
+
+.myBar {
+    width: 0;
+    height: 20px;
+    background-color: #04AA6D;
+    transition: width 0.5s ease-in-out;
+    border-radius: 10px;
+}
+
+/* TEST */
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    background-color: var(--complementary-color);
+    color: black;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.arrow:hover {
+    opacity: 0.8;
+}
+

@@ -18,19 +18,34 @@
     </ul>
   </nav>
 
-  <nav th:fragment="side-navigation">
-    <div class="side-logo">
-      <a th:href="@{/}">
-        LOGOIMAGE
-      </a>
-    </div>
-    <div class="navigation-links">
-      <li><a th:href="@{/dashboard}">Dashboard</a></li>
-      <li><a th:href="@{/projects}">Projects</a></li>
-      <li><a th:href="@{/profile}">Profile</a></li>
-      <li><a th:href="@{/logout}">Logout</a></li>
-    </div>
-  </nav>
+  <div th:fragment="side-navigation" class="primary-nav">
+
+          <button href="#" class="hamburger open-panel nav-toggle" onclick="toggleNavbar()"></button>
+
+          <nav role="navigation" class="menu" id="navbar-side">
+
+              <a href="#" class="logotype">TaskMate</a>
+
+              <div class="overflow-container">
+
+                  <ul class="menu-dropdown">
+
+                      <li><a th:href="@{/dashboard}">Dashboard</a><span class="icon"><i class="fa fa-dashboard"></i></span></li>
+
+                      <li><a th:href="@{/projects}">Projects</a><span class="icon"><i class="fa fa-envelope"></i></span></li>
+
+                      <li><a th:href="@{/profile}">Account</a><span class="icon"><i class="fa fa-gear"></i></span></li>
+
+                      <li><a th:href="@{/logout}">Logout</a><span class="icon"><i class="fa fa-dashboard"></i></span></li>
+
+                  </ul>
+
+              </div>
+
+          </nav>
+
+      </div>
+
 
 </body>
 </html>

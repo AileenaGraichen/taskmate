@@ -3,6 +3,7 @@ package kea.taskmate.controller;
 import kea.taskmate.models.*;
 import kea.taskmate.repository.*;
 import jakarta.servlet.http.HttpSession;
+import kea.taskmate.service.DashboardService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,13 +22,15 @@ public class MainController {
     private final SectionRepository sectionRepository;
     private final ActivityRepository activityRepository;
     private final TaskRepository taskRepository;
+    private final DashboardService dashboardService;
 
-    public MainController(UserRepository userRepository, ProjectRepository projectRepository, SectionRepository sectionRepository, ActivityRepository activityRepository, TaskRepository taskRepository){
+    public MainController(UserRepository userRepository, ProjectRepository projectRepository, SectionRepository sectionRepository, ActivityRepository activityRepository, TaskRepository taskRepository, DashboardService dashboardService){
         this.userRepository = userRepository;
         this.projectRepository = projectRepository;
         this.sectionRepository = sectionRepository;
         this.activityRepository = activityRepository;
         this.taskRepository = taskRepository;
+        this.dashboardService = dashboardService;
     }
 
     @GetMapping("/")
@@ -106,7 +109,10 @@ public class MainController {
     }
 
     @GetMapping("/dashboard")
-    public String getDashboard(HttpSession session){
+    public String getDashboard(HttpSession session, Model model){
+        User user = (User) session.getAttribute("user");
+        List<ProjectOverview> projectOverviews =  dashboardService.getProjectOverviews(user.getId());
+        model.addAttribute("projectOverviews", projectOverviews);
         return "dashboard";
     }
 
@@ -170,6 +176,7 @@ public class MainController {
         return "redirect:/project-page/"+project.getId();
     }
 
+    // SKAL IKKE HAVE PATH VARIABLE
     @PostMapping("/update-section/{sectionId}")
     public String updateSection(@PathVariable("sectionId") int sectionId,
                                 @RequestParam("section-name") String sectionName,
@@ -207,6 +214,7 @@ public class MainController {
         return "redirect:/section-page/"+section.getId();
     }
 
+    // SKAL IKKE HAVE PATH VARIABLE
     @PostMapping("/update-activity/{activityId}")
     public String updateActivity(@PathVariable("activityId") int activityId,
                                 @RequestParam("activity-name") String activityName,
@@ -219,6 +227,8 @@ public class MainController {
         activityRepository.updateActivity(activity);
         return "redirect:/section-page/"+activity.getSectionId();
     }
+
+
 
     // Shows all tasks of an activity
     @GetMapping("/activity-page/{activityId}")
@@ -241,8 +251,9 @@ public class MainController {
         return "redirect:/activity-page/"+activity.getId();
     }
 
+    // SKAL IKKE HAVE PATH VARIABLE
     @PostMapping("/update-task/{taskId}")
-    public String updatetask(@PathVariable("taskId") int taskId,
+    public String updateTask(@PathVariable("taskId") int taskId,
                                  @RequestParam("task-name") String taskName,
                                  @RequestParam("description") String description,
                                  @RequestParam("duration") float duration){
