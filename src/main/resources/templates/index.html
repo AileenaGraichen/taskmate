@@ -19,12 +19,21 @@
 </head>
 <body>
 <div th:insert="fragments/header-footer-fragments :: header"></div>
+<div class="toplayerBackground">
 <div id="background_image"></div>
+
 <div class="container">
-    <video id="frontPageVideo" width="720" height="576" autoplay loop muted>
-        <source src="../static/images/TaskMate.mp4" th:src="@{/images/TaskMate.mp4}" type="video/mp4">
-    </video>
-    <div class="box"><h1>Bringing your ideas to life. One project at a time.</h1></div>
+    <div class="text-container">
+        <h1>Bringing your ideas to life. One project at a time.</h1>
+        <h2>Empower Your Projects, Unleash Collective Brilliance: Seamlessly Collaborate, Achieve Unprecedented Efficiency and Success!</h2>
+    </div>
+    <div class="video-container">
+        <video id="frontPageVideo" width="720" height="576" autoplay loop muted>
+            <source src="../static/images/TaskMate.mp4" th:src="@{/images/TaskMate.mp4}" type="video/mp4">
+        </video>
+    </div>
+
+</div>
 </div>
 </body>
 </html>

@@ -20,19 +20,15 @@
 </head>
 <body>
 <div th:insert="fragments/header-footer-fragments :: header"></div>
+<div class="toplayerBackground"></div>
 <div id="background_image"></div>
 <div class="container-login">
     <div class="box">
-        <!-- <button class="button-header" onclick="showLoginForm()">Login</button> -->
-        <!-- <button class="button-header" onclick="showRegisterForm()">Register</button> -->
         <div>
             <div id="login-form" th:insert="fragments/form-fragments :: login-form"></div>
-
             <div id="register-form" th:insert="fragments/form-fragments :: register"></div>
-
         </div>
     </div>
 </div>
-    <!-- <a th:href="@{/projects}">Go to projects</a> -->
 </body>
 </html>
