@@ -12,34 +12,31 @@
 <section class="hero">
     <section class="top-section">
         <section class="topLeftSection">
-            <a th:href="@{/projects}"><button><img class="right-arrow-img" th:src="@{images/arrow_right.png}" alt="" src="">Projects</button></a>
-            <h1 th:text="${session.project.projectName}"></h1>
+            <a th:href="@{/projects}"><button class="button-header"><img class="arrow-right.svg" th:src="@{/images/arrow-right.svg}" alt="" src="">Projects</button></a>
         </section>
 
         <section class="topRightSection">
-            <button onclick="openEditProjectForm()">Edit Project</button>
-            <button onclick="openDeleteProjectPopUp()">Delete Project</button>
+            <button class="button-header" onclick="openEditProjectForm()">Edit Project</button>
+            <button class="button-header" onclick="openDeleteProjectPopUp()">Delete Project</button>
         </section>
     </section>
 
     <section class="bottom-section">
         <div class="pp-row1">
             <h4>Sections in </h4>
-            <div th:each="section : ${session.listOfSections}">
-                <a href="" th:href="@{'/section-page/'+${section.getId()}}">
-                    <h4 class="project" th:text="${section.sectionName}"></h4>
-                </a>
-            </div>
+            <h1 th:text="' '+${session.project.projectName}"></h1>
         </div>
 
         <div class="pp-row2">
-            <button onclick="openCreateSectionForm()" class="add-section">
-                <img th:src="@{images/arrow-right.svg}" alt="Add section" src="">
-            </button>
-            <div class="section" th:each="section : ${session.listOfSections}">
-                <button th:href="@{'/section-page/'+${section.getId()}}">
-                    <span th:text="${section.sectionName}"></span>
+            <section>
+                <button onclick="openCreateSectionForm()" class="add-section">
+                    <img th:src="@{/images/plus.svg}" alt="Add section" src="">
                 </button>
+            </section>
+            <div th:each="section : ${session.listOfSections}">
+                <a href=""  th:href="@{'/section-page/'+${section.getId()}}">
+                    <button class="section" th:text="${section.sectionName}"></button>
+                </a>
             </div>
         </div>
     </section>

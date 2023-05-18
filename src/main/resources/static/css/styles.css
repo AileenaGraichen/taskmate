@@ -139,6 +139,18 @@ a:hover, a:visited, a:link, a:active {
     display: block;
 }
 
+.header-links {
+    display: flex;
+    justify-content: center; /* optional: align buttons in the center horizontally */
+}
+
+.header-links li {
+    margin-right: 10px; /* optional: add some space between the buttons */
+}
+
+/*#############*/
+/*BUTTON-HEADER*/
+
 .button-header {
     font-family: Helvetica, serif;
     margin: 10px;
@@ -169,12 +181,4 @@ a:hover, a:visited, a:link, a:active {
 
 .button-header:active {
     transform: scale(0.95);
-}
-.header-links {
-    display: flex;
-    justify-content: center; /* optional: align buttons in the center horizontally */
-}
-
-.header-links li {
-    margin-right: 10px; /* optional: add some space between the buttons */
 }

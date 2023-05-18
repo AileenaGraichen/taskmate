@@ -1,5 +1,5 @@
 /* PROJECTS */
-#projects, #sections {
+#projects, #sections, #activities, #tasks {
     margin-top: 50px;
     margin-bottom: 50px;
     padding: 0;
@@ -27,17 +27,21 @@ body {
 
 .top-section {
     display: flex;
+    width: 100%;
     align-items: center;
     justify-content: space-between;
     flex-wrap: nowrap;
     margin: 0 1rem 2rem 1rem;
+    background: var(--complementary-color);
+    border-radius: 10px;
+    border-color: var(--complementary-color);
 }
 
 .topRightSection {
     display: flex;
 }
 
-.add-project, .project, .add-section, .section {
+.add-project, .project, .add-section, .section, .add-activity, .activity, .add-task, .task {
     display: flex;
     height: 10rem;
     width: 12.5rem;
@@ -55,9 +59,14 @@ body {
     -webkit-text-fill-color: var(--primary-color);
 }
 
-.add-project img, .add-section img {
-    width: 3rem;
-    height: 3rem;
+.add-project img, .add-section img, .add-activity img, .add-task img {
+    width: 3.5rem;
+    height: 3.5rem;
+}
+
+.topLeftSection img, .p-row1 img {
+    width: 1rem;
+    height: 1rem;
 }
 
 h4, h1 {
@@ -67,9 +76,16 @@ h4, h1 {
     color: var(--primary-color);
 }
 
-.p-row1, .pp-row1 {
+.p-row1 {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.pp-row1 {
+    display: flex;
+    flex-direction: row;
     width: 100%;
 }
 
@@ -80,35 +96,6 @@ h4, h1 {
     width: 100%;
 }
 
-.topRightSection button, .topLeftSection button, .p-row1 button {
-    display: flex;
-    height: 2rem;
-    min-width: 5rem;
-    margin: 0.5rem;
-    background: var(--secondary-color);
-    border-radius: 10px;
-    border-color: var(--secondary-color);
-    align-items: center;
-    justify-content: center;
-    -webkit-text-fill-color: var(--primary-color);
-    font-family: var(--sub-heading);
-}
-
-/*##########################*/
-/* EDIT-PROJECT-POPUP-FORM */
-#edit-project-form {
-    display: none;
-}
-
-#create-project-form {
-    display: none;
-}
-
-/* EDIT-SECTION-POPUP-FORM */
-#edit-section-form {
-    display: none;
-}
-
-#create-section-form {
+#create-project {
     display: none;
 }

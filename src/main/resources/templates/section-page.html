@@ -1,10 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Section page</title>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/page.css" th:href="@{/css/page.css}"/>
+    <script type="text/javascript" src="../static/javascript/script.js" th:src="@{/javascript/script.js}"></script>
 </head>
 <body>
+<section class="hero">
+    <section class="top-section">
+        <section class="topLeftSection">
+            <a th:href="@{'/project-page/'+${session.project.id}}"><button class="button-header"><img class="arrow-right.svg" th:src="@{/images/arrow-right.svg}" alt="" src="">Sections</button></a>
+        </section>
 
+        <section class="topRightSection">
+            <button class="button-header" onclick="openEditSectionForm()">Edit Section</button>
+            <button class="button-header" onclick="openDeleteSectionPopUp()">Delete Section</button>
+        </section>
+    </section>
+
+    <section class="bottom-section">
+        <div class="pp-row1">
+            <h4>Activities in </h4>
+            <h1 th:text="${session.section.sectionName}"></h1>
+        </div>
+
+        <div class="pp-row2">
+            <section>
+                <button onclick="openCreateActivityForm()" class="add-activity">
+                    <img th:src="@{/images/plus.svg}" alt="Add activity" src="">
+                </button>
+            </section>
+            <div th:each="activity : ${session.listOfActivities}">
+                <a href=""  th:href="@{'/activity-page/'+${activity.getId()}}">
+                    <button class="activity" th:text="${activity.activityName}"></button>
+                </a>
+            </div>
+        </div>
+    </section>
+</section>
 </body>
 </html>
