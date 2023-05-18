@@ -1,0 +1,51 @@
+.sidebar-form-wrapper {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    background-color: var(--complementary-color);
+}
+
+.sidebar-form-top {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-form-dates {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sidebar-modal {
+    display: none;
+    position: fixed; /* Stay in place */
+    z-index: 2000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.section-modal-content {
+    background-color: var(--complementary-color);
+    margin: 0 0 0 60%;
+    padding: 20px;
+    height: 100vh;
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="../../static/css/styles.css" th:href="@{css/styles.css}"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/infoSidebarStyles.css" th:href="@{css/infoSidebarStyles.css}"/>
 </head>
 <body>
 
@@ -95,7 +96,47 @@
     </div>
 </form>
 
+<form th:fragment="update-section-form" class="sidebar-form-wrapper" th:action="@{/update-section}" method="post">
+    <div class="sidebar-form-top">
+        <input type="text" placeholder="Section Name" name="section-name" th:value="${section.sectionName}">
+        <div class="sidebar-form-dates">
+            <input type="date" placeholder="Start Date" name="start-date" th:value="${section.startDate}">
+            <input type="date" placeholder="End Date" name="end-date" th:value="${section.endDate}">
+        </div>
+        <input type="text" placeholder="Description" name="description" th:value="${section.description}">
+    </div>
+    <div class="sidebar-form-bottom">
+        <button class="" type="submit">Save</button>
+    </div>
+</form>
 
+<form th:fragment="update-activity-form" class="sidebar-form" th:action="@{/update-activity}" method="post">
+    <div class="sidebar-form-top">
+        <input type="text" placeholder="Activity Name" name="activity-name" th:value="${activity.activityName}">
+        <input type="number" placeholder="Hours" name="duration" th:value="${activity.duration}">
+        <input type="text" placeholder="Description" name="description" th:value="${activity.description}">
+    </div>
+    <div class="sidebar-form-bottom">
+        <button class="" type="submit">Save</button>
+    </div>
+</form>
+
+<form th:fragment="update-task-form" class="sidebar-form" th:action="@{/update-task}" method="post">
+    <div class="sidebar-form-top">
+        <input type="text" placeholder="Task Name" name="task-name" th:value="${task.taskName}">
+        <input type="number" placeholder="Hours" name="duration" th:value="${task.duration}">
+        <input type="text" placeholder="Description" name="description" th:value="${task.description}">
+    </div>
+    <div class="sidebar-form-bottom">
+        <button class="" type="submit">Save</button>
+    </div>
+</form>
+
+<div th:fragment="section-info-sidebar" class="section-modal-content">
+    <span class="close" th:onclick="showInfoSideBar([[${section.id}]])">&times;</span>
+    <div th:insert="fragments/form-fragments :: update-section-form" th:with="section = ${section}"></div>
+    <div>assignees</div>
+</div>
 
 </body>
 </html>
