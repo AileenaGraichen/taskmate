@@ -68,3 +68,25 @@ function toggleNavbar() {
         y.style.marginLeft = "100px";
     }
 }
+
+function showInfoSideBar(sectionId) {
+    let sidebarId = "sidebar" + sectionId;
+    let sidebar = document.getElementById(sidebarId);
+    let computedStyle = window.getComputedStyle(sidebar);
+    if (computedStyle.display === "none") {
+        sidebar.style.display = "block";
+    } else {
+        sidebar.style.display = "none";
+    }
+}
+
+window.onclick = function(event) {
+    let modals = document.querySelectorAll(".sidebar-modal");
+    for (let i = 0; i < modals.length; i++) {
+        let modal = modals[i];
+        if (event.target === modal) {
+            modal.style.display = "none";
+            return; // Stop the loop if a modal is closed
+        }
+    }
+};
