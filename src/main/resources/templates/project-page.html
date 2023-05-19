@@ -17,9 +17,18 @@
         </section>
 
         <section class="topRightSection">
-            <button class="button-header" onclick="openEditProjectForm()">Edit Project</button>
+            <a href="" th:href="@{'/project-settings/'+${project.getId()}}">
+                <button class="button-header">Settings</button>
+            </a>
+
+            <a href="" th:href="@{'/project-page/'+${project.getId()}}">
+                <button class="project" th:text="${project.projectName}"></button>
+            </a>
+
             <button class="button-header" onclick="openDeleteProjectPopUp()">Delete Project</button>
         </section>
+
+        <!--<div id="update-project" th:insert="fragments/form-fragments :: update-project-form"></div>-->
     </section>
 
     <section class="bottom-section">

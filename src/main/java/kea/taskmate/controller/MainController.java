@@ -148,6 +148,16 @@ public class MainController {
         return "project-page";
     }
 
+    @GetMapping("/project-settings/{projectId}")
+    public String getProjectSetting(@PathVariable("projectId") int projectId,
+                                 HttpSession session){
+        List<Section> listOfSections = sectionRepository.getSectionsByProjectId(projectId);
+        session.setAttribute("listOfSections", listOfSections);
+        session.setAttribute("project", projectRepository.getProjectById(projectId));
+        return "project-settings";
+    }
+
+
     @PostMapping("/update-project")
     public String updateProject(@RequestParam("project-name") String projectName,
                                 @RequestParam("description") String description,

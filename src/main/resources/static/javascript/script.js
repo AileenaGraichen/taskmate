@@ -16,8 +16,8 @@ function openCreateSectionForm() {
     document.getElementById("create-section-form").style.display = "block";
 }
 
-function openEditProjectForm() {
-    document.getElementById("edit-project-form").style.display = "block";
+function openUpdateProjectForm() {
+    document.getElementById("update-project-form").style.display = "block";
 }
 
 function openDeleteProjectPopUp() {
