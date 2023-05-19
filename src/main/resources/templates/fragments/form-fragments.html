@@ -97,46 +97,74 @@
     </div>
 </form>
 
-<form th:fragment="update-section-form" class="sidebar-form-wrapper" th:action="@{/update-section}" method="post">
-    <div class="sidebar-form-top">
-        <input type="text" placeholder="Section Name" name="section-name" th:value="${section.sectionName}">
-        <div class="sidebar-form-dates">
+<form th:fragment="update-section-form" th:action="@{/update-section}" method="post">
+    <input type="hidden" name="section-id" th:value="${section.id}">
+    <div class="sidebar-info">
+        <input class="no-style-input" type="text" placeholder="Section Name" name="section-name" th:value="${section.sectionName}">
+        <h3>Duration</h3>
+        <div class="sidebar-info-duration">
+            <span>From:</span>
             <input type="date" placeholder="Start Date" name="start-date" th:value="${section.startDate}">
+            <span>To:</span>
             <input type="date" placeholder="End Date" name="end-date" th:value="${section.endDate}">
         </div>
-        <input type="text" placeholder="Description" name="description" th:value="${section.description}">
+        <h3>Description</h3>
+        <div class="sidebar-info-description">
+            <textarea id="section-description" placeholder="Description" name="description" th:text="${section.description}"></textarea>
+        </div>
     </div>
-    <div class="sidebar-form-bottom">
-        <button class="" type="submit">Save</button>
-    </div>
+    <button class="button-submit" type="submit">Save</button>
 </form>
 
 <form th:fragment="update-activity-form" class="sidebar-form" th:action="@{/update-activity}" method="post">
-    <div class="sidebar-form-top">
-        <input type="text" placeholder="Activity Name" name="activity-name" th:value="${activity.activityName}">
-        <input type="number" placeholder="Hours" name="duration" th:value="${activity.duration}">
-        <input type="text" placeholder="Description" name="description" th:value="${activity.description}">
+    <input type="hidden" name="activity-id" th:value="${activity.id}">
+    <div class="sidebar-info">
+        <input class="no-style-input" type="text" placeholder="Activity Name" name="activity-name" th:value="${activity.activityName}">
+        <h3>Duration</h3>
+        <div class="sidebar-info-duration">
+            <span>Hours:</span>
+            <input type="number" placeholder="Hours" name="duration" th:value="${activity.durationInHours}">
+        </div>
+        <h3>Description</h3>
+        <div class="sidebar-info-description">
+            <textarea id="activity-description" placeholder="Description" name="description" th:text="${activity.description}"></textarea>
+        </div>
     </div>
-    <div class="sidebar-form-bottom">
-        <button class="" type="submit">Save</button>
-    </div>
+    <button class="button-submit" type="submit">Save</button>
 </form>
 
 <form th:fragment="update-task-form" class="sidebar-form" th:action="@{/update-task}" method="post">
-    <div class="sidebar-form-top">
-        <input type="text" placeholder="Task Name" name="task-name" th:value="${task.taskName}">
-        <input type="number" placeholder="Hours" name="duration" th:value="${task.duration}">
-        <input type="text" placeholder="Description" name="description" th:value="${task.description}">
+    <input type="hidden" name="task-id" th:value="${task.id}">
+    <div class="sidebar-info">
+        <input class="no-style-input" type="text" placeholder="Task Name" name="task-name" th:value="${task.taskName}">
+        <h3>Duration</h3>
+        <div class="sidebar-info-duration">
+            <span>Hours:</span>
+            <input type="number" step="0.01" placeholder="Hours" name="duration" th:value="${task.durationInHours}">
+        </div>
+        <h3>Description</h3>
+        <div class="sidebar-info-description">
+            <textarea id="task-description" placeholder="Description" name="description" th:text="${task.description}"></textarea>
+        </div>
     </div>
-    <div class="sidebar-form-bottom">
-        <button class="" type="submit">Save</button>
-    </div>
+    <button class="button-submit" type="submit">Save</button>
 </form>
 
-<div th:fragment="section-info-sidebar" class="section-modal-content">
+<div th:fragment="section-info-sidebar" class="sidebar-modal-content">
     <span class="close" th:onclick="showInfoSideBar([[${section.id}]])">&times;</span>
-    <div th:insert="fragments/form-fragments :: update-section-form" th:with="section = ${section}"></div>
-    <div>assignees</div>
+    <div class="sidebar-form-wrapper" th:insert="fragments/form-fragments :: update-section-form" th:with="section = ${section}"></div>
+    <div class="sidebar-buttons">
+        <button class="button-header">Open</button>
+    </div>
+</div>
+
+<div th:fragment="activity-info-sidebar" class="sidebar-modal-content">
+    <span class="close" th:onclick="showInfoSideBar([[${activity.id}]])">&times;</span>
+    <div class="sidebar-form-wrapper" th:insert="fragments/form-fragments :: update-activity-form" th:with="activity = ${activity}"></div>
+    <div class="sidebar-assignees">assignees</div>
+    <div class="sidebar-buttons">
+        <button class="button-header">Open</button>
+    </div>
 </div>
 
 </body>
