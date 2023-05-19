@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" type="text/css" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
     <link rel="stylesheet" type="text/css" href="../static/css/page.css" th:href="@{/css/page.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/infoSidebarStyles.css" th:href="@{/css/infoSidebarStyles.css}"/>
     <script type="text/javascript" src="../static/javascript/script.js" th:src="@{/javascript/script.js}"></script>
 </head>
 <body>
@@ -37,6 +38,9 @@
                 <a href=""  th:href="@{'/activity-page/'+${activity.getId()}}">
                     <button class="activity" th:text="${activity.activityName}"></button>
                 </a>
+                <button th:onclick="showActivityInfoSideBar([[${activity.id}]])">Info</button>
+                <div class="modal" th:id="'sidebarActivity' + ${activity.id}" th:insert="fragments/form-fragments :: activity-info-sidebar" th:with="section = ${activity}"></div>
+
             </div>
         </div>
     </section>

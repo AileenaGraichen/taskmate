@@ -35,13 +35,17 @@ public class ActivityRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             resultSet.next();
-            String activityName = resultSet.getString(2);
-            String description = resultSet.getString(3);
-            float durationInHours = resultSet.getFloat(4);
+            int sectionId = resultSet.getInt(2);
+            String activityName = resultSet.getString(3);
+            String description = resultSet.getString(4);
+            float durationInHours = resultSet.getFloat(5);
+            int status = resultSet.getInt(6);
 
+            activity.setSectionId(sectionId);
             activity.setActivityName(activityName);
             activity.setDescription(description);
             activity.setDurationInHours(durationInHours);
+            activity.setStatus(status);
 
         } catch (SQLException e){
             System.out.println("Could not find activity");

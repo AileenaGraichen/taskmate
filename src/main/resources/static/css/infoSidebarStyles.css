@@ -1,21 +1,17 @@
 .sidebar-form-wrapper {
     display: flex;
     flex-direction: column;
-    border-radius: 10px;
     background-color: var(--complementary-color);
 }
 
-.sidebar-form-top {
-    display: flex;
-    flex-direction: column;
+.sidebar-form-wrapper, .sidebar-assignees {
+    box-shadow: var(--box-shadow);
+    padding: 1rem;
+    border-radius: 10px;
+    margin: 2rem 1rem 0 1rem;
 }
 
-.sidebar-form-dates {
-    display: flex;
-    justify-content: space-between;
-}
-
-.sidebar-modal {
+.modal {
     display: none;
     position: fixed; /* Stay in place */
     z-index: 2000; /* Sit on top */
@@ -28,7 +24,7 @@
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-.section-modal-content {
+.sidebar-modal-content {
     background-color: var(--complementary-color);
     margin: 0 0 0 60%;
     padding: 20px;
@@ -37,8 +33,10 @@
 
 /* The Close Button */
 .close {
+    position: absolute;
+    top: 1%;
+    right: 1%;
     color: #aaa;
-    float: right;
     font-size: 28px;
     font-weight: bold;
 }
@@ -48,4 +46,58 @@
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.sidebar-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.sidebar-info div {
+    margin-bottom: 1rem;
+}
+
+.sidebar-info input[type="text"] {
+    border: none;
+    outline: none;
+    background: none;
+    margin: 0 1rem 1rem 0;
+    font-family: Helvetica, sans-serif;
+    font-size: x-large;
+    color: var(--primary-color);
+}
+
+.sidebar-info-description textarea {
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    padding: 1rem;
+    resize: none;
+    scroll-behavior: smooth;
+}
+
+.sidebar-info-duration input[type="date"], input[type="number"] {
+    border: none;
+    outline: none;
+    background: inherit;
+}
+
+.sidebar-info-duration{
+    display: flex;
+    justify-content: space-between;
+}
+
+.sidebar-info-description {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-buttons {
+    position: absolute;
+    bottom: 5%;
+    right: 2%;
+}
+
+.sidebar-form-wrapper.button-header {
+    width: 1rem;
 }

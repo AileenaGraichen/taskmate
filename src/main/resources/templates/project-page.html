@@ -29,8 +29,6 @@
                 <a href="" th:href="@{'/section-page/'+${section.getId()}}">
                     <h4 class="project" th:text="${section.sectionName}"></h4>
                 </a>
-                <button th:onclick="showInfoSideBar([[${section.id}]])">Info</button>
-                <div class="sidebar-modal" th:id="'sidebar' + ${section.id}" th:insert="fragments/form-fragments :: section-info-sidebar" th:with="section = ${section}"></div>
             </div>
             <h1 th:text="' '+${session.project.projectName}"></h1>
         </div>
@@ -45,6 +43,8 @@
                 <a href=""  th:href="@{'/section-page/'+${section.getId()}}">
                     <button class="section" th:text="${section.sectionName}"></button>
                 </a>
+                <button th:onclick="showSectionInfoSideBar([[${section.id}]])">Info</button>
+                <div class="modal" th:id="'sidebarSection' + ${section.id}" th:insert="fragments/form-fragments :: section-info-sidebar" th:with="section = ${section}"></div>
             </div>
         </div>
     </section>
