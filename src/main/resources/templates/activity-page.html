@@ -10,9 +10,11 @@
 </head>
 <body>
 <section class="hero">
+    <h1 th:text="' '+${session.activity.activityName}"></h1>
+
     <section class="top-section">
         <section class="topLeftSection">
-            <a th:href="@{'/project-page/'+${session.project.id}}"><button class="button-header"><img class="arrow-right.svg" th:src="@{/images/arrow-right.svg}" alt="" src="">Activities</button></a>
+            <a th:href="@{'/section-page/'+${session.section.id}}"><button class="button-header"><img class="arrow-right.svg" th:src="@{/images/arrow-right.svg}" alt="" src="">Activities</button></a>
         </section>
 
         <section class="topRightSection">
@@ -23,8 +25,7 @@
 
     <section class="bottom-section">
         <div class="pp-row1">
-            <h4>Tasks in </h4>
-            <h1 th:text="' '+${session.section.activityName}"></h1>
+            <h4>Tasks</h4>
         </div>
 
         <div class="pp-row2">
@@ -41,5 +42,6 @@
         </div>
     </section>
 </section>
+<div id="create-task" th:insert="fragments/form-fragments :: create-task-form"></div>
 </body>
 </html>

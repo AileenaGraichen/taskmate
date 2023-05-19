@@ -13,7 +13,7 @@ function openCreateProjectForm() {
 }
 
 function openCreateSectionForm() {
-    document.getElementById("create-section-form").style.display = "block";
+    document.getElementById("create-section").style.display = "block";
 }
 
 function openEditProjectForm() {
@@ -25,7 +25,7 @@ function openDeleteProjectPopUp() {
 }
 
 function openCreateActivityForm() {
-    document.getElementById("create-activity-form").style.display = "block";
+    document.getElementById("create-activity").style.display = "block";
 }
 
 function openEditActivityForm() {
@@ -45,7 +45,7 @@ function openDeleteSectionPopUp() {
 }
 
 function openCreateTaskForm() {
-    document.getElementById("create-task-form").style.display = "block";
+    document.getElementById("create-task").style.display = "block";
 }
 
 function openEditTaskForm() {

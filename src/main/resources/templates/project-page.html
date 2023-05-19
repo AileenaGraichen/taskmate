@@ -11,6 +11,8 @@
 </head>
 <body>
 <section class="hero">
+    <h1 th:text="' '+${session.project.projectName}"></h1>
+
     <section class="top-section">
         <section class="topLeftSection">
             <a th:href="@{/projects}"><button class="button-header"><img class="arrow-right.svg" th:src="@{/images/arrow-right.svg}" alt="" src="">Projects</button></a>
@@ -24,19 +26,11 @@
 
     <section class="bottom-section">
         <div class="pp-row1">
-            <h4>Sections in </h4>
-            <div th:each="section : ${session.listOfSections}">
-                <a href="" th:href="@{'/section-page/'+${section.getId()}}">
-                    <h4 class="project" th:text="${section.sectionName}"></h4>
-                </a>
-                <button th:onclick="showInfoSideBar([[${section.id}]])">Info</button>
-                <div class="sidebar-modal" th:id="'sidebar' + ${section.id}" th:insert="fragments/form-fragments :: section-info-sidebar" th:with="section = ${section}"></div>
-            </div>
-            <h1 th:text="' '+${session.project.projectName}"></h1>
+            <h4>Sections</h4>
         </div>
 
         <div class="pp-row2">
-            <section>
+            <section class="add-sec">
                 <button onclick="openCreateSectionForm()" class="add-section">
                     <img th:src="@{/images/plus.svg}" alt="Add section" src="">
                 </button>
@@ -49,5 +43,6 @@
         </div>
     </section>
 </section>
+<div id="create-section" th:insert="fragments/form-fragments :: create-section-form"></div>
 </body>
 </html>
