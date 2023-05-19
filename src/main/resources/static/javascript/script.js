@@ -13,7 +13,7 @@ function openCreateProjectForm() {
 }
 
 function openCreateSectionForm() {
-    document.getElementById("create-section-form").style.display = "block";
+    document.getElementById("create-section").style.display = "block";
 }
 
 function openUpdateProjectForm() {
@@ -25,7 +25,7 @@ function openDeleteProjectPopUp() {
 }
 
 function openCreateActivityForm() {
-    document.getElementById("create-activity-form").style.display = "block";
+    document.getElementById("create-activity").style.display = "block";
 }
 
 function openEditActivityForm() {
@@ -45,7 +45,7 @@ function openDeleteSectionPopUp() {
 }
 
 function openCreateTaskForm() {
-    document.getElementById("create-task-form").style.display = "block";
+    document.getElementById("create-task").style.display = "block";
 }
 
 function openEditTaskForm() {
@@ -69,8 +69,19 @@ function toggleNavbar() {
     }
 }
 
-function showInfoSideBar(sectionId) {
-    let sidebarId = "sidebar" + sectionId;
+function showSectionInfoSideBar(sectionId) {
+    let sidebarId = "sidebarSection" + sectionId;
+    let sidebar = document.getElementById(sidebarId);
+    let computedStyle = window.getComputedStyle(sidebar);
+    if (computedStyle.display === "none") {
+        sidebar.style.display = "block";
+    } else {
+        sidebar.style.display = "none";
+    }
+}
+
+function showActivityInfoSideBar(activityId) {
+    let sidebarId = "sidebarActivity" + activityId;
     let sidebar = document.getElementById(sidebarId);
     let computedStyle = window.getComputedStyle(sidebar);
     if (computedStyle.display === "none") {
@@ -81,7 +92,7 @@ function showInfoSideBar(sectionId) {
 }
 
 window.onclick = function(event) {
-    let modals = document.querySelectorAll(".sidebar-modal");
+    let modals = document.querySelectorAll(".modal");
     for (let i = 0; i < modals.length; i++) {
         let modal = modals[i];
         if (event.target === modal) {

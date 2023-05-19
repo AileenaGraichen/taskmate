@@ -188,8 +188,8 @@ public class MainController {
     }
 
     // SKAL IKKE HAVE PATH VARIABLE
-    @PostMapping("/update-section/{sectionId}")
-    public String updateSection(@PathVariable("sectionId") int sectionId,
+    @PostMapping("/update-section")
+    public String updateSection(@RequestParam("section-id") int sectionId,
                                 @RequestParam("section-name") String sectionName,
                                 @RequestParam("description") String description,
                                 @RequestParam("start-date") Date startDate,
@@ -226,8 +226,8 @@ public class MainController {
     }
 
     // SKAL IKKE HAVE PATH VARIABLE
-    @PostMapping("/update-activity/{activityId}")
-    public String updateActivity(@PathVariable("activityId") int activityId,
+    @PostMapping("/update-activity")
+    public String updateActivity(@RequestParam("activity-id") int activityId,
                                 @RequestParam("activity-name") String activityName,
                                 @RequestParam("description") String description,
                                 @RequestParam("duration") float duration){
@@ -263,8 +263,8 @@ public class MainController {
     }
 
     // SKAL IKKE HAVE PATH VARIABLE
-    @PostMapping("/update-task/{taskId}")
-    public String updateTask(@PathVariable("taskId") int taskId,
+    @PostMapping("/update-task")
+    public String updateTask(@RequestParam("task-id") int taskId,
                                  @RequestParam("task-name") String taskName,
                                  @RequestParam("description") String description,
                                  @RequestParam("duration") float duration){

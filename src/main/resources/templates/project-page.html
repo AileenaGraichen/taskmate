@@ -11,41 +11,34 @@
 </head>
 <body>
 <section class="hero">
+    <h1 th:text="' '+${session.project.projectName}"></h1>
+
     <section class="top-section">
         <section class="topLeftSection">
             <a th:href="@{/projects}"><button class="button-header"><img class="arrow-right.svg" th:src="@{/images/arrow-right.svg}" alt="" src="">Projects</button></a>
         </section>
 
         <section class="topRightSection">
-            <a href="" th:href="@{'/project-settings/'+${project.getId()}}">
-                <button class="button-header">Settings</button>
-            </a>
 
-            <a href="" th:href="@{'/project-page/'+${project.getId()}}">
-                <button class="project" th:text="${project.projectName}"></button>
-            </a>
+
+            <div th:each="project : ${session.projectsList}">
+                <a href="" th:href="@{'/project-settings/'+${project.getId()}}">
+                    <button class="button-header">Settings</button>
+                </a>
+            </div>
 
             <button class="button-header" onclick="openDeleteProjectPopUp()">Delete Project</button>
         </section>
 
-        <!--<div id="update-project" th:insert="fragments/form-fragments :: update-project-form"></div>-->
     </section>
 
     <section class="bottom-section">
         <div class="pp-row1">
-            <h4>Sections in </h4>
-            <div th:each="section : ${session.listOfSections}">
-                <a href="" th:href="@{'/section-page/'+${section.getId()}}">
-                    <h4 class="project" th:text="${section.sectionName}"></h4>
-                </a>
-                <button th:onclick="showInfoSideBar([[${section.id}]])">Info</button>
-                <div class="sidebar-modal" th:id="'sidebar' + ${section.id}" th:insert="fragments/form-fragments :: section-info-sidebar" th:with="section = ${section}"></div>
-            </div>
-            <h1 th:text="' '+${session.project.projectName}"></h1>
+            <h4>Sections</h4>
         </div>
 
         <div class="pp-row2">
-            <section>
+            <section class="add-sec">
                 <button onclick="openCreateSectionForm()" class="add-section">
                     <img th:src="@{/images/plus.svg}" alt="Add section" src="">
                 </button>
@@ -54,9 +47,12 @@
                 <a href=""  th:href="@{'/section-page/'+${section.getId()}}">
                     <button class="section" th:text="${section.sectionName}"></button>
                 </a>
+                <button th:onclick="showSectionInfoSideBar([[${section.id}]])">Info</button>
+                <div class="modal" th:id="'sidebarSection' + ${section.id}" th:insert="fragments/form-fragments :: section-info-sidebar" th:with="section = ${section}"></div>
             </div>
         </div>
     </section>
 </section>
+<div id="create-section" th:insert="fragments/form-fragments :: create-section-form"></div>
 </body>
 </html>

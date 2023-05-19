@@ -6,10 +6,13 @@
 
     <link rel="stylesheet" type="text/css" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
     <link rel="stylesheet" type="text/css" href="../static/css/page.css" th:href="@{/css/page.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/infoSidebarStyles.css" th:href="@{/css/infoSidebarStyles.css}"/>
     <script type="text/javascript" src="../static/javascript/script.js" th:src="@{/javascript/script.js}"></script>
 </head>
 <body>
 <section class="hero">
+    <h1 th:text="${session.section.sectionName}"></h1>
+
     <section class="top-section">
         <section class="topLeftSection">
             <a th:href="@{'/project-page/'+${session.project.id}}"><button class="button-header"><img class="arrow-right.svg" th:src="@{/images/arrow-right.svg}" alt="" src="">Sections</button></a>
@@ -23,8 +26,7 @@
 
     <section class="bottom-section">
         <div class="pp-row1">
-            <h4>Activities in </h4>
-            <h1 th:text="${session.section.sectionName}"></h1>
+            <h4>Activities</h4>
         </div>
 
         <div class="pp-row2">
@@ -37,9 +39,13 @@
                 <a href=""  th:href="@{'/activity-page/'+${activity.getId()}}">
                     <button class="activity" th:text="${activity.activityName}"></button>
                 </a>
+                <button th:onclick="showActivityInfoSideBar([[${activity.id}]])">Info</button>
+                <div class="modal" th:id="'sidebarActivity' + ${activity.id}" th:insert="fragments/form-fragments :: activity-info-sidebar" th:with="section = ${activity}"></div>
+
             </div>
         </div>
     </section>
 </section>
+<div id="create-activity" th:insert="fragments/form-fragments :: create-activity-form"></div>
 </body>
 </html>
