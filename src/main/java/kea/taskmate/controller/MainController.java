@@ -94,6 +94,13 @@ public class MainController {
         return "redirect:/";
     }
 
+    @GetMapping("/profile")
+    public String showProfile(HttpSession session, Model model){
+        User user = (User) session.getAttribute("user");
+        userRepository.getUserById(user.getId());
+        return "profile";
+    }
+
     //POST FOR UPDATING PROFILE
     @PostMapping("/update-profile")
     public String updateProfile(@RequestParam("firstName") String firstName,
