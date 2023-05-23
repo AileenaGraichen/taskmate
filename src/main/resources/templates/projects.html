@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" type="text/css" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
     <link rel="stylesheet" type="text/css" href="../static/css/page.css" th:href="@{/css/page.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/infoSidebarStyles.css" th:href="@{/css/infoSidebarStyles.css}"/>
     <script type="text/javascript" src="../static/javascript/script.js" th:src="@{/javascript/script.js}"></script>
 </head>
 <body>
@@ -26,6 +27,6 @@
             </a>
         </div>
     </div>
-    <div id="create-project" th:insert="fragments/form-fragments :: create-project-form"></div>
+    <div id="create-project" class="modal" th:insert="fragments/form-fragments :: create-project-form"></div>
 </body>
 </html>
