@@ -10,6 +10,7 @@
     <script type="text/javascript" src="../static/javascript/script.js" th:src="@{/javascript/script.js}"></script>
 </head>
 <body>
+<!--<div th:insert="fragments/header-footer-fragments :: side-navigation"></div>-->
 <section class="hero">
     <h1 th:text="' '+${session.project.projectName}"></h1>
 
@@ -19,9 +20,16 @@
         </section>
 
         <section class="topRightSection">
-            <button class="button-header" onclick="openEditProjectForm()">Edit Project</button>
+
+            <div th:each="project : ${session.projectsList}">
+                <a href="" th:href="@{'/project-settings/'+${project.getId()}}">
+                    <button class="button-header">Settings</button>
+                </a>
+            </div>
+
             <button class="button-header" onclick="openDeleteProjectPopUp()">Delete Project</button>
         </section>
+
     </section>
 
     <section class="bottom-section">

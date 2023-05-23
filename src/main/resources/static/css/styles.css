@@ -214,8 +214,8 @@ a:hover, a:visited, a:link, a:active {
 
 .button-header:active {
     transform: scale(0.95);
-
 }
+
 .header-links {
     display: flex;
     flex-flow: row wrap;
@@ -247,3 +247,4 @@ a:hover, a:visited, a:link, a:active {
     text-decoration: none;
     border-bottom: none;
 }
+

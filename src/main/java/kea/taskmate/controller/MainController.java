@@ -96,6 +96,13 @@ public class MainController {
         return "redirect:/";
     }
 
+    @GetMapping("/profile")
+    public String showProfile(HttpSession session, Model model){
+        User user = (User) session.getAttribute("user");
+        userRepository.getUserById(user.getId());
+        return "profile";
+    }
+
     //POST FOR UPDATING PROFILE
     @PostMapping("/update-profile")
     public String updateProfile(@RequestParam("firstName") String firstName,
@@ -151,6 +158,16 @@ public class MainController {
         session.setAttribute("team", teamList);
         return "project-page";
     }
+
+    @GetMapping("/project-settings/{projectId}")
+    public String getProjectSetting(@PathVariable("projectId") int projectId,
+                                 HttpSession session){
+        List<Section> listOfSections = sectionRepository.getSectionsByProjectId(projectId);
+        session.setAttribute("listOfSections", listOfSections);
+        session.setAttribute("project", projectRepository.getProjectById(projectId));
+        return "project-settings";
+    }
+
 
     @PostMapping("/update-project")
     public String updateProject(@RequestParam("project-name") String projectName,

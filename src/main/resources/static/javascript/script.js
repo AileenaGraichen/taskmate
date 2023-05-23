@@ -16,8 +16,8 @@ function openCreateSectionForm() {
     document.getElementById("create-section").style.display = "block";
 }
 
-function openEditProjectForm() {
-    document.getElementById("edit-project-form").style.display = "block";
+function openUpdateProjectForm() {
+    document.getElementById("update-project-form").style.display = "block";
 }
 
 function openDeleteProjectPopUp() {
@@ -59,7 +59,7 @@ function openDeleteTaskPopUp() {
 
 function toggleNavbar() {
     let x = document.getElementById("navbar-side");
-    let y = document.getElementById("dashboard");
+    let y = document.getElementById("platform");
     if(x.style.left === "-200px"){
         x.style.left = "0";
         y.style.marginLeft = "300px";

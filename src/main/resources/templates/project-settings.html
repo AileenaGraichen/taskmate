@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Project Settings</title>
+    <!-- Favicons -->
+    <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="../static/images/TaskMate_favicon.png" th:href="@{images/TaskMate_favicon.png}"
+    />
+    <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="../static/images/TaskMate_favicon.png" th:href="@{images/TaskMate_favicon.png}"
+    />
+    <link rel="stylesheet" type="text/css" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/dashboard.css" th:href="@{/css/dashboard.css}"/>
+    <script type="text/javascript" src="../static/javascript/chartsStyles.js" th:src="@{/javascript/chartsStyles.js}"></script>
+    <script type="text/javascript" src="../static/javascript/script.js" th:src="@{/javascript/script.js}"></script>
+</head>
+<body>
+<div th:insert="fragments/header-footer-fragments :: side-navigation"></div>
+<div id="platform" class="page-wrapper">
+    <div class="overview-wrapper">
+        <h1>Settings</h1>
+        <div id="update-project" th:insert="fragments/form-fragments :: update-project-form"></div>
+    </div>
+</div>
+</body>
+</html>
