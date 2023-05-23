@@ -3,6 +3,7 @@ package kea.taskmate.repository;
 import kea.taskmate.models.Section;
 import kea.taskmate.models.TeamMember;
 import kea.taskmate.utility.ConnectionManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
@@ -33,9 +34,7 @@ public class TeamMemberRepository {
 
             while (rs.next()){
 
-                TeamMember teamMember = new TeamMember(rs.getInt(1), rs.getInt(2), rs.getString(3));
-                teamMember.setProjectId(projectId);
-                teamMember.setUserId(rs.getInt(1));
+                TeamMember teamMember = new TeamMember(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4));
                 listOfTeamMembers.add(teamMember);
             }
         }catch (SQLException e){
@@ -57,7 +56,8 @@ public class TeamMemberRepository {
             rs.next();
             teamMember.setUserId(userId);
             teamMember.setProjectId(projectId);
-            teamMember.setRole(rs.getString(3));
+            teamMember.setUserFirstName(rs.getString(3));
+            teamMember.setRole(rs.getString(4));
 
         }catch (SQLException e){
             e.printStackTrace();
@@ -66,13 +66,14 @@ public class TeamMemberRepository {
     }
 
     public void addTeamMember(TeamMember teamMember){
-        final String QUERY = "INSERT INTO taskmate.team_member(user_id, project_id, team_role) VALUES (?, ?, ?)";
+        final String QUERY = "INSERT INTO taskmate.team_member(user_id, project_id, user_name, team_role) VALUES (?, ?, ?, ?)";
         try{
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
             PreparedStatement ps = connection.prepareStatement(QUERY);
             ps.setInt(1, teamMember.getUserId());
             ps.setInt(2, teamMember.getProjectId());
-            ps.setString(3, teamMember.getRole());
+            ps.setString(3, teamMember.getUserFirstName());
+            ps.setString(4, teamMember.getRole());
 
             ps.executeUpdate();
         }catch (SQLException e){

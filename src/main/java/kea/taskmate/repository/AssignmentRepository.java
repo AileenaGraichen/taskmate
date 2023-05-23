@@ -26,19 +26,24 @@ public class AssignmentRepository {
 
 
     //change variables
-    public List<ActivityAssignment> getActivityAssignmentById (int activityId, int userId){
+    public List<ActivityAssignment> getActivityAssignmentById (int activityId){
         List<ActivityAssignment> list = new ArrayList<>();
         try{
-            final String QUERY = "SELECT * FROM taskmate.activity_assignment WHERE activity_id = ? AND user_id = ?";
+            final String QUERY = "SELECT aa.*, u.fname " +
+                                 "FROM taskmate.activity_assignment AS aa " +
+                                 "JOIN taskmate.user AS u ON aa.user_id = u.id " +
+                                 "WHERE aa.activity_id = ?";
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
             preparedStatement.setInt(1, activityId);
-            preparedStatement.setInt(2, userId);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
+                int userId = resultSet.getInt(1);
                 float hoursAssigned = resultSet.getFloat(3);
+                String userFirstName = resultSet.getString(4);
                 ActivityAssignment activityAssignment = new ActivityAssignment(userId, activityId, hoursAssigned);
+                activityAssignment.setUserFirstName(userFirstName);
                 list.add(activityAssignment);
             }
         }catch (SQLException e){

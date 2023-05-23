@@ -73,6 +73,8 @@ public class ActivityRepository {
                 activity.setId(id);
                 activity.setStatus(status);
                 list.add(activity);
+
+
             }
 
         }catch (SQLException e){
@@ -111,7 +113,8 @@ public class ActivityRepository {
             preparedStatement.setString(1, activity.getActivityName());
             preparedStatement.setString(2, activity.getDescription());
             preparedStatement.setFloat(3, activity.getDurationInHours());
-            preparedStatement.setInt(4, activity.getId());
+            preparedStatement.setInt(4, activity.getStatus());
+            preparedStatement.setInt(5, activity.getId());
 
             preparedStatement.executeUpdate();
 

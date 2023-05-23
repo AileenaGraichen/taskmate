@@ -4,15 +4,13 @@ import kea.taskmate.models.*;
 import kea.taskmate.repository.*;
 import jakarta.servlet.http.HttpSession;
 import kea.taskmate.service.DashboardService;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -24,14 +22,18 @@ public class MainController {
     private final ActivityRepository activityRepository;
     private final TaskRepository taskRepository;
     private final DashboardService dashboardService;
+    private final TeamMemberRepository teamMemberRepository;
+    private final AssignmentRepository assignmentRepository;
 
-    public MainController(UserRepository userRepository, ProjectRepository projectRepository, SectionRepository sectionRepository, ActivityRepository activityRepository, TaskRepository taskRepository, DashboardService dashboardService){
+    public MainController(UserRepository userRepository, ProjectRepository projectRepository, SectionRepository sectionRepository, ActivityRepository activityRepository, TaskRepository taskRepository, DashboardService dashboardService, TeamMemberRepository teamMemberRepository, AssignmentRepository assignmentRepository){
         this.userRepository = userRepository;
         this.projectRepository = projectRepository;
         this.sectionRepository = sectionRepository;
         this.activityRepository = activityRepository;
         this.taskRepository = taskRepository;
         this.dashboardService = dashboardService;
+        this.teamMemberRepository = teamMemberRepository;
+        this.assignmentRepository = assignmentRepository;
     }
 
     @GetMapping("/")
@@ -143,8 +145,10 @@ public class MainController {
     public String getProjectPage(@PathVariable("projectId") int projectId,
                               HttpSession session){
         List<Section> listOfSections = sectionRepository.getSectionsByProjectId(projectId);
+        List<TeamMember> teamList = teamMemberRepository.getTeamByProjectId(projectId);
         session.setAttribute("listOfSections", listOfSections);
         session.setAttribute("project", projectRepository.getProjectById(projectId));
+        session.setAttribute("team", teamList);
         return "project-page";
     }
 
@@ -199,6 +203,9 @@ public class MainController {
                                  HttpSession session){
 
         List<Activity> listOfActivities = activityRepository.getActivityListById(sectionId);
+        for (Activity a : listOfActivities){
+            a.setAssignments(assignmentRepository.getActivityAssignmentById(a.getId()));
+        }
         session.setAttribute("listOfActivities", listOfActivities);
         session.setAttribute("section", sectionRepository.getSectionById(sectionId));
         return "section-page";
@@ -264,5 +271,18 @@ public class MainController {
         task.setDurationInHours(duration);
         taskRepository.updateTask(task);
         return "redirect:/activity-page/"+task.getActivityId();
+    }
+
+    @PostMapping("/update-activity-assignment")
+    public String updateActivityAssignment(@RequestParam("activity-id") int activityId,
+                                           @RequestParam("selected-user")  int userId,
+                                           @RequestParam("hours-assigned") float hoursAssigned,
+                                           HttpSession session){
+        System.out.println(userId + " " + activityId + " " +hoursAssigned);
+        Section section = (Section) session.getAttribute("section");
+        ActivityAssignment activityAssignment = new ActivityAssignment(userId, activityId, hoursAssigned);
+        assignmentRepository.addActivityAssignment(activityAssignment);
+
+        return "redirect:/section-page/"+section.getId();
     }
 }

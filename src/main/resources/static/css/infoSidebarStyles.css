@@ -24,11 +24,21 @@
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-.sidebar-modal-content {
-    background-color: var(--complementary-color);
+.sidebar-modal-content{
     margin: 0 0 0 60%;
-    padding: 20px;
     height: 100vh;
+}
+
+.assignees-modal-content {
+    margin: 10% auto;
+    width: 45%;
+    height: 40%;
+    border-radius: 10px;
+}
+
+.sidebar-modal-content, .assignees-modal-content {
+    background-color: var(--complementary-color);
+    padding: 20px;
 }
 
 /* The Close Button */

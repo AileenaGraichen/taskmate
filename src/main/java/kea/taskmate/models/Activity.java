@@ -1,6 +1,8 @@
 package kea.taskmate.models;
 
 
+import java.util.List;
+
 public class Activity {
     private int id;
     private int sectionId;
@@ -8,6 +10,7 @@ public class Activity {
     private String description;
     private float durationInHours;
     private int status;
+    private List<ActivityAssignment> assignments;
 
     public Activity(){}
 
@@ -64,6 +67,14 @@ public class Activity {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public List<ActivityAssignment> getAssignments() {
+        return assignments;
+    }
+
+    public void setAssignments(List<ActivityAssignment> assignments) {
+        this.assignments = assignments;
     }
 }
 

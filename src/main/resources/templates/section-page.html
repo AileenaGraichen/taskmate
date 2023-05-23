@@ -39,9 +39,8 @@
                 <a href=""  th:href="@{'/activity-page/'+${activity.getId()}}">
                     <button class="activity" th:text="${activity.activityName}"></button>
                 </a>
-                <button th:onclick="showActivityInfoSideBar([[${activity.id}]])">Info</button>
-                <div class="modal" th:id="'sidebarActivity' + ${activity.id}" th:insert="fragments/form-fragments :: activity-info-sidebar" th:with="section = ${activity}"></div>
-
+                <button th:onclick="toggleActivityInfoSideBar([[${activity.id}]])">Info</button>
+                <div class="modal" th:id="'sidebarActivity' + ${activity.id}" th:insert="fragments/form-fragments :: activity-info-sidebar" th:with="activity = ${activity}"></div>
             </div>
         </div>
     </section>

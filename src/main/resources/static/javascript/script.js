@@ -69,7 +69,7 @@ function toggleNavbar() {
     }
 }
 
-function showSectionInfoSideBar(sectionId) {
+function toggleSectionInfoSideBar(sectionId) {
     let sidebarId = "sidebarSection" + sectionId;
     let sidebar = document.getElementById(sidebarId);
     let computedStyle = window.getComputedStyle(sidebar);
@@ -80,7 +80,7 @@ function showSectionInfoSideBar(sectionId) {
     }
 }
 
-function showActivityInfoSideBar(activityId) {
+function toggleActivityInfoSideBar(activityId) {
     let sidebarId = "sidebarActivity" + activityId;
     let sidebar = document.getElementById(sidebarId);
     let computedStyle = window.getComputedStyle(sidebar);
@@ -88,6 +88,16 @@ function showActivityInfoSideBar(activityId) {
         sidebar.style.display = "block";
     } else {
         sidebar.style.display = "none";
+    }
+}
+
+function toggleAssigneesForm() {
+    let assigneeForm = document.getElementById("assignee-form");
+    let computedStyle = window.getComputedStyle(assigneeForm);
+    if (computedStyle.display === "none") {
+        assigneeForm.style.display = "block";
+    } else {
+        assigneeForm.style.display = "none";
     }
 }
 

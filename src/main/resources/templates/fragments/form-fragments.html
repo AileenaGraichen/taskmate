@@ -5,6 +5,7 @@
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="../../static/css/styles.css" th:href="@{css/styles.css}"/>
     <link rel="stylesheet" type="text/css" href="../../static/css/infoSidebarStyles.css" th:href="@{css/infoSidebarStyles.css}"/>
+    <script type="text/javascript" src="../../static/javascript/script.js" th:src="@{/static/javascript/script.js}"></script>
 </head>
 <body>
 
@@ -123,7 +124,7 @@
         <h3>Duration</h3>
         <div class="sidebar-info-duration">
             <span>Hours:</span>
-            <input type="number" placeholder="Hours" name="duration" th:value="${activity.durationInHours}">
+            <input type="number" step="0.25" placeholder="Hours" name="duration" th:value="${activity.durationInHours}">
         </div>
         <h3>Description</h3>
         <div class="sidebar-info-description">
@@ -140,7 +141,7 @@
         <h3>Duration</h3>
         <div class="sidebar-info-duration">
             <span>Hours:</span>
-            <input type="number" step="0.01" placeholder="Hours" name="duration" th:value="${task.durationInHours}">
+            <input type="number" step="0.25" placeholder="Hours" name="duration" th:value="${task.durationInHours}">
         </div>
         <h3>Description</h3>
         <div class="sidebar-info-description">
@@ -151,7 +152,7 @@
 </form>
 
 <div th:fragment="section-info-sidebar" class="sidebar-modal-content">
-    <span class="close" th:onclick="showInfoSideBar([[${section.id}]])">&times;</span>
+    <span class="close" th:onclick="toggleSectionInfoSideBar([[${section.id}]])">&times;</span>
     <div class="sidebar-form-wrapper" th:insert="fragments/form-fragments :: update-section-form" th:with="section = ${section}"></div>
     <div class="sidebar-buttons">
         <button class="button-header">Open</button>
@@ -159,13 +160,43 @@
 </div>
 
 <div th:fragment="activity-info-sidebar" class="sidebar-modal-content">
-    <span class="close" th:onclick="showInfoSideBar([[${activity.id}]])">&times;</span>
+    <span class="close" th:onclick="toggleActivityInfoSideBar([[${activity.id}]])">&times;</span>
     <div class="sidebar-form-wrapper" th:insert="fragments/form-fragments :: update-activity-form" th:with="activity = ${activity}"></div>
-    <div class="sidebar-assignees">assignees</div>
+    <div class="sidebar-assignees">
+        <h1>People Assigned</h1>
+        <div class="assignees-content">
+                <table>
+                    <tr>
+                        <th>Person</th>
+                        <th>Hours</th>
+                    </tr>
+                    <tr th:each="assignment : ${activity.assignments}">
+                        <td th:text="${assignment.userFirstName}"></td>
+                        <td th:text="${assignment.hoursAssigned}"></td>
+                    </tr>
+                </table>
+            <button onclick="toggleAssigneesForm()">Add</button>
+            <div class="modal" id="assignee-form" th:insert="fragments/form-fragments :: asignee-form" th:with="activity = ${activity}"></div>
+        </div>
+    </div>
     <div class="sidebar-buttons">
         <button class="button-header">Open</button>
     </div>
 </div>
+
+<form th:fragment="asignee-form" class="assignees-modal-content" th:action="@{/update-activity-assignment}" method="post">
+    <h1>Assign People</h1>
+    <div>
+        <input type="text" name="activity-id" th:value="${activity.id}">
+        <label>Person</label>
+        <select name="selected-user">
+            <option th:each="member : ${session.team}" th:value="${member.userId}" th:text="${member.userFirstName}"></option>
+        </select>
+        <label>Hours</label>
+        <input type="number" step="0.01" name="hours-assigned">
+    </div>
+    <button type="submit">Save</button>
+</form>
 
 </body>
 </html>
