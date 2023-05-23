@@ -40,17 +40,17 @@
         <span class="closeProj" th:onclick="closeCreateProject()">&times;</span>
         <h4>Add project</h4>
         <div class="nameDescription">
-            <input type="text" placeholder="Project Name" name="project-name" required>
+            <input type="text" placeholder="Project-Name" name="project-name" required>
             <textarea placeholder="Description" name="description"></textarea>
         </div>
         <div class="dates">
             <div class="sDate">
-                <label for="start-date">Start Date</label>
-                <input type="date" id="start-date" placeholder="Start Date" name="start-date" required>
+                <label for="start-date">Start date</label>
+                <input type="date" id="start-date" placeholder="Start date" name="start-date" required>
             </div>
             <div class="eDate">
-                <label for="End-date">End Date</label>
-                <input type="date" id="end-date" placeholder="End Date" name="end-date" required>
+                <label for="End-date">End date</label>
+                <input type="date" id="end-date" placeholder="End date" name="end-date" required>
             </div>
         </div>
     </div>
@@ -64,17 +64,17 @@
         <h1>Settings</h1>
     </div>
     <div class="ps-heading">
-        <input id="project-name" type="text" placeholder="Project Name" name="project-name" th:value="${session.project.projectName}">
+        <input id="project-name" type="text" placeholder="Project-Name" name="project-name" th:value="${session.project.projectName}">
     </div>
         <div class="ps-input">
             <div class="ps-input-right"></div>
             <div class="ps-input-left"></div>
             <label for="description">Description:</label>
             <textarea rows="4" cols="40" id="description" placeholder="Description" name="description" th:text="${session.project.description}" ></textarea><br/>
-            <label for="startDate">Start Date:</label>
-            <input id="startDate" type="date" placeholder="Start Date" name="start-date" th:value="${session.project.startDate}"><br/>
-            <label for="endDate">End Date:</label>
-            <input id="endDate" type="date" placeholder="End Date" name="end-date" th:value="${session.project.endDate}">
+            <label for="startDate">Start date:</label>
+            <input id="startDate" type="date" placeholder="Start date" name="start-date" th:value="${session.project.startDate}"><br/>
+            <label for="endDate">End date:</label>
+            <input id="endDate" type="date" placeholder="End date" name="end-date" th:value="${session.project.endDate}">
         </div>
         <button class="button-header" type="submit">Save</button>
 </form>
@@ -84,17 +84,17 @@
         <span class="closeProj" th:onclick="closeCreateSection()">&times;</span>
         <h4>Add section</h4>
         <div class="nameDescription">
-            <input type="text" placeholder="Section Name" name="section-name" required>
+            <input type="text" placeholder="Section-Name" name="section-name" required>
             <textarea type="text" placeholder="Description" name="description"></textarea>
         </div>
         <div class="dates">
             <div class="sDate">
-                <label for="start-date">Start Date</label>
-                <input type="date" placeholder="Start Date" name="start-date" required>
+                <label for="start-date">Start date</label>
+                <input type="date" placeholder="Start date" name="start-date" required>
             </div>
             <div class="eDate">
-                <label for="end-date">End Date</label>
-                <input type="date" placeholder="End Date" name="end-date" required>
+                <label for="end-date">End date</label>
+                <input type="date" placeholder="End date" name="end-date" required>
             </div>
         </div>
     </div>
@@ -108,13 +108,13 @@
         <span class="closeProj" th:onclick="closeCreateActivity()">&times;</span>
         <h4>Add activity</h4>
         <div class="nameDescription">
-            <input type="text" placeholder="Activity Name" name="activity-name" required>
+            <input type="text" placeholder="Activity-Name" name="activity-name" required>
             <textarea type="text" placeholder="Description" name="description"></textarea>
         </div>
         <div class="createDuration">
             <div class="hours">
                 <label for="durationInHours">Duration in hours</label>
-                <input type="number" class="createDur" placeholder="Duration In Hours" name="duration" required>
+                <input type="number" class="createDur bordered" placeholder="Duration in hours" name="duration" required>
             </div>
         </div>
     </div>
@@ -128,13 +128,13 @@
         <span class="closeProj" th:onclick="closeCreateTask()">&times;</span>
         <h4>Add task</h4>
         <div class="nameDescription">
-            <input type="text" placeholder="Task Name" name="Task-name" required>
+            <input type="text" placeholder="Task-Name" name="Task-name" required>
             <textarea type="text" placeholder="Description" name="description"></textarea>
         </div>
         <div class="createDuration">
             <div class="hours">
                 <label for="durationInHours">Duration in hours</label>
-                <input type="number" class="createDur" placeholder="Duration In Hours" name="duration" required>
+                <input type="number" class="createDur" placeholder="Duration in hours" name="duration" required>
             </div>
         </div>
     </div>
@@ -146,13 +146,13 @@
 <form th:fragment="update-section-form" th:action="@{/update-section}" method="post">
     <input type="hidden" name="section-id" th:value="${section.id}">
     <div class="sidebar-info">
-        <input class="no-style-input" type="text" placeholder="Section Name" name="section-name" th:value="${section.sectionName}">
+        <input class="no-style-input" type="text" placeholder="Section-Name" name="section-name" th:value="${section.sectionName}">
         <h3>Duration</h3>
         <div class="sidebar-info-duration">
             <span>From:</span>
-            <input type="date" placeholder="Start Date" name="start-date" th:value="${section.startDate}">
+            <input type="date" placeholder="Start date" name="start-date" th:value="${section.startDate}">
             <span>To:</span>
-            <input type="date" placeholder="End Date" name="end-date" th:value="${section.endDate}">
+            <input type="date" placeholder="End date" name="end-date" th:value="${section.endDate}">
         </div>
         <h3>Description</h3>
         <div class="sidebar-info-description">
@@ -165,7 +165,7 @@
 <form th:fragment="update-activity-form" class="sidebar-form" th:action="@{/update-activity}" method="post">
     <input type="hidden" name="activity-id" th:value="${activity.id}">
     <div class="sidebar-info">
-        <input class="no-style-input" type="text" placeholder="Activity Name" name="activity-name" th:value="${activity.activityName}">
+        <input class="no-style-input" type="text" placeholder="Activity-Name" name="activity-name" th:value="${activity.activityName}">
         <h3>Duration</h3>
         <div class="sidebar-info-duration">
             <span>Hours:</span>
@@ -178,14 +178,14 @@
         <h3>Status</h3>
         <div class="sidebar-info-status">
             <div th:switch="${activity.status}">
-                <p th:case="0">Not Started</p>
-                <p th:case="1">In Progress</p>
+                <p th:case="0">Not started</p>
+                <p th:case="1">In progress</p>
                 <p th:case="2">Done</p>
             </div>
             <div>
                 <select name="activity-status">
-                    <option th:value="0">Not Started</option>
-                    <option th:value="1">In Progress</option>
+                    <option th:value="0">Not started</option>
+                    <option th:value="1">In progress</option>
                     <option th:value="2">Done</option>
                 </select>
             </div>
@@ -197,7 +197,7 @@
 <form th:fragment="update-task-form" class="sidebar-form" th:action="@{/update-task}" method="post">
     <input type="hidden" name="task-id" th:value="${task.id}">
     <div class="sidebar-info">
-        <input class="no-style-input" type="text" placeholder="Task Name" name="task-name" th:value="${task.taskName}">
+        <input class="no-style-input" type="text" placeholder="Task-Name" name="task-name" th:value="${task.taskName}">
         <h3>Duration</h3>
         <div class="sidebar-info-duration">
             <span>Hours:</span>
@@ -248,7 +248,7 @@
     <span class="close" th:onclick="toggleTaskInfoSideBar([[${task.id}]])">&times;</span>
     <div class="sidebar-form-wrapper" th:insert="fragments/form-fragments :: update-task-form" th:with="task = ${task}"></div>
     <div class="sidebar-assignees">
-        <h1>People Assigned</h1>
+        <h1>People assigned</h1>
         <div class="assignees-content">
             <table>
                 <tr>
