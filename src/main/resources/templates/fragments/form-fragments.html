@@ -67,9 +67,6 @@
         <input id="project-name" type="text" placeholder="Project Name" name="project-name" th:value="${session.project.projectName}">
     </div>
         <div class="ps-input">
-            <div class="ps-input-right"></div>
-            <div class="ps-input-left"></div>
-            <label for="description">Description:</label>
             <textarea rows="4" cols="40" id="description" placeholder="Description" name="description" th:text="${session.project.description}" ></textarea><br/>
             <label for="startDate">Start Date:</label>
             <input id="startDate" type="date" placeholder="Start Date" name="start-date" th:value="${session.project.startDate}"><br/>
