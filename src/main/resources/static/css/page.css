@@ -10,15 +10,15 @@
 }
 
 body {
-    display: flex;
-    flex-direction: column;
+    /*display: flex;
+    flex-direction: column;*/
     margin-top: 3rem;
     min-height: 100vh;
     min-width: 100%;
-    align-items: flex-start;
-    justify-content: flex-start;
-    flex-wrap: wrap;
     padding: 1.25rem;
+    /*align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;*/
 }
 
 .hero {
@@ -108,33 +108,154 @@ h4 {
     width: 100%;
 }
 
-.add-sec {
+/*.add-sec {
     display: flex;
     flex-direction: column;
-}
+}*/
 
-#create-section, #create-project, #create-activity, #create-task {
+/*############*/
+/*CREATE FORMS*/
+
+.createForm {
     display: flex;
     flex-direction: column;
-    background-color: #4CAF50;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: space-between;
     position: fixed;
     top: 50%;
+    width: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    min-width: 25rem;
-    min-height: 25rem;
+    background-color: var(--complementary-color);
+    padding: 20px;
+    height: 75vh;
     box-shadow: var(--box-shadow);
-    backdrop-filter: blur(150px);
-    -webkit-backdrop-filter: blur(9px);
-    border: var(--border);
+    order: var(--border);
     border-radius: 10px;
-    z-index: 1;
+    z-index: 2;
 }
 
-#create-section img {
+.close {
+    margin: 5% 5% 0;
+    position: absolute;
+    //top: 5%;
+    //right: 5%;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover, .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.nameDescription input[type="text"] {
+    border: none;
+    outline: none;
+    background: none;
+    margin: 0 0 2rem 0;
+    font-family: Helvetica, sans-serif;
+    font-size: x-large;
+    border-bottom: solid;
+    border-bottom-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.nameDescription textarea {
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    padding: 1rem;
+    resize: none;
+    scroll-behavior: smooth;
+    height: 100px;
+}
+
+.nameDescription {
     display: flex;
-    height: 15rem;
-    width: 9rem;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    margin: 5vh 5vh 5vh;
+}
+
+.dates, .createDuration input[type="date"], input[type="number"] {
+    border: none;
+    outline: none;
+    background: inherit;
+}
+
+.dates, .createDuration {
+    display: flex;
+
+}
+
+.dates {
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10% 2rem 0;
+    left: 5%;
+}
+
+.sDate ::-webkit-calendar-picker-indicator, .eDate ::-webkit-calendar-picker-indicator {
+    position: absolute;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    color: var(--primary-color);
+}
+/*##############################################################*/
+
+/* A few custom styles for date inputs */
+input[type="date"] {
+    display: flex;
+    flex-direction: row-reverse;
+    appearance: none;
+    -webkit-appearance: none;
+    color: var(--primary-color);
+    font-family: var(--sub-heading);
+    font-size: 18px;
+    border:1px solid #ecf0f1;
+    background: var(--complementary-color);
+    padding:5px;
+    //display: inline-block !important;
+    visibility: visible !important;
+    box-shadow: var(--box-shadow);
+}
+
+/*##############################################################*/
+
+.sDate, .eDate {
+    display: flex;
+    flex-direction: column;
+    margin: 5% 5% 5%;
+    width: 35%;
+    align-items: flex-start;
+}
+
+label [for="start-date"], label [for="end-date"] {
+    display: flex;
+    flex-direction: row-reverse;
+    cursor: pointer;
+    color: var(--primary-color);
+    font-family: var(--sub-heading);
+    box-shadow: var(--box-shadow);
+}
+
+.createDuration {
+    flex-direction: column;
+}
+
+.createForm h4 {
+    margin: 5% 5% 0;
+}
+
+.createButton {
+    bottom: 5%;
+    position: absolute;
+    left: 5%;
 }
 
 #create-project {

@@ -34,21 +34,29 @@
     </div>
 </form>
 
-<div id="create-project-form">
-    <form th:fragment="create-project-form" class="" action="/create-project" th:action="@{/create-project}" method="POST">
-        <div class="">
+<form th:fragment="create-project-form" class="createForm" action="/create-project" th:action="@{/create-project}" method="POST">
+    <div class="createFormInfo">
+        <span class="close" th:onclick="closeCreateProject()">&times;</span>
+        <h4>Add project</h4>
+        <div class="nameDescription">
             <input type="text" placeholder="Project Name" name="project-name" required>
-            <input type="text" placeholder="Description" name="description">
-            <label for="start-date">Start Date</label>
-            <input type="date" id="start-date" placeholder="Start Date" name="start-date">
-            <label for="End-date">End Date</label>
-            <input type="date" id="end-date" placeholder="End Date" name="end-date">
+            <textarea type="text" placeholder="Description" name="description"></textarea>
         </div>
-        <div>
-            <button class="" type="submit" th:href="@{/projects}">Create</button>
+        <div class="dates">
+            <div class="sDate">
+                <label for="start-date">Start Date</label>
+                <input type="date" id="start-date" placeholder="Start Date" name="start-date">
+            </div>
+            <div class="eDate">
+                <label for="End-date">End Date</label>
+                <input type="date" id="end-date" placeholder="End Date" name="end-date">
+            </div>
         </div>
-    </form>
-</div>
+    </div>
+    <div class="createButton">
+        <button class="button-header" type="submit" th:href="@{/projects}">Create</button>
+    </div>
+</form>
 
 <form th:fragment="update-project-form" class="" action="/update-project" th:action="@{/update-project}" method="post">
     <div class="">
@@ -62,38 +70,63 @@
     </div>
 </form>
 
-<form th:fragment="create-section-form" class="" action="/create-section" th:action="@{/create-section}" method="post">
-    <div class="">
-        <input type="text" placeholder="Section Name" name="section-name" required>
-        <input type="text" placeholder="Description" name="description">
-        <input type="date" placeholder="Start Date" name="start-date">
-        <input type="date" placeholder="End Date" name="end-date">
+<form th:fragment="create-section-form" class="createForm" action="/create-section" th:action="@{/create-section}" method="post">
+    <div class="createFormInfo">
+        <span class="close" th:onclick="closeCreateSection()">&times;</span>
+        <h4>Add section</h4>
+        <div class="nameDescription">
+            <input type="text" placeholder="Section Name" name="section-name" required>
+            <textarea type="text" placeholder="Description" name="description"></textarea>
+        </div>
+        <div class="dates">
+            <div class="sDate">
+                <label for="start-date">Start Date</label>
+                <input type="date" placeholder="Start Date" name="start-date">
+            </div>
+            <div class="eDate">
+                <label for="end-date">End Date</label>
+                <input type="date" placeholder="End Date" name="end-date">
+            </div>
+        </div>
     </div>
-    <img th:src="@{/images/EineKleineBohne.jpg}" alt="Add task" src="">
-    <div>
-        <button class="" type="submit">Create</button>
+    <div class="createButton">
+        <button class="button-header" type="submit" th:href="@{/project-page}">Create</button>
     </div>
 </form>
 
-<form th:fragment="create-activity-form" class="" action="/create-activity" th:action="@{/create-activity}" method="post">
-    <div class="">
-        <input type="text" placeholder="Activity Name" name="activity-name" required>
-        <input type="text" placeholder="Description" name="description">
-        <input type="number" placeholder="Duration" name="duration">
+<form th:fragment="create-activity-form" class="createForm" action="/create-activity" th:action="@{/create-activity}" method="post">
+    <div class="createFormInfo">
+        <span class="close" th:onclick="closeCreateActivity()">&times;</span>
+        <h4>Add activity</h4>
+        <div class="nameDescription">
+            <input type="text" placeholder="Activity Name" name="activity-name" required>
+            <textarea type="text" placeholder="Description" name="description"></textarea>
+        </div>
+        <div class="createDuration">
+            <label for="durationInHours">Duration in hours</label>
+            <input type="number" class="createDuration" placeholder="Duration In Hours" name="duration">
+        </div>
     </div>
-    <div>
-        <button class="" type="submit">Create</button>
+    <div class="createButton">
+        <button class="button-header" type="submit" th:href="@{/section-page}">Create</button>
     </div>
 </form>
 
-<form th:fragment="create-task-form" class="" action="/create-task" th:action="@{/create-task}" method="post">
-    <div class="">
-        <input type="text" placeholder="Task Name" name="Task-name" required>
-        <input type="text" placeholder="Description" name="description">
-        <input type="number" placeholder="Duration" name="duration">
+<form th:fragment="create-task-form" class="createForm" action="/create-task" th:action="@{/create-task}" method="post">
+    <div class="createFormInfo">
+        <span class="close" th:onclick="closeCreateTask()">&times;</span>
+        <h4>Add task</h4>
+        <div class="nameDescription">
+            <input type="text" placeholder="Task Name" name="Task-name" required>
+            <textarea type="text" placeholder="Description" name="description"></textarea>
+        </div>
+        <div class="createDuration">
+            <label for="durationInHours">Duration in hours</label>
+            <input type="number" placeholder="Duration" name="duration">
+        </div>
     </div>
-    <div>
-        <button class="" type="submit">Create</button>
+    <div class="createButton">
+        <button class="button-header" type="submit" th:href="@{/activity-page}">Create</button>
     </div>
 </form>
 

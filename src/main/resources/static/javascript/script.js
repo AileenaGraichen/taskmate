@@ -12,8 +12,8 @@ function openCreateProjectForm() {
     document.getElementById("create-project").style.display = "block";
 }
 
-function openCreateSectionForm() {
-    document.getElementById("create-section").style.display = "block";
+function closeCreateProject() {
+    document.getElementById("create-project").style.display = "none";
 }
 
 function openEditProjectForm() {
@@ -24,16 +24,12 @@ function openDeleteProjectPopUp() {
     document.getElementById("delete-project-id").style.display = "block";
 }
 
-function openCreateActivityForm() {
-    document.getElementById("create-activity").style.display = "block";
+function openCreateSectionForm() {
+    document.getElementById("create-section").style.display = "block";
 }
 
-function openEditActivityForm() {
-    document.getElementById("edit-activity-form").style.display = "block";
-}
-
-function openDeleteActivityPopUp() {
-    document.getElementById("delete-activity-id").style.display = "block";
+function closeCreateSection() {
+    document.getElementById("create-section").style.display = "none";
 }
 
 function openEditSectionForm() {
@@ -44,8 +40,29 @@ function openDeleteSectionPopUp() {
     document.getElementById("delete-section-id").style.display = "block";
 }
 
+function openCreateActivityForm() {
+    document.getElementById("create-activity").style.display = "block";
+}
+
+function closeCreateActivity() {
+    document.getElementById("create-activity").style.display = "none";
+
+}
+
+function openEditActivityForm() {
+    document.getElementById("edit-activity-form").style.display = "block";
+}
+
+function openDeleteActivityPopUp() {
+    document.getElementById("delete-activity-id").style.display = "block";
+}
+
 function openCreateTaskForm() {
     document.getElementById("create-task").style.display = "block";
+}
+
+function closeCreateTask() {
+    document.getElementById("create-task").style.display = "none";
 }
 
 function openEditTaskForm() {
