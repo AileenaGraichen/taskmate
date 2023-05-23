@@ -141,6 +141,7 @@ public class MainController {
                                 @RequestParam("start-date") Date startDate,
                                 @RequestParam("end-date") Date endDate,
                                 HttpSession session){
+        System.out.println(endDate);
         User user = (User) session.getAttribute("user");
         Project project = new Project(user.getId(), projectName, description, startDate, endDate);
         projectRepository.addProject(project);

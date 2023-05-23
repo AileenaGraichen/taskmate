@@ -21,8 +21,8 @@
 
         <section class="topRightSection">
 
-            <div th:each="project : ${session.projectsList}">
-                <a href="" th:href="@{'/project-settings/'+${project.getId()}}">
+            <div>
+                <a href="" th:href="@{'/project-settings/'+${session.project.id}}">
                     <button class="button-header">Settings</button>
                 </a>
             </div>
