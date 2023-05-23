@@ -1,5 +1,6 @@
 package kea.taskmate.repository;
 
+import kea.taskmate.models.Activity;
 import kea.taskmate.models.Task;
 import kea.taskmate.utility.ConnectionManager;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,13 +35,17 @@ public class TaskRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             resultSet.next();
-            String taskName = resultSet.getString(2);
-            String description = resultSet.getString(3);
-            float durationInHours = resultSet.getFloat(4);
+            int activityId = resultSet.getInt(2);
+            String taskName = resultSet.getString(3);
+            String description = resultSet.getString(4);
+            float durationInHours = resultSet.getFloat(5);
+            int status = resultSet.getInt(6);
 
+            task.setActivityId(activityId);
             task.setTaskName(taskName);
             task.setDescription(description);
             task.setDurationInHours(durationInHours);
+            task.setStatus(status);
 
         } catch (SQLException e){
             System.out.println("Could not find task");
@@ -111,6 +116,23 @@ public class TaskRepository {
 
         }catch (SQLException e){
             System.out.println("Could not update task.");
+            e.printStackTrace();
+        }
+    }
+
+    public void updateTaskStatus(Task task){
+        final String UPDATE_QUERY = "UPDATE taskmate.task SET status = ? WHERE id = ?";
+        try{
+            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY);
+
+            preparedStatement.setInt(1, task.getStatus());
+            preparedStatement.setInt(2, task.getId());
+
+            preparedStatement.executeUpdate();
+
+        }catch (SQLException e){
+            System.out.println("Could not update task status");
             e.printStackTrace();
         }
     }

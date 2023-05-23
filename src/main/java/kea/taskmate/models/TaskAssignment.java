@@ -3,6 +3,8 @@ package kea.taskmate.models;
 public class TaskAssignment {
     private int taskId;
     private int userId;
+
+    private String userFirstName;
     private float hoursAssigned;
 
     public TaskAssignment() {
@@ -28,6 +30,14 @@ public class TaskAssignment {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getUserFirstName() {
+        return userFirstName;
+    }
+
+    public void setUserFirstName(String userFirstName) {
+        this.userFirstName = userFirstName;
     }
 
     public float getHoursAssigned() {

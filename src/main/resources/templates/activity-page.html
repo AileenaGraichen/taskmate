@@ -33,21 +33,22 @@
                 <h4>Tasks</h4>
             </div>
 
-            <div class="pp-row2">
-                <section>
-                    <button onclick="openCreateTaskForm()" class="add-task">
-                        <img th:src="@{/images/plus.svg}" alt="Add task" src="">
-                    </button>
-                </section>
-                <div th:each="task : ${session.listOfTasks}">
-                    <a href=""  th:href="@{'/task-page/'+${task.getId()}}">
-                        <button class="task" th:text="${task.taskName}"></button>
-                    </a>
-                </div>
+        <div class="pp-row2">
+            <section>
+                <button onclick="openCreateTaskForm()" class="add-task">
+                    <img th:src="@{/images/plus.svg}" alt="Add task" src="">
+                </button>
+            </section>
+            <div th:each="task : ${session.listOfTasks}">
+                <a href=""  th:href="@{'/task-page/'+${task.getId()}}">
+                    <button class="task" th:text="${task.taskName}"></button>
+                </a>
+                <button th:onclick="toggleTaskInfoSideBar([[${task.id}]])">Info</button>
+                <div class="modal" th:id="'sidebarTask' + ${task.id}" th:insert="fragments/form-fragments :: task-info-sidebar" th:with="task = ${task}"></div>
             </div>
-        </section>
+        </div>
     </section>
-</div>
+</section>
 <div id="create-task" class="modal" th:insert="fragments/form-fragments :: create-task-form"></div>
 </body>
 </html>
