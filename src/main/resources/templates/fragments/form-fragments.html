@@ -60,16 +60,23 @@
 </form>
 
 <form th:fragment="update-project-form" class="" action="/update-project" th:action="@{/update-project}" method="post">
-    <div class="">
-        <input type="text" placeholder="Project Name" name="project-name" th:value="${session.project.projectName}">
-        <label for="description">Description:</label><br/>
-        <textarea rows="4" cols="40" id="description" placeholder="Description" name="description" th:text="${session.project.description}" ></textarea>
-        <input type="date" placeholder="Start Date" name="start-date" th:value="${session.project.startDate}">
-        <input type="date" placeholder="End Date" name="end-date" th:value="${session.project.endDate}">
+    <div class="ps-heading">
+        <h1>Settings</h1>
     </div>
-    <div>
+    <div class="ps-heading">
+        <input id="project-name" type="text" placeholder="Project Name" name="project-name" th:value="${session.project.projectName}">
+    </div>
+        <div class="ps-input">
+            <div class="ps-input-right"></div>
+            <div class="ps-input-left"></div>
+            <label for="description">Description:</label>
+            <textarea rows="4" cols="40" id="description" placeholder="Description" name="description" th:text="${session.project.description}" ></textarea><br/>
+            <label for="startDate">Start Date:</label>
+            <input id="startDate" type="date" placeholder="Start Date" name="start-date" th:value="${session.project.startDate}"><br/>
+            <label for="endDate">End Date:</label>
+            <input id="endDate" type="date" placeholder="End Date" name="end-date" th:value="${session.project.endDate}">
+        </div>
         <button class="button-header" type="submit">Save</button>
-    </div>
 </form>
 
 <form th:fragment="create-section-form" class="createForm" action="/create-section" th:action="@{/create-section}" method="post">

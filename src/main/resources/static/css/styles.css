@@ -35,6 +35,12 @@ h2{
     color: var(--primary-color);
 }
 
+textarea{
+    resize: none;
+    overflow: auto; /*removes default scrollbars, but adds them when needed*/
+    font-family: Helvetica;
+}
+
 #background_image {
     background-image: url("../images/Background_FrontPage.svg");
     position: fixed;
@@ -59,6 +65,7 @@ ul{
     justify-content: space-around;
     align-items: center;
 }
+
 
 .text-container {
     flex: 1;
@@ -182,8 +189,6 @@ a:hover, a:visited, a:link, a:active {
     margin-right: 10px; /* optional: add some space between the buttons */
 }
 
-/*#############*/
-/*BUTTON-HEADER*/
 
 .button-header {
     font-family: Helvetica, serif;
@@ -247,4 +252,35 @@ a:hover, a:visited, a:link, a:active {
     text-decoration: none;
     border-bottom: none;
 }
+
+#project-name{
+    font-family: Helvetica;
+    color: var(--primary-color);
+    font-size: xx-large;
+}
+
+label{
+    font-family: Helvetica;
+    color: var(--primary-color);
+    font-size: large;
+}
+
+/*Settings-page*/
+.ps-heading{
+    display: flex;
+    flex-flow: row wrap;
+    margin: 5%;
+}
+
+.ps-input{
+    display: flex;
+    flex-flow: column wrap;
+    margin: 5%;
+}
+
+.ps-input-left{
+    display: flex;
+    flex-flow: row wrap;
+}
+
 
