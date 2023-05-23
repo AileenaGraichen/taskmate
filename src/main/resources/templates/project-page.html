@@ -7,52 +7,57 @@
     <link rel="stylesheet" type="text/css" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
     <link rel="stylesheet" type="text/css" href="../static/css/page.css" th:href="@{/css/page.css}"/>
     <link rel="stylesheet" type="text/css" href="../static/css/infoSidebarStyles.css" th:href="@{/css/infoSidebarStyles.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/dashboard.css" th:href="@{/css/dashboard.css}"/>
     <script type="text/javascript" src="../static/javascript/script.js" th:src="@{/javascript/script.js}"></script>
 </head>
 <body>
-<!--<div th:insert="fragments/header-footer-fragments :: side-navigation"></div>-->
-<section class="hero">
-    <h1 th:text="' '+${session.project.projectName}"></h1>
+<div th:insert="fragments/header-footer-fragments :: side-navigation"></div>
 
-    <section class="top-section">
-        <section class="topLeftSection">
-            <a th:href="@{/projects}"><button class="button-header"><img class="arrow-right.svg" th:src="@{/images/arrow-right.svg}" alt="" src="">Projects</button></a>
-        </section>
+<div id="platform" class="project-wrap">
+    <!--<div th:insert="fragments/header-footer-fragments :: side-navigation"></div>-->
+    <section class="hero">
+        <h1 th:text="' '+${session.project.projectName}"></h1>
 
-        <section class="topRightSection">
-
-            <div>
-                <a href="" th:href="@{'/project-settings/'+${session.project.id}}">
-                    <button class="button-header">Settings</button>
-                </a>
-            </div>
-
-            <button class="button-header" onclick="openDeleteProjectPopUp()">Delete Project</button>
-        </section>
-
-    </section>
-
-    <section class="bottom-section">
-        <div class="pp-row1">
-            <h4>Sections</h4>
-        </div>
-
-        <div class="pp-row2">
-            <section class="add-sec">
-                <button onclick="openCreateSectionForm()" class="add-section">
-                    <img th:src="@{/images/plus.svg}" alt="Add section" src="">
-                </button>
+        <section class="top-section">
+            <section class="topLeftSection">
+                <a th:href="@{/projects}"><button class="button-header"><img class="arrow-right.svg" th:src="@{/images/arrow-right.svg}" alt="" src="">Projects</button></a>
             </section>
-            <div th:each="section : ${session.listOfSections}">
-                <a href=""  th:href="@{'/section-page/'+${section.getId()}}">
-                    <button class="section" th:text="${section.sectionName}"></button>
-                </a>
-                <button th:onclick="toggleSectionInfoSideBar([[${section.id}]])">Info</button>
-                <div class="modal" th:id="'sidebarSection' + ${section.id}" th:insert="fragments/form-fragments :: section-info-sidebar" th:with="section = ${section}"></div>
+
+            <section class="topRightSection">
+
+                <div>
+                    <a href="" th:href="@{'/project-settings/'+${session.project.id}}">
+                        <button class="button-header">Settings</button>
+                    </a>
+                </div>
+
+                <button class="button-header" onclick="openDeleteProjectPopUp()">Delete Project</button>
+            </section>
+
+        </section>
+
+        <section class="bottom-section">
+            <div class="pp-row1">
+                <h4>Sections</h4>
             </div>
-        </div>
+
+            <div class="pp-row2">
+                <section class="add-sec">
+                    <button onclick="openCreateSectionForm()" class="add-section">
+                        <img th:src="@{/images/plus.svg}" alt="Add section" src="">
+                    </button>
+                </section>
+                <div th:each="section : ${session.listOfSections}">
+                    <a href=""  th:href="@{'/section-page/'+${section.getId()}}">
+                        <button class="section" th:text="${section.sectionName}"></button>
+                    </a>
+                    <button th:onclick="toggleSectionInfoSideBar([[${section.id}]])">Info</button>
+                    <div class="modal" th:id="'sidebarSection' + ${section.id}" th:insert="fragments/form-fragments :: section-info-sidebar" th:with="section = ${section}"></div>
+                </div>
+            </div>
+        </section>
     </section>
-</section>
-<div id="create-section" th:insert="fragments/form-fragments :: create-section-form"></div>
+</div>
+<div id="create-section" class="modal" th:insert="fragments/form-fragments :: create-section-form"></div>
 </body>
 </html>

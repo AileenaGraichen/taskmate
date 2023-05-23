@@ -37,7 +37,7 @@
 
 <form th:fragment="create-project-form" class="createForm" action="/create-project" th:action="@{/create-project}" method="POST">
     <div class="createFormInfo">
-        <span class="close" th:onclick="closeCreateProject()">&times;</span>
+        <span class="closeProj" th:onclick="closeCreateProject()">&times;</span>
         <h4>Add project</h4>
         <div class="nameDescription">
             <input type="text" placeholder="Project Name" name="project-name" required>
@@ -74,7 +74,7 @@
 
 <form th:fragment="create-section-form" class="createForm" action="/create-section" th:action="@{/create-section}" method="post">
     <div class="createFormInfo">
-        <span class="close" th:onclick="closeCreateSection()">&times;</span>
+        <span class="closeProj" th:onclick="closeCreateSection()">&times;</span>
         <h4>Add section</h4>
         <div class="nameDescription">
             <input type="text" placeholder="Section Name" name="section-name" required>
@@ -83,11 +83,11 @@
         <div class="dates">
             <div class="sDate">
                 <label for="start-date">Start Date</label>
-                <input type="date" placeholder="Start Date" name="start-date">
+                <input type="date" placeholder="Start Date" name="start-date" required>
             </div>
             <div class="eDate">
                 <label for="end-date">End Date</label>
-                <input type="date" placeholder="End Date" name="end-date">
+                <input type="date" placeholder="End Date" name="end-date" required>
             </div>
         </div>
     </div>
@@ -98,15 +98,17 @@
 
 <form th:fragment="create-activity-form" class="createForm" action="/create-activity" th:action="@{/create-activity}" method="post">
     <div class="createFormInfo">
-        <span class="close" th:onclick="closeCreateActivity()">&times;</span>
+        <span class="closeProj" th:onclick="closeCreateActivity()">&times;</span>
         <h4>Add activity</h4>
         <div class="nameDescription">
             <input type="text" placeholder="Activity Name" name="activity-name" required>
             <textarea type="text" placeholder="Description" name="description"></textarea>
         </div>
         <div class="createDuration">
-            <label for="durationInHours">Duration in hours</label>
-            <input type="number" class="createDuration" placeholder="Duration In Hours" name="duration">
+            <div class="hours">
+                <label for="durationInHours">Duration in hours</label>
+                <input type="number" class="createDur" placeholder="Duration In Hours" name="duration" required>
+            </div>
         </div>
     </div>
     <div class="createButton">
@@ -116,15 +118,17 @@
 
 <form th:fragment="create-task-form" class="createForm" action="/create-task" th:action="@{/create-task}" method="post">
     <div class="createFormInfo">
-        <span class="close" th:onclick="closeCreateTask()">&times;</span>
+        <span class="closeProj" th:onclick="closeCreateTask()">&times;</span>
         <h4>Add task</h4>
         <div class="nameDescription">
             <input type="text" placeholder="Task Name" name="Task-name" required>
             <textarea type="text" placeholder="Description" name="description"></textarea>
         </div>
         <div class="createDuration">
-            <label for="durationInHours">Duration in hours</label>
-            <input type="number" placeholder="Duration" name="duration">
+            <div class="hours">
+                <label for="durationInHours">Duration in hours</label>
+                <input type="number" class="createDur" placeholder="Duration In Hours" name="duration" required>
+            </div>
         </div>
     </div>
     <div class="createButton">

@@ -7,44 +7,49 @@
     <link rel="stylesheet" type="text/css" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
     <link rel="stylesheet" type="text/css" href="../static/css/page.css" th:href="@{/css/page.css}"/>
     <link rel="stylesheet" type="text/css" href="../static/css/infoSidebarStyles.css" th:href="@{/css/infoSidebarStyles.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/dashboard.css" th:href="@{/css/dashboard.css}"/>
     <script type="text/javascript" src="../static/javascript/script.js" th:src="@{/javascript/script.js}"></script>
 </head>
 <body>
-<section class="hero">
-    <h1 th:text="${session.section.sectionName}"></h1>
+<div th:insert="fragments/header-footer-fragments :: side-navigation"></div>
 
-    <section class="top-section">
-        <section class="topLeftSection">
-            <a th:href="@{'/project-page/'+${session.project.id}}"><button class="button-header"><img class="arrow-right.svg" th:src="@{/images/arrow-right.svg}" alt="" src="">Sections</button></a>
-        </section>
+<div id="platform" class="project-wrap">
+    <section class="hero">
+        <h1 th:text="${session.section.sectionName}"></h1>
 
-        <section class="topRightSection">
-            <button class="button-header" onclick="openEditSectionForm()">Edit Section</button>
-            <button class="button-header" onclick="openDeleteSectionPopUp()">Delete Section</button>
-        </section>
-    </section>
-
-    <section class="bottom-section">
-        <div class="pp-row1">
-            <h4>Activities</h4>
-        </div>
-
-        <div class="pp-row2">
-            <section>
-                <button onclick="openCreateActivityForm()" class="add-activity">
-                    <img th:src="@{/images/plus.svg}" alt="Add activity" src="">
-                </button>
+        <section class="top-section">
+            <section class="topLeftSection">
+                <a th:href="@{'/project-page/'+${session.project.id}}"><button class="button-header"><img class="arrow-right.svg" th:src="@{/images/arrow-right.svg}" alt="" src="">Sections</button></a>
             </section>
-            <div th:each="activity : ${session.listOfActivities}">
-                <a href=""  th:href="@{'/activity-page/'+${activity.getId()}}">
-                    <button class="activity" th:text="${activity.activityName}"></button>
-                </a>
-                <button th:onclick="toggleActivityInfoSideBar([[${activity.id}]])">Info</button>
-                <div class="modal" th:id="'sidebarActivity' + ${activity.id}" th:insert="fragments/form-fragments :: activity-info-sidebar" th:with="activity = ${activity}"></div>
+
+            <section class="topRightSection">
+                <button class="button-header" onclick="openEditSectionForm()">Edit Section</button>
+                <button class="button-header" onclick="openDeleteSectionPopUp()">Delete Section</button>
+            </section>
+        </section>
+
+        <section class="bottom-section">
+            <div class="pp-row1">
+                <h4>Activities</h4>
             </div>
-        </div>
+
+            <div class="pp-row2">
+                <section>
+                    <button onclick="openCreateActivityForm()" class="add-activity">
+                        <img th:src="@{/images/plus.svg}" alt="Add activity" src="">
+                    </button>
+                </section>
+                <div th:each="activity : ${session.listOfActivities}">
+                    <a href=""  th:href="@{'/activity-page/'+${activity.getId()}}">
+                        <button class="activity" th:text="${activity.activityName}"></button>
+                    </a>
+                    <button th:onclick="toggleActivityInfoSideBar([[${activity.id}]])">Info</button>
+                    <div class="modal" th:id="'sidebarActivity' + ${activity.id}" th:insert="fragments/form-fragments :: activity-info-sidebar" th:with="activity = ${activity}"></div>
+                </div>
+            </div>
+        </section>
     </section>
-</section>
-<div id="create-activity" th:insert="fragments/form-fragments :: create-activity-form"></div>
+</div>
+<div id="create-activity" class="modal" th:insert="fragments/form-fragments :: create-activity-form"></div>
 </body>
 </html>
