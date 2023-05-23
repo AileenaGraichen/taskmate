@@ -3,7 +3,6 @@ package kea.taskmate.repository;
 import kea.taskmate.models.ActivityAssignment;
 import kea.taskmate.models.TaskAssignment;
 import kea.taskmate.utility.ConnectionManager;
-import kea.taskmate.utility.PasswordEncrypter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
@@ -26,7 +25,7 @@ public class AssignmentRepository {
 
 
     //change variables
-    public List<ActivityAssignment> getActivityAssignmentById (int activityId){
+    public List<ActivityAssignment> getActivityAssignmentsById(int activityId){
         List<ActivityAssignment> list = new ArrayList<>();
         try{
             final String QUERY = "SELECT aa.*, u.fname " +
@@ -53,19 +52,24 @@ public class AssignmentRepository {
         return list;
     }
 
-    public List<TaskAssignment> getTaskAssignmentById (int taskId, int userId){
+    public List<TaskAssignment> getTaskAssignmentsById (int taskId){
         List<TaskAssignment> list = new ArrayList<>();
         try{
-            final String QUERY = "SELECT * FROM taskmate.task_assignment WHERE task_id = ? AND user_id = ?";
+            final String QUERY = "SELECT ta.*, u.fname " +
+                    "FROM taskmate.task_assignment AS ta " +
+                    "JOIN taskmate.user AS u ON ta.user_id = u.id " +
+                    "WHERE ta.task_id = ?";
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
             preparedStatement.setInt(1, taskId);
-            preparedStatement.setInt(2, userId);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
+                int userId = resultSet.getInt(1);
                 float hoursAssigned = resultSet.getFloat(3);
+                String userFirstName = resultSet.getString(4);
                 TaskAssignment taskAssignment = new TaskAssignment(userId, taskId, hoursAssigned);
+                taskAssignment.setUserFirstName(userFirstName);
                 list.add(taskAssignment);
             }
         }catch (SQLException e){

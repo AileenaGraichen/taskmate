@@ -108,8 +108,29 @@ function toggleActivityInfoSideBar(activityId) {
     }
 }
 
-function toggleAssigneesForm() {
-    let assigneeForm = document.getElementById("assignee-form");
+function toggleTaskInfoSideBar(taskId) {
+    let sidebarId = "sidebarTask" + taskId;
+    let sidebar = document.getElementById(sidebarId);
+    let computedStyle = window.getComputedStyle(sidebar);
+    if (computedStyle.display === "none") {
+        sidebar.style.display = "block";
+    } else {
+        sidebar.style.display = "none";
+    }
+}
+
+function toggleActivityAssigneesForm() {
+    let assigneeForm = document.getElementById("activity-assignee-form");
+    let computedStyle = window.getComputedStyle(assigneeForm);
+    if (computedStyle.display === "none") {
+        assigneeForm.style.display = "block";
+    } else {
+        assigneeForm.style.display = "none";
+    }
+}
+
+function toggleTaskAssigneesForm() {
+    let assigneeForm = document.getElementById("task-assignee-form");
     let computedStyle = window.getComputedStyle(assigneeForm);
     if (computedStyle.display === "none") {
         assigneeForm.style.display = "block";

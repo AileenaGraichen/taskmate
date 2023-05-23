@@ -29,7 +29,6 @@ public class ActivityRepository {
         try{
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_QUERY);
-
             preparedStatement.setInt(1, activityId);
 
             ResultSet resultSet = preparedStatement.executeQuery();

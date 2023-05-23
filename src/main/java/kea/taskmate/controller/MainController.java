@@ -4,13 +4,11 @@ import kea.taskmate.models.*;
 import kea.taskmate.repository.*;
 import jakarta.servlet.http.HttpSession;
 import kea.taskmate.service.DashboardService;
-import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -97,7 +95,7 @@ public class MainController {
     }
 
     @GetMapping("/profile")
-    public String showProfile(HttpSession session, Model model){
+    public String showProfile(HttpSession session){
         User user = (User) session.getAttribute("user");
         userRepository.getUserById(user.getId());
         return "profile";
@@ -222,7 +220,7 @@ public class MainController {
 
         List<Activity> listOfActivities = activityRepository.getActivityListById(sectionId);
         for (Activity a : listOfActivities){
-            a.setAssignments(assignmentRepository.getActivityAssignmentById(a.getId()));
+            a.setAssignments(assignmentRepository.getActivityAssignmentsById(a.getId()));
         }
         session.setAttribute("listOfActivities", listOfActivities);
         session.setAttribute("section", sectionRepository.getSectionById(sectionId));
@@ -261,6 +259,9 @@ public class MainController {
     public String getActivityPage(@PathVariable("activityId") int activityId,
                                  HttpSession session){
         List<Task> listOfTasks = taskRepository.getTaskListById(activityId);
+        for (Task t : listOfTasks){
+            t.setAssignments(assignmentRepository.getTaskAssignmentsById(t.getId()));
+        }
         session.setAttribute("listOfTasks", listOfTasks);
         session.setAttribute("activity", activityRepository.getActivityById(activityId));
         return "activity-page";
@@ -296,11 +297,39 @@ public class MainController {
                                            @RequestParam("selected-user")  int userId,
                                            @RequestParam("hours-assigned") float hoursAssigned,
                                            HttpSession session){
-        System.out.println(userId + " " + activityId + " " +hoursAssigned);
         Section section = (Section) session.getAttribute("section");
+        List<ActivityAssignment> assignments = assignmentRepository.getActivityAssignmentsById(activityId);
         ActivityAssignment activityAssignment = new ActivityAssignment(userId, activityId, hoursAssigned);
+        for (ActivityAssignment assignment : assignments){
+            System.out.println(assignment.getUserId()+ "|" + userId);
+            if(assignment.getUserId() == userId) {
+                assignmentRepository.updateActivityAssignment(activityAssignment);
+                return "redirect:/section-page/"+section.getId();
+            }
+        }
         assignmentRepository.addActivityAssignment(activityAssignment);
 
+
         return "redirect:/section-page/"+section.getId();
+    }
+
+    @PostMapping("/update-task-assignment")
+    public String updateTaskAssignment(@RequestParam("task-id") int taskId,
+                                           @RequestParam("selected-user")  int userId,
+                                           @RequestParam("hours-assigned") float hoursAssigned,
+                                           HttpSession session){
+        Activity activity = (Activity) session.getAttribute("activity");
+        List<TaskAssignment> assignments = assignmentRepository.getTaskAssignmentsById(taskId);
+        TaskAssignment taskAssignment = new TaskAssignment(userId, taskId, hoursAssigned);
+        for (TaskAssignment assignment : assignments){
+            if(assignment.getUserId() == userId) {
+                assignmentRepository.updateTaskAssignment(taskAssignment);
+                return "redirect:/activity-page/"+activity.getId();
+            }
+        }
+        assignmentRepository.addTaskAssignment(taskAssignment);
+
+
+        return "redirect:/activity-page/"+activity.getId();
     }
 }
