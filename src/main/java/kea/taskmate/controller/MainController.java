@@ -243,12 +243,15 @@ public class MainController {
     public String updateActivity(@RequestParam("activity-id") int activityId,
                                 @RequestParam("activity-name") String activityName,
                                 @RequestParam("description") String description,
-                                @RequestParam("duration") float duration){
+                                @RequestParam("duration") float duration,
+                                 @RequestParam("activity-status") int status){
         Activity activity = activityRepository.getActivityById(activityId);
         activity.setActivityName(activityName);
         activity.setDescription(description);
         activity.setDurationInHours(duration);
+        activity.setStatus(status);
         activityRepository.updateActivity(activity);
+        activityRepository.updateActivityStatus(activity);
         return "redirect:/section-page/"+activity.getSectionId();
     }
 
