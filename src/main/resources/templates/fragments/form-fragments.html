@@ -24,6 +24,30 @@
     </div>
 </form>
 
+<form th:fragment="update-profile-form" class="" action="/profile" th:action="@{/profile}" method="post">
+    <div class="form-container">
+        <div class="ps-heading">
+            <h1>Profile</h1>
+        </div>
+        <div class="ps-input">
+            <label for="firstName">First Name</label>
+            <input id="firstName" type="text" placeholder="First Name" name="firstName" th:value="${session.user.firstName}">
+        </div>
+        <div class="ps-input">
+            <label for="lastName">Last Name</label>
+            <input id="lastName" type="text" placeholder="Last Name" name="lastName" th:value="${session.user.lastName}">
+        </div>
+        <div class="ps-input">
+            <label for="eMail">E-Mail</label>
+            <input id="eMail" type="email" placeholder="E-Mail" name="email" th:value="${session.user.email}">
+        </div>
+    </div>
+    <div class="form-container">
+        <button class="button-header" type="submit">SAVE</button>
+    </div>
+</form>
+
+
 <form th:fragment="login-form" class="" action="/login" th:action="@{/login}" method="POST">
     <div class="form-container">
         <h1>Login</h1>
@@ -68,13 +92,25 @@
         <input id="project-name" type="text" placeholder="Project-Name" name="project-name" th:value="${session.project.projectName}">
     </div>
         <div class="ps-input">
-            <textarea rows="4" cols="40" id="description" placeholder="Description" name="description" th:text="${session.project.description}" ></textarea><br/>
-            <label for="startDate">Start date:</label>
-            <input id="startDate" type="date" placeholder="Start date" name="start-date" th:value="${session.project.startDate}"><br/>
-            <label for="endDate">End date:</label>
-            <input id="endDate" type="date" placeholder="End date" name="end-date" th:value="${session.project.endDate}">
+            <div class="ps-input-description">
+                <label for="description">Description</label>
+                <textarea rows="4" cols="40" id="description" placeholder="Description" name="description" th:text="${session.project.description}" ></textarea>
+            </div>
+            <div class="ps-input-description">
+                <label for="startDate">Start date</label>
+                <input id="startDate" type="date" placeholder="Start date" name="start-date" th:value="${session.project.startDate}">
+            </div>
+            <div class="ps-input-description">
+                <label for="endDate">End date</label>
+                <input id="endDate" type="date" placeholder="End date" name="end-date" th:value="${session.project.endDate}">
+            </div>
+            <div class="ps-input-description">
+                <label for="collaborators">Collaborators</label>
+                <input id="collaborators" type="text" placeholder="collaborators" name="collaborators">
+            </div>
+            <button class="button-header" type="submit">Save</button>
         </div>
-        <button class="button-header" type="submit">Save</button>
+
 </form>
 
 <form th:fragment="create-section-form" class="createForm" action="/create-section" th:action="@{/create-section}" method="post">

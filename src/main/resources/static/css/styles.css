@@ -270,6 +270,7 @@ label{
     display: flex;
     flex-flow: row wrap;
     margin: 5%;
+    justify-content: center;
 }
 
 .ps-input{
@@ -278,6 +279,19 @@ label{
     margin: 5%;
 }
 
+.ps-input-description{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin: 5%;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+input[type="date" i] {
+    width: 100px;
+
+}
 
 
 
