@@ -102,7 +102,7 @@ public class MainController {
     }
 
     //POST FOR UPDATING PROFILE
-    @PostMapping("/update-profile")
+    @PostMapping("/profile")
     public String updateProfile(@RequestParam("firstName") String firstName,
                                 @RequestParam("lastName") String lastName,
                                 @RequestParam("email") String email,
