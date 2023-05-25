@@ -73,7 +73,6 @@ function openDeleteTaskPopUp() {
     document.getElementById("delete-task-id").style.display = "block";
 }
 
-
 function toggleNavbar() {
     let x = document.getElementById("navbar-side");
     let y = document.getElementById("platform");

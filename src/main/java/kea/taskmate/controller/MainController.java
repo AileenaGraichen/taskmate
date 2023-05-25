@@ -335,4 +335,22 @@ public class MainController {
 
         return "redirect:/activity-page/"+activity.getId();
     }
+
+    @GetMapping("/delete-task-assignment/{userId}/{taskId}")
+    public String deleteTaskAssignment(@PathVariable("userId") int userId,
+                                   @PathVariable("taskId") int taskId,
+                                   HttpSession session){
+        assignmentRepository.deleteTaskAssignment(userId, taskId);
+        Activity activity = (Activity) session.getAttribute("activity");
+        return "redirect:/activity-page/"+activity.getId();
+    }
+
+    @GetMapping("/delete-activity-assignment/{userId}/{taskId}")
+    public String deleteActivityAssignment(@PathVariable("userId") int userId,
+                                   @PathVariable("taskId") int taskId,
+                                   HttpSession session){
+        assignmentRepository.deleteActivityAssignment(userId, taskId);
+        Section section = (Section) session.getAttribute("section");
+        return "redirect:/section-page/"+section.getId();
+    }
 }

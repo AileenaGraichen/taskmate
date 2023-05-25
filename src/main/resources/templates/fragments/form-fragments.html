@@ -230,6 +230,7 @@
                     <tr th:each="assignment : ${activity.assignments}">
                         <td th:text="${assignment.userFirstName}"></td>
                         <td th:text="${assignment.hoursAssigned}"></td>
+                        <td><a th:href="@{'/delete-activity-assignment/'+${assignment.userId}+'/'+${assignment.activityId}}">Delete</a></td>
                     </tr>
                 </table>
             <button onclick="toggleActivityAssigneesForm()">Add</button>
@@ -255,6 +256,7 @@
                 <tr th:each="assignment : ${task.assignments}">
                     <td th:text="${assignment.userFirstName}"></td>
                     <td th:text="${assignment.hoursAssigned}"></td>
+                    <td><a th:href="@{'/delete-task-assignment/'+${assignment.userId}+'/'+${assignment.taskId}}">Delete</a></td>
                 </tr>
             </table>
             <button onclick="toggleTaskAssigneesForm()">Add</button>

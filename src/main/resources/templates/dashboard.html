@@ -10,12 +10,12 @@
     <link rel="stylesheet" type="text/css" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body onload="progressBar(); showOverview()">
+<body onload="progressBar();">
 
     <div th:insert="fragments/header-footer-fragments :: side-navigation"></div>
 
     <div id="platform" class="page-wrapper">
-        <div class="overview-wrapper" th:each="overview : ${projectOverviews}">
+        <div class="overview-wrapper" th:unless="${#lists.isEmpty(projectOverviews)}" th:each="overview : ${projectOverviews}">
             <div class="dashboard-top">
                 <div class="pieChart">
                     <canvas th:id="'myChart' + ${overview.project.id}"></canvas>
@@ -37,7 +37,7 @@
                     </script>
                 </div>
                 <div class="project-info">
-                    <h1 th:text="${overview.project.projectName}"></h1>
+                    <a th:href="@{'/project-page/'+${overview.project.id}}"><h1 th:text="${overview.project.projectName}"></h1></a>
                     <div class="myProgress">
                         <div class="myBar"  th:data-progress="${overview.projectStatus.persentageDone}"></div><span th:text="${overview.projectStatus.persentageDone+'%'}"></span>
                     </div>
@@ -46,20 +46,36 @@
             <div class="dashboard-bottom">
                 <div class="list activity-list">
                     <h2>Activities</h2>
-                    <div class="list-item" th:each="activity : ${overview.activities}" th:switch="${activity.status}">
-                        <span th:text="${activity.activityName}"></span>
+                    <div class="list-item" th:unless="${#lists.isEmpty(overview.activities)}" th:each="activity : ${overview.activities}" th:switch="${activity.status}">
+                        <a th:href="@{'/section-page/'+${activity.sectionId}}" th:text="${activity.activityName}"></a>
                         <span th:text="'Duration: '+${activity.durationInHours}"></span>
                         <p th:case="0">Not Started</p>
                         <p th:case="1">In Progress</p>
                         <p th:case="2">Done</p>
                     </div>
+                    <div th:unless="${not #lists.isEmpty(overview.activities)}">
+                        <span>You have no activities in this project yet</span>
+                    </div>
                 </div>
                 <div class="list task-list">
                     <h2>Tasks</h2>
-                    <div th:each="task : ${overview.tasks}">
-                        <span th:text="${task.taskName}"></span>
+                    <div class="list-item" th:unless="${#lists.isEmpty(overview.tasks)}" th:each="task : ${overview.tasks}" th:switch="${task.status}">
+                        <a th:href="@{'/activity-page/'+${task.activityId}}"><span th:text="${task.taskName}"></span></a>
+                        <span th:text="'Duration: '+${task.durationInHours}"></span>
+                        <p th:case="0">Not Started</p>
+                        <p th:case="1">In Progress</p>
+                        <p th:case="2">Done</p>
+                    </div>
+                    <div th:unless="${not #lists.isEmpty(overview.tasks)}">
+                        <span>You have no tasks in this project yet</span>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="no-projects" th:unless="${not #lists.isEmpty(projectOverviews)}">
+            <div class="no-projects-content">
+                <h1>You have no working projects</h1>
+                <a th:href="@{/projects}" class="hover-link">Start a Project here!</a>
             </div>
         </div>
     </div>
