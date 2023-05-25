@@ -30,6 +30,14 @@ function openDeleteProjectPopUp() {
     document.getElementById("delete-project").style.display = "block";
 }
 
+function openDeleteProfilePopUp() {
+    document.getElementById("delete-profile").style.display = "block";
+}
+
+function closeDeleteProfilePopUp(){
+    document.getElementById("delete-profile").style.display = "none";
+}
+
 function openCreateSectionForm() {
     document.getElementById("create-section").style.display = "block";
 }
