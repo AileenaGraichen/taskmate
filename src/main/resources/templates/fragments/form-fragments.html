@@ -5,6 +5,7 @@
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="../../static/css/styles.css" th:href="@{css/styles.css}"/>
     <link rel="stylesheet" type="text/css" href="../../static/css/infoSidebarStyles.css" th:href="@{css/infoSidebarStyles.css}"/>
+<link rel="stylesheet" type="text/css" href="../../static/css/page.css" th:href="@{css/page.css}"/>
     <script type="text/javascript" src="../../static/javascript/script.js" th:src="@{/static/javascript/script.js}"></script>
 </head>
 <body>
@@ -289,6 +290,42 @@
         <input type="number" step="0.25" name="hours-assigned">
     </div>
     <button type="submit">Save</button>
+</form>
+
+<form th:fragment="delete-project-popup" class="delete-popup" th:action="@{/delete-project}">
+    <span class="closeProj" th:onclick="closeDeleteProjectPopUp()">&times;</span>
+    <h1 class="form-header">Are you sure?</h1>
+    <div class="form-buttons">
+        <a th:href="@{/projects}" class="sureDeleteButton button-header"> Delete project</a>
+        <a class="sureDeleteCancel button-header" onclick="closeDeleteProjectPopUp()">Cancel</a>
+    </div>
+</form>
+
+<form th:fragment="delete-section-popup" class="delete-popup" th:action="@{/delete-section}">
+    <span class="closeProj" th:onclick="closeDeleteSectionPopUp()">&times;</span>
+    <h1 class="form-header">Are you sure?</h1>
+    <div class="form-buttons">
+        <a th:href="@{/project-page}" class="sureDeleteButton button-header"> Delete section</a>
+        <a class="sureDeleteCancel button-header" onclick="closeDeleteSectionPopUp()">Cancel</a>
+    </div>
+</form>
+
+<form th:fragment="delete-activity-popup" class="delete-popup" th:action="@{/delete-activity}">
+    <span class="closeProj" th:onclick="closeDeleteActivityPopUp()">&times;</span>
+    <h1 class="form-header">Are you sure?</h1>
+    <div class="form-buttons">
+        <a th:href="@{/section-page}" class="sureDeleteButton button-header"> Delete activity</a>
+        <a class="sureDeleteCancel button-header" onclick="closeDeleteActivityPopUp()">Cancel</a>
+    </div>
+</form>
+
+<form th:fragment="delete-task-popup" class="delete-popup" th:action="@{/delete-task}">
+    <span class="closeProj" th:onclick="closeDeleteTaskPopUp()">&times;</span>
+    <h1 class="form-header">Are you sure?</h1>
+    <div class="form-buttons">
+        <a th:href="@{/activity-page}" class="sureDeleteButton button-header"> Delete task</a>
+        <a class="sureDeleteCancel button-header" onclick="closeDeleteTaskPopUp()">Cancel</a>
+    </div>
 </form>
 
 </body>

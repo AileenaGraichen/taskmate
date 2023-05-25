@@ -9,6 +9,18 @@
     <link rel="stylesheet" type="text/css" href="../static/css/infoSidebarStyles.css" th:href="@{/css/infoSidebarStyles.css}"/>
     <link rel="stylesheet" type="text/css" href="../static/css/dashboard.css" th:href="@{/css/dashboard.css}"/>
     <script type="text/javascript" src="../static/javascript/script.js" th:src="@{/javascript/script.js}"></script>
+    <!-- Favicons -->
+    <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="../static/images/TaskMate_favicon.png" th:href="@{images/TaskMate_favicon.png}"
+    />
+    <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="../static/images/TaskMate_favicon.png" th:href="@{images/TaskMate_favicon.png}"
+    />
 </head>
 <body>
 <div th:insert="fragments/header-footer-fragments :: side-navigation"></div>
@@ -32,6 +44,7 @@
             </div>
         </div>
         <div id="create-project" class="modal" th:insert="fragments/form-fragments :: create-project-form"></div>
+        //<div id="delete-project" class="modal" th:insert="fragments/form-fragments :: delete-project-popup"></div>
     </div>
 </body>
 </html>

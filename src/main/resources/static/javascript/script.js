@@ -73,6 +73,22 @@ function openDeleteTaskPopUp() {
     document.getElementById("delete-task-id").style.display = "block";
 }
 
+function closeDeleteProjectPopUp() {
+    document.getElementById("delete-project-id").style.display = "none";
+}
+
+function closeDeleteSectionPopUp() {
+    document.getElementById("delete-section-id").style.display = "none";
+}
+
+function closeDeleteActivityPopUp() {
+    document.getElementById("delete-activity-id").style.display = "none";
+}
+
+function closeDeleteTaskPopUp() {
+    document.getElementById("delete-task-id").style.display = "none";
+}
+
 
 function toggleNavbar() {
     let x = document.getElementById("navbar-side");
