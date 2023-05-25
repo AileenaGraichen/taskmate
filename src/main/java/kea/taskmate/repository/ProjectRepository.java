@@ -131,50 +131,65 @@ public class ProjectRepository {
     }
 
     public ProjectOverview getActivitiesAndTasksByProjectId(int projectId){
-        final String QUERY = """
-                SELECT a.*, t.*
-                FROM taskmate.activity a\s
-                JOIN taskmate.task t ON t.activity_id = a.id\s
-                JOIN taskmate.section s ON s.id = a.section_id\s
-                JOIN taskmate.project p ON p.id = s.project_id\s
+        final String QUERY_ACTIVITIES = """
+                SELECT a.*
+                FROM taskmate.activity a
+                JOIN taskmate.section s ON s.id = a.section_id
+                JOIN taskmate.project p ON p.id = s.project_id
                 WHERE p.id = ?""";
 
-        List<Activity> activityList = new ArrayList<>();
-        List<Task> taskList = new ArrayList<>();
+        final String QUERY_TASKS = """
+               SELECT t.*
+               FROM taskmate.task t
+               JOIN taskmate.activity a ON a.id = t.activity_id
+               JOIN taskmate.section s ON s.id = a.section_id
+               JOIN taskmate.project p ON p.id = s.project_id
+               WHERE p.id = ?""";
+
         ProjectOverview projectOverview = new ProjectOverview();
+        projectOverview.setProject(getProjectById(projectId));
 
         try{
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
-            preparedStatement.setInt(1, projectId);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            PreparedStatement preparedStatementActivities = connection.prepareStatement(QUERY_ACTIVITIES);
+            preparedStatementActivities.setInt(1, projectId);
+            PreparedStatement preparedStatementTasks = connection.prepareStatement(QUERY_TASKS);
+            preparedStatementTasks.setInt(1, projectId);
 
-            while (resultSet.next()) {
-                int activityId = resultSet.getInt("a.id");
-                int activitySectionId = resultSet.getInt("a.section_id");
-                String activityName = resultSet.getString("a.activity_name");
-                String activityDescription = resultSet.getString("a.description");
-                float activityDuration = resultSet.getFloat("a.duration");
-                int activityStatus = resultSet.getInt("a.status");
+            //retrieve activities
+            List<Activity> activityList = new ArrayList<>();
+            ResultSet activitiesResultset = preparedStatementActivities.executeQuery();
+            while(activitiesResultset.next()){
+                int activityId = activitiesResultset.getInt("a.id");
+                int activitySectionId = activitiesResultset.getInt("a.section_id");
+                String activityName = activitiesResultset.getString("a.activity_name");
+                String activityDescription = activitiesResultset.getString("a.description");
+                float activityDuration = activitiesResultset.getFloat("a.duration");
+                int activityStatus = activitiesResultset.getInt("a.status");
                 Activity activity = new Activity(activitySectionId, activityName, activityDescription, activityDuration);
                 activity.setId(activityId);
                 activity.setStatus(activityStatus);
                 activityList.add(activity);
+            }
 
-                int taskId = resultSet.getInt("t.id");
-                int taskActivityId = resultSet.getInt("t.activity_id");
-                String taskName = resultSet.getString("t.task_name");
-                String taskDescription = resultSet.getString("t.description");
-                float taskDuration = resultSet.getFloat("t.duration");
-                int taskStatus = resultSet.getInt("t.status");
+            //retrieve tasks
+            List<Task> taskList = new ArrayList<>();
+            ResultSet taskResultset = preparedStatementTasks.executeQuery();
+            while(taskResultset.next()){
+                int taskId = taskResultset.getInt("t.id");
+                int taskActivityId = taskResultset.getInt("t.activity_id");
+                String taskName = taskResultset.getString("t.task_name");
+                String taskDescription = taskResultset.getString("t.description");
+                float taskDuration = taskResultset.getFloat("t.duration");
+                int taskStatus = taskResultset.getInt("t.status");
                 Task task = new Task(taskActivityId, taskName, taskDescription, taskDuration);
                 task.setId(taskId);
                 task.setStatus(taskStatus);
                 taskList.add(task);
             }
+
             projectOverview.setActivities(activityList);
             projectOverview.setTasks(taskList);
-            projectOverview.setProject(getProjectById(projectId));
 
         }catch (SQLException e){
             System.out.println("Could not find projects");

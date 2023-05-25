@@ -12,7 +12,11 @@ public class ProjectStatus {
         this.done = done;
         this.inProgress = inProgress;
         this.notStarted = notStarted;
-        persentageDone = (double) done / (done + inProgress + notStarted) * 100.0;
+
+        int total = done + inProgress + notStarted;
+        double percentage = total != 0 ? ((double) done / total * 100.0) : 0.0;
+
+        persentageDone = Double.parseDouble(String.format("%.0f", percentage));
     }
 
     public int getDone() {

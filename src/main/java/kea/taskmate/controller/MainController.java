@@ -243,12 +243,15 @@ public class MainController {
     public String updateActivity(@RequestParam("activity-id") int activityId,
                                 @RequestParam("activity-name") String activityName,
                                 @RequestParam("description") String description,
-                                @RequestParam("duration") float duration){
+                                @RequestParam("duration") float duration,
+                                 @RequestParam("activity-status") int status){
         Activity activity = activityRepository.getActivityById(activityId);
         activity.setActivityName(activityName);
         activity.setDescription(description);
         activity.setDurationInHours(duration);
+        activity.setStatus(status);
         activityRepository.updateActivity(activity);
+        activityRepository.updateActivityStatus(activity);
         return "redirect:/section-page/"+activity.getSectionId();
     }
 
@@ -331,5 +334,23 @@ public class MainController {
 
 
         return "redirect:/activity-page/"+activity.getId();
+    }
+
+    @GetMapping("/delete-task-assignment/{userId}/{taskId}")
+    public String deleteTaskAssignment(@PathVariable("userId") int userId,
+                                   @PathVariable("taskId") int taskId,
+                                   HttpSession session){
+        assignmentRepository.deleteTaskAssignment(userId, taskId);
+        Activity activity = (Activity) session.getAttribute("activity");
+        return "redirect:/activity-page/"+activity.getId();
+    }
+
+    @GetMapping("/delete-activity-assignment/{userId}/{taskId}")
+    public String deleteActivityAssignment(@PathVariable("userId") int userId,
+                                   @PathVariable("taskId") int taskId,
+                                   HttpSession session){
+        assignmentRepository.deleteActivityAssignment(userId, taskId);
+        Section section = (Section) session.getAttribute("section");
+        return "redirect:/section-page/"+section.getId();
     }
 }
