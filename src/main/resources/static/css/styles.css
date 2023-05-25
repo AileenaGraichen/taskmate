@@ -254,13 +254,13 @@ a:hover, a:visited, a:link, a:active {
 }
 
 #project-name{
-    font-family: Helvetica;
+    font-family: Helvetica, serif;
     color: var(--primary-color);
     font-size: xx-large;
 }
 
 label{
-    font-family: Helvetica;
+    font-family: Helvetica, serif;
     color: var(--primary-color);
     font-size: large;
 }
@@ -292,6 +292,3 @@ input[type="date" i] {
     width: 100px;
 
 }
-
-
-

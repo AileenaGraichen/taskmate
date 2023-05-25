@@ -137,7 +137,7 @@ public class TaskRepository {
         }
     }
 
-    public void deleteTaskByID(int id) {
+    public void deleteTaskById(int id) {
         final String DELETE_QUERY = "DELETE FROM taskmate.task WHERE id = ?";
         try {
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);

@@ -5,7 +5,8 @@
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="../../static/css/styles.css" th:href="@{css/styles.css}"/>
     <link rel="stylesheet" type="text/css" href="../../static/css/infoSidebarStyles.css" th:href="@{css/infoSidebarStyles.css}"/>
-<link rel="stylesheet" type="text/css" href="../../static/css/page.css" th:href="@{css/page.css}"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/page.css" th:href="@{css/page.css}"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/dashboard.css" th:href="@{css/dashboard.css}"/>
     <script type="text/javascript" src="../../static/javascript/script.js" th:src="@{/static/javascript/script.js}"></script>
 </head>
 <body>
@@ -46,7 +47,6 @@
         <button class="button-header" type="submit">SAVE</button>
     </div>
 </form>
-
 
 <form th:fragment="login-form" class="" action="/login" th:action="@{/login}" method="POST">
     <div class="form-container">
@@ -168,7 +168,7 @@
         <div class="createDuration">
             <div class="hours">
                 <label for="durationInHours">Duration in hours</label>
-                <input type="number" class="createDur" placeholder="Duration in hours" name="duration" required>
+                <input id="durationInHours" type="number" class="createDur" placeholder="Duration in hours" name="duration" required>
             </div>
         </div>
     </div>
@@ -332,11 +332,11 @@
     <button type="submit">Save</button>
 </form>
 
-<form th:fragment="delete-project-popup" class="delete-popup" th:action="@{/delete-project}">
+<form th:fragment="delete-project-popup" class="delete-popup" th:action="@{/delete-project}" method="post">
     <span class="closeProj" th:onclick="closeDeleteProjectPopUp()">&times;</span>
     <h1 class="form-header">Are you sure?</h1>
     <div class="form-buttons">
-        <a th:href="@{/projects}" class="sureDeleteButton button-header"> Delete project</a>
+        <a th:href="@{/delete-project/{projectId}}" class="sureDeleteButton button-header"> Delete project</a>
         <a class="sureDeleteCancel button-header" onclick="closeDeleteProjectPopUp()">Cancel</a>
     </div>
 </form>

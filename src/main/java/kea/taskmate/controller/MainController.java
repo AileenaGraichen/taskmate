@@ -353,4 +353,42 @@ public class MainController {
         Section section = (Section) session.getAttribute("section");
         return "redirect:/section-page/"+section.getId();
     }
+
+    @GetMapping("/delete-project/{projectId}")
+    public String deleteProject(@PathVariable("projectId") int projectId, HttpSession session) {
+        Project project = (Project) session.getAttribute("project");
+        projectRepository.deleteProjectById(projectId);
+
+        return "redirect:/overview";
+    }
+
+    @GetMapping("/delete-section/{sectionId}")
+    public String deleteSection(@PathVariable("sectionId") int sectionId, HttpSession session){
+        Project project = (Project) session.getAttribute("projectFromOverview");
+        Section section = (Section) session.getAttribute("section");
+        sectionRepository.deleteSectionById(section.getId());
+
+        return "redirect:/";
+    }
+
+    @GetMapping("/delete-activity/{activityId}")
+    public String deleteActivity(HttpSession session){
+        Project project = (Project) session.getAttribute("projectFromOverview");
+        Section section = (Section) session.getAttribute("section");
+        Activity activity = (Activity) session.getAttribute("activity");
+        activityRepository.deleteActivityById(activity.getId());
+
+        return "redirect:/";
+    }
+
+    @GetMapping("/delete-task/{taskId}")
+    public String deleteTask(HttpSession session){
+        Project project = (Project) session.getAttribute("projectFromOverview");
+        Section section = (Section) session.getAttribute("section");
+        Activity activity = (Activity) session.getAttribute("activity");
+        Task task = (Task) session.getAttribute("task");
+        taskRepository.deleteTaskById(task.getId());
+
+        return "redirect:/";
+    }
 }

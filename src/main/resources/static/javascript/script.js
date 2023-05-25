@@ -20,8 +20,14 @@ function openUpdateProjectForm() {
     document.getElementById("update-project-form").style.display = "block";
 }
 
+function closeDeleteProjectPopUp() {
+    console.log("Closing delete project popup");
+    document.getElementById("delete-project").style.display = "none";
+}
+
 function openDeleteProjectPopUp() {
-    document.getElementById("delete-project-id").style.display = "block";
+    console.log("Opening delete project popup");
+    document.getElementById("delete-project").style.display = "block";
 }
 
 function openCreateSectionForm() {
@@ -71,10 +77,6 @@ function openEditTaskForm() {
 
 function openDeleteTaskPopUp() {
     document.getElementById("delete-task-id").style.display = "block";
-}
-
-function closeDeleteProjectPopUp() {
-    document.getElementById("delete-project-id").style.display = "none";
 }
 
 function closeDeleteSectionPopUp() {

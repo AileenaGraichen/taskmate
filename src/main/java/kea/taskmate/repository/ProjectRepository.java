@@ -116,7 +116,7 @@ public class ProjectRepository {
             e.printStackTrace();
         }
     }
-    public void deleteProject(int id){
+    public void deleteProjectById(int id){
         final String DELETE_QUERY = "DELETE FROM taskmate.project WHERE id = ?";
         try {
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);

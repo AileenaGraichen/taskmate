@@ -140,7 +140,7 @@ public class ActivityRepository {
         }
     }
 
-    public void deleteActivityByID(int id) {
+    public void deleteActivityById(int id) {
         final String DELETE_QUERY = "DELETE FROM taskmate.activity WHERE id = ?";
         try {
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
@@ -154,4 +154,3 @@ public class ActivityRepository {
         }
     }
 }
-

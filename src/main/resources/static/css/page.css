@@ -66,12 +66,6 @@ body {
     -webkit-text-fill-color: var(--primary-color);
 }
 
-/*.add-project:hover, .project:hover, .add-section:hover, .section:hover, .add-activity:hover, .activity:hover, .add-task:hover, .task:hover {
-    background-position: right center;
-    color: #fff;
-    text-decoration: none;
-}*/
-
 .add-project img, .add-section img, .add-activity img, .add-task img {
     width: 3.5rem;
     height: 3.5rem;
@@ -149,6 +143,12 @@ h4 {
     z-index: 2;
 }
 
+.createFormInfo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
 .closeProj {
     position: absolute;
     top: 3%;
@@ -199,9 +199,11 @@ h4 {
 }
 
 .dates {
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin: 5% 0 0;
+    width: 100%;
 }
 
 .sDate ::-webkit-calendar-picker-indicator, .eDate ::-webkit-calendar-picker-indicator {
@@ -234,7 +236,7 @@ input[type="date"] {
 .sDate, .eDate {
     display: flex;
     flex-direction: column;
-    width: 35%;
+    width: 28vh;
     align-items: flex-start;
 }
 
