@@ -292,6 +292,18 @@ input[type="date" i] {
     width: 100px;
 
 }
+.ps-input-button{
+    display: flex;
+    justify-content: center;
+}
+#save-button{
+    width: 20%;
+}
 
+.settings-wrapper{
+    margin: 50px 100px 100px 300px;
+    transition: margin-left 0.45s cubic-bezier(0.77, 0, 0.175, 1);
+    background-color: var(--complementary-color);
+}
 
 

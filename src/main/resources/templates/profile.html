@@ -21,9 +21,14 @@
 </head>
 <body>
 <div th:insert="fragments/header-footer-fragments :: side-navigation"></div>
-<div id="platform" class="page-wrapper">
+<div id="platform" class="settings-wrapper">
     <div class="overview-wrapper">
         <div id="update-project" th:insert="fragments/form-fragments :: update-profile-form"></div>
+    </div>
+</div>
+<div class="delete-popup-container">
+     <div class="modal">
+          <div id="delete-profile" th:insert="fragments/form-fragments :: delete-profile-popup"></div>
     </div>
 </div>
 </body>

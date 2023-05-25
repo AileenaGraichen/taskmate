@@ -44,9 +44,9 @@
     </div>
     <div class="form-container">
         <button class="button-header" type="submit">SAVE</button>
+        <button class="button-header" onclick="openDeleteProfilePopUp()">Delete Profile</button>
     </div>
 </form>
-
 
 <form th:fragment="login-form" class="" action="/login" th:action="@{/login}" method="POST">
     <div class="form-container">
@@ -108,7 +108,9 @@
                 <label for="collaborators">Collaborators</label>
                 <input id="collaborators" type="text" placeholder="collaborators" name="collaborators">
             </div>
-            <button class="button-header" type="submit">Save</button>
+            <div class="ps-input-button">
+                <button id="save-button" class="button-header" type="submit">Save</button>
+            </div>
         </div>
 
 </form>
@@ -332,7 +334,7 @@
     <button type="submit">Save</button>
 </form>
 
-<form th:fragment="delete-project-popup" class="delete-popup" th:action="@{/delete-project}">
+<form th:fragment="delete-project-popup" class="delete-popup" th:action="@{/delete-project}" method="post">
     <span class="closeProj" th:onclick="closeDeleteProjectPopUp()">&times;</span>
     <h1 class="form-header">Are you sure?</h1>
     <div class="form-buttons">
@@ -365,6 +367,15 @@
     <div class="form-buttons">
         <a th:href="@{/activity-page}" class="sureDeleteButton button-header"> Delete task</a>
         <a class="sureDeleteCancel button-header" onclick="closeDeleteTaskPopUp()">Cancel</a>
+    </div>
+</form>
+
+<form th:fragment="delete-profile-popup" class="delete-popup" th:action="@{/delete-profile}" method="post">
+    <!--<span class="closeProj" th:onclick="closeDeleteProjectPopUp()">&times;</span>-->
+    <h1 class="form-header">Are you sure?</h1>
+    <div class="form-buttons">
+        <a th:href="@{/delete-user}" class="sureDeleteButton button-header">Delete profile</a>
+        <a class="sureDeleteCancel button-header" onclick="closeDeleteProfilePopUp()">Cancel</a>
     </div>
 </form>
 
