@@ -15,6 +15,8 @@
             href="../static/images/TaskMate_favicon.png" th:href="@{images/TaskMate_favicon.png}"
     />
     <link rel="stylesheet" type="text/css" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/page.css" th:href="@{/css/page.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/infoSidebarStyles.css" th:href="@{/css/infoSidebarStyles.css}"/>
     <link rel="stylesheet" type="text/css" href="../static/css/dashboard.css" th:href="@{/css/dashboard.css}"/>
     <script type="text/javascript" src="../static/javascript/chartsStyles.js" th:src="@{/javascript/chartsStyles.js}"></script>
     <script type="text/javascript" src="../static/javascript/script.js" th:src="@{/javascript/script.js}"></script>
@@ -26,10 +28,6 @@
         <div id="update-project" th:insert="fragments/form-fragments :: update-profile-form"></div>
     </div>
 </div>
-<div class="delete-popup-container">
-     <div class="modal">
-          <div id="delete-profile" th:insert="fragments/form-fragments :: delete-profile-popup"></div>
-    </div>
-</div>
+<div class="modal delete-popup-container" id="delete-profile" th:insert="fragments/form-fragments :: delete-profile-popup"></div>
 </body>
 </html>

@@ -34,14 +34,13 @@ body {
     width: 100%;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: nowrap;
     margin: 1rem 0 3rem;
     background: var(--complementary-color);
     border-radius: 10px;
     box-shadow: var(--box-shadow);
     border-color: var(--off-color);
 }
-
-
 
 .topRightSection {
     display: flex;
@@ -62,6 +61,7 @@ body {
     justify-content: center;
     cursor: pointer;
     touch-action: manipulation;
+
     font-family: helvetica, sans-serif;
     font-size: 5.5mm;
     -webkit-text-fill-color: var(--primary-color);
@@ -295,6 +295,33 @@ label [for="start-date"], label [for="end-date"] {
     bottom: 7%;
     left: 7vh;
     position: absolute;
+}
+
+#create-project {
+    display: none;
+}
+
+#create-section {
+    display: none;
+}
+
+#create-activity {
+    display: none;
+}
+
+#create-task {
+    display: none;
+}
+
+#delete-project-id {
+    display: none;
+}
+#delete-profile{
+    display: none;
+}
+
+.tryout{
+    display: none;
 }
 
 .delete-popup {

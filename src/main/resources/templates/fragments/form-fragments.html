@@ -5,7 +5,7 @@
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="../../static/css/styles.css" th:href="@{css/styles.css}"/>
     <link rel="stylesheet" type="text/css" href="../../static/css/infoSidebarStyles.css" th:href="@{css/infoSidebarStyles.css}"/>
-    <link rel="stylesheet" type="text/css" href="../../static/css/page.css" th:href="@{css/page.css}"/>
+    <!--<link rel="stylesheet" type="text/css" href="../../static/css/page.css" th:href="@{css/page.css}"/>-->
     <link rel="stylesheet" type="text/css" href="../../static/css/dashboard.css" th:href="@{css/dashboard.css}"/>
     <script type="text/javascript" src="../../static/javascript/script.js" th:src="@{/static/javascript/script.js}"></script>
 </head>
@@ -46,7 +46,9 @@
     <div class="form-container">
         <button class="button-header" type="submit">SAVE</button>
         <button class="button-header" onclick="openDeleteProfilePopUp()">Delete Profile</button>
+
     </div>
+
 </form>
 
 <form th:fragment="login-form" class="" action="/login" th:action="@{/login}" method="POST">
@@ -286,14 +288,14 @@
     </div>
 </div>
 
-<form th:fragment="delete-profile-popup" class="delete-popup" th:action="@{/delete-profile}" method="post">
-    <!--<span class="closeProj" th:onclick="closeDeleteProjectPopUp()">&times;</span>-->
+<div th:fragment="delete-profile-popup" class="delete-popup">
+    <span class="closeProj" th:onclick="closeDeleteProfilePopUp()">&times;</span>
     <h1 class="form-header">Are you sure?</h1>
     <div class="form-buttons">
         <a th:href="@{/delete-user}" class="sureDeleteButton button-header">Delete profile</a>
         <a class="sureDeleteCancel button-header" onclick="closeDeleteProfilePopUp()">Cancel</a>
     </div>
-</form>
+</div>
 
 </body>
 </html>
