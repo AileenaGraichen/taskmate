@@ -158,6 +158,24 @@ public class MainController {
         return "project-page";
     }
 
+    @GetMapping("/project-tree-view/{projectId}")
+    public String projectListViewPage(@PathVariable("projectId") int projectId,
+                                      Model model){
+        List<Section> listOfSections = sectionRepository.getSectionsByProjectId(projectId);
+        for(Section section : listOfSections){
+            section.setActivityList(activityRepository.getActivityListById(section.getId()));
+            for(Activity activity : section.getActivityList()){
+                activity.setTaskList(taskRepository.getTaskListById(activity.getId()));
+                activity.setAssignments(assignmentRepository.getActivityAssignmentsById(activity.getId()));
+                for(Task task : activity.getTaskList()){
+                    task.setAssignments(assignmentRepository.getTaskAssignmentsById(task.getId()));
+                }
+            }
+        }
+        model.addAttribute("listOfSections", listOfSections);
+        return "project-tree-view";
+    }
+
     @GetMapping("/project-settings/{projectId}")
     public String getProjectSetting(@PathVariable("projectId") int projectId,
                                  HttpSession session){
@@ -300,6 +318,7 @@ public class MainController {
                                            @RequestParam("selected-user")  int userId,
                                            @RequestParam("hours-assigned") float hoursAssigned,
                                            HttpSession session){
+
         Section section = (Section) session.getAttribute("section");
         List<ActivityAssignment> assignments = assignmentRepository.getActivityAssignmentsById(activityId);
         ActivityAssignment activityAssignment = new ActivityAssignment(userId, activityId, hoursAssigned);
@@ -307,7 +326,7 @@ public class MainController {
             System.out.println(assignment.getUserId()+ "|" + userId);
             if(assignment.getUserId() == userId) {
                 assignmentRepository.updateActivityAssignment(activityAssignment);
-                return "redirect:/section-page/"+section.getId();
+                return"redirect:/section-page/"+section.getId();
             }
         }
         assignmentRepository.addActivityAssignment(activityAssignment);

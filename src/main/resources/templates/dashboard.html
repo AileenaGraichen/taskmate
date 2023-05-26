@@ -47,7 +47,7 @@
                 <div class="list activity-list">
                     <h2>Activities</h2>
                     <div class="list-item" th:unless="${#lists.isEmpty(overview.activities)}" th:each="activity : ${overview.activities}" th:switch="${activity.status}">
-                        <a th:href="@{'/section-page/'+${activity.sectionId}}" th:text="${activity.activityName}"></a>
+                        <span th:text="${activity.activityName}"></span>
                         <span th:text="'Duration: '+${activity.durationInHours}"></span>
                         <p th:case="0">Not Started</p>
                         <p th:case="1">In Progress</p>
@@ -60,7 +60,7 @@
                 <div class="list task-list">
                     <h2>Tasks</h2>
                     <div class="list-item" th:unless="${#lists.isEmpty(overview.tasks)}" th:each="task : ${overview.tasks}" th:switch="${task.status}">
-                        <a th:href="@{'/activity-page/'+${task.activityId}}"><span th:text="${task.taskName}"></span></a>
+                        <span th:text="${task.taskName}"></span>
                         <span th:text="'Duration: '+${task.durationInHours}"></span>
                         <p th:case="0">Not Started</p>
                         <p th:case="1">In Progress</p>

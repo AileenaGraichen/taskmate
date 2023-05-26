@@ -167,13 +167,8 @@ a.logotype img {
     flex-wrap: nowrap;
 }
 
-.list-item span, p, a {
+.list-item span, p {
     width: 30%;
-}
-
-a {
-    text-decoration: none;
-    color: var(--off-color);
 }
 
 .activity-list {
@@ -261,57 +256,4 @@ a {
 .no-projects-content {
     top: 30%;
     position: absolute;
-}
-
-/* Responsive Styles */
-
-@media screen and (max-width: 768px) {
-    .primary-nav {
-        position: relative;
-    }
-
-    .menu {
-        position: relative;
-        width: 100%;
-    }
-
-    .menu ul {
-        display: none;
-    }
-
-    .menu .icon {
-        display: none;
-    }
-
-    .hamburger {
-        display: block;
-    }
-
-    .overflow-container {
-        border-top: none;
-    }
-
-    .page-wrapper {
-        margin: 50px 20px 100px 20px;
-    }
-
-    .dashboard-top,
-    .dashboard-bottom {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    .project-info {
-        width: 100%;
-        margin-top: 1rem;
-    }
-
-    .list {
-        margin: 1rem 0;
-    }
-
-    .pieChart {
-        margin: 20px auto;
-    }
 }

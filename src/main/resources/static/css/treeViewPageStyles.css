@@ -1,0 +1,51 @@
+/*PROJECT PAGE TREE VIEW*/
+
+ul, #project-tree-view {
+    list-style-type: none;
+}
+
+#project-tree-view {
+    margin: 0;
+    padding: 0;
+}
+
+.ppt-row2 {
+    background-color: var(--complementary-color);
+}
+
+.tree-item {
+    border: #04AA6D;
+}
+
+.caret {
+    cursor: pointer;
+    user-select: none;
+    background-color: var(--complementary-color);
+}
+
+.caret::before {
+    content: "\25B6";
+    color: black;
+    display: inline-block;
+    margin-right: 6px;
+}
+
+.caret-down::before {
+    transform: rotate(90deg);
+}
+
+.nested {
+    display: none;
+}
+
+.nested-activity {
+    margin-left: 1rem;
+}
+
+.nested-task {
+    margin-left: 2rem;
+}
+
+.active {
+    display: block;
+}
