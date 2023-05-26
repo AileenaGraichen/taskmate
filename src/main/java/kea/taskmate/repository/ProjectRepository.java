@@ -58,14 +58,12 @@ public class ProjectRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             resultSet.next();
-            int id = resultSet.getInt(1);
             int userId = resultSet.getInt(2);
             String projectName = resultSet.getString(3);
             String description = resultSet.getString(4);
             Date startDate = resultSet.getDate(5);
             Date endDate = resultSet.getDate(6);
 
-            project.setId(id);
             project.setUserId(userId);
             project.setProjectName(projectName);
             project.setDescription(description);

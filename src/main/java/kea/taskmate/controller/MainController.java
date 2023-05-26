@@ -4,6 +4,7 @@ import kea.taskmate.models.*;
 import kea.taskmate.repository.*;
 import jakarta.servlet.http.HttpSession;
 import kea.taskmate.service.DashboardService;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -152,8 +153,9 @@ public class MainController {
                               HttpSession session){
         List<Section> listOfSections = sectionRepository.getSectionsByProjectId(projectId);
         List<TeamMember> teamList = teamMemberRepository.getTeamByProjectId(projectId);
+        Project project = projectRepository.getProjectById(projectId);
         session.setAttribute("listOfSections", listOfSections);
-        session.setAttribute("project", projectRepository.getProjectById(projectId));
+        session.setAttribute("project", project);
         session.setAttribute("team", teamList);
         return "project-page";
     }
@@ -373,41 +375,42 @@ public class MainController {
         return "redirect:/section-page/"+section.getId();
     }
 
-    @GetMapping("/delete-project/{projectId}")
-    public String deleteProject(@PathVariable("projectId") int projectId, HttpSession session) {
-        Project project = (Project) session.getAttribute("project");
-        projectRepository.deleteProjectById(projectId);
+    @GetMapping("/delete-project")
+    public String deleteProject(HttpSession session) {
 
-        return "redirect:/overview";
+        Project project = (Project) session.getAttribute("project");
+        System.out.println("KANIN TEST2: "+project.getId());
+        projectRepository.deleteProjectById(project.getId());
+
+        return "redirect:/projects";
     }
 
-    @GetMapping("/delete-section/{sectionId}")
-    public String deleteSection(@PathVariable("sectionId") int sectionId, HttpSession session){
-        Project project = (Project) session.getAttribute("projectFromOverview");
+    @GetMapping("/delete-section")
+    public String deleteSection(HttpSession session){
+
+        Project project = (Project) session.getAttribute("project");
         Section section = (Section) session.getAttribute("section");
         sectionRepository.deleteSectionById(section.getId());
 
-        return "redirect:/";
+        return "redirect:/project-page/"+project.getId();
     }
 
-    @GetMapping("/delete-activity/{activityId}")
+    @GetMapping("/delete-activity")
     public String deleteActivity(HttpSession session){
-        Project project = (Project) session.getAttribute("projectFromOverview");
         Section section = (Section) session.getAttribute("section");
         Activity activity = (Activity) session.getAttribute("activity");
         activityRepository.deleteActivityById(activity.getId());
 
-        return "redirect:/";
+        return "redirect:/section-page/"+section.getId();
     }
 
-    @GetMapping("/delete-task/{taskId}")
+    @GetMapping("/delete-task")
     public String deleteTask(HttpSession session){
-        Project project = (Project) session.getAttribute("projectFromOverview");
-        Section section = (Section) session.getAttribute("section");
+
         Activity activity = (Activity) session.getAttribute("activity");
         Task task = (Task) session.getAttribute("task");
         taskRepository.deleteTaskById(task.getId());
 
-        return "redirect:/";
+        return "redirect:/activity-page/"+activity.getId();
     }
 }
