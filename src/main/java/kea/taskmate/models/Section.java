@@ -1,6 +1,7 @@
 package kea.taskmate.models;
 
 import java.sql.Date;
+import java.util.List;
 
 public class Section {
     private int id;
@@ -9,6 +10,7 @@ public class Section {
     private String description;
     private Date startDate;
     private Date endDate;
+    private List<Activity> activityList;
 
     public Section() {
     }
@@ -67,5 +69,13 @@ public class Section {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public List<Activity> getActivityList() {
+        return activityList;
+    }
+
+    public void setActivityList(List<Activity> activityList) {
+        this.activityList = activityList;
     }
 }

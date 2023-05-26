@@ -114,7 +114,7 @@ h4 {
     width: 100%;
 }
 
-.p-row2, .pp-row2 {
+.p-row2, .pp-row2, .ppt-row2 {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -336,3 +336,6 @@ label [for="start-date"], label [for="end-date"] {
     display: flex;
     flex-direction: row;
 }
+
+
+

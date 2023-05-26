@@ -11,6 +11,7 @@ public class Activity {
     private float durationInHours;
     private int status;
     private List<ActivityAssignment> assignments;
+    private List<Task> taskList;
 
     public Activity(){}
 
@@ -75,6 +76,14 @@ public class Activity {
 
     public void setAssignments(List<ActivityAssignment> assignments) {
         this.assignments = assignments;
+    }
+
+    public List<Task> getTaskList() {
+        return taskList;
+    }
+
+    public void setTaskList(List<Task> taskList) {
+        this.taskList = taskList;
     }
 }
 

@@ -57,7 +57,7 @@
                     <button class="task" th:text="${task.taskName}"></button>
                 </a>
                 <button th:onclick="toggleTaskInfoSideBar([[${task.id}]])">Info</button>
-                <div class="modal" th:id="'sidebarTask' + ${task.id}" th:insert="fragments/form-fragments :: task-info-sidebar" th:with="task = ${task}"></div>
+                <div class="modal" th:id="'sidebarTask' + ${task.id}" th:insert="fragments/sidebar-fragments :: task-info-sidebar" th:with="task = ${task}"></div>
             </div>
         </div>
     </section>

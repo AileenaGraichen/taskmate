@@ -37,7 +37,9 @@
                 </section>
 
                 <section class="topRightSection">
-
+                    <a th:href="@{'/project-tree-view/'+${session.project.id}}">
+                        <button class="button-header">Change View</button>
+                    </a>
                     <div>
                         <a href="" th:href="@{'/project-settings/'+${session.project.id}}">
                             <button class="button-header">Settings</button>
@@ -65,7 +67,7 @@
                             <button class="section" th:text="${section.sectionName}"></button>
                         </a>
                         <button th:onclick="toggleSectionInfoSideBar([[${section.id}]])">Info</button>
-                        <div class="modal" th:id="'sidebarSection' + ${section.id}" th:insert="fragments/form-fragments :: section-info-sidebar" th:with="section = ${section}"></div>
+                        <div class="modal" th:id="'sidebarSection' + ${section.id}" th:insert="fragments/sidebar-fragments :: section-info-sidebar" th:with="section = ${section}"></div>
                     </div>
                 </div>
             </section>
@@ -73,6 +75,6 @@
     </div>
     <div class="delete-popup-container" id="delete-project-id" th:insert="fragments/form-fragments :: delete-project-popup"></div>
     <div id="create-section" class="modal" th:insert="fragments/form-fragments :: create-section-form"></div>
-    //<div id="delete-project" class="modal" th:insert="fragments/form-fragments :: delete-project-popup"></div>
+    <div id="delete-project" class="modal" th:insert="fragments/form-fragments :: delete-project-popup"></div>
 </body>
 </html>
