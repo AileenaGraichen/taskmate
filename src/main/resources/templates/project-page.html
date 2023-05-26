@@ -38,7 +38,7 @@
 
                 <section class="topRightSection">
                     <a th:href="@{'/project-tree-view/'+${session.project.id}}">
-                        <button class="button-header">Change View</button>
+                        <button class="button-header">Tree View</button>
                     </a>
                     <div>
                         <a href="" th:href="@{'/project-settings/'+${session.project.id}}">
@@ -66,7 +66,7 @@
                         <a href=""  th:href="@{'/section-page/'+${section.getId()}}">
                             <button class="section" th:text="${section.sectionName}"></button>
                         </a>
-                        <button th:onclick="toggleSectionInfoSideBar([[${section.id}]])">Info</button>
+                        <button class="section-info-button button-header" th:onclick="toggleSectionInfoSideBar([[${section.id}]])">Info</button>
                         <div class="modal" th:id="'sidebarSection' + ${section.id}" th:insert="fragments/sidebar-fragments :: section-info-sidebar" th:with="section = ${section}"></div>
                     </div>
                 </div>

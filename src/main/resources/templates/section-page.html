@@ -36,6 +36,9 @@
             </section>
 
             <section class="topRightSection">
+                <a th:href="@{'/project-tree-view/'+${session.project.id}}">
+                    <button class="button-header">Tree View</button>
+                </a>
                 <button class="button-header" onclick="openEditSectionForm()">Edit Section</button>
                 <button class="button-header" onclick="openDeleteSectionPopUp()">Delete Section</button>
             </section>
@@ -56,7 +59,7 @@
                     <a href=""  th:href="@{'/activity-page/'+${activity.getId()}}">
                         <button class="activity" th:text="${activity.activityName}"></button>
                     </a>
-                    <button th:onclick="toggleActivityInfoSideBar([[${activity.id}]])">Info</button>
+                    <button class="activity-info-button button-header" th:onclick="toggleActivityInfoSideBar([[${activity.id}]])">Info</button>
                     <div class="modal" th:id="'sidebarActivity' + ${activity.id}" th:insert="fragments/sidebar-fragments :: activity-info-sidebar" th:with="activity = ${activity}"></div>
                 </div>
             </div>

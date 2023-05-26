@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -8,11 +8,12 @@
   <script type="text/javascript" src="../../static/javascript/script.js" th:src="@{/static/javascript/script.js}"></script>
 </head>
 <body>
+
 <div th:fragment="section-info-sidebar" class="sidebar-modal-content">
   <span class="close" th:onclick="toggleSectionInfoSideBar([[${section.id}]])">&times;</span>
   <div class="sidebar-form-wrapper" th:insert="fragments/form-fragments :: update-section-form" th:with="section = ${section}"></div>
   <div class="sidebar-buttons">
-    <button class="button-header">Open</button>
+    <a th:href="@{'/section-page/'+${section.id}}"><button class="button-header">Open</button></a>
   </div>
 </div>
 
@@ -38,7 +39,7 @@
     </div>
   </div>
   <div class="sidebar-buttons">
-    <button class="button-header">Open</button>
+    <a th:href="@{'/activity-page/'+${activity.id}}"><button class="button-header">Open</button></a>
   </div>
 </div>
 

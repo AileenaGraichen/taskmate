@@ -51,7 +51,7 @@ body {
     width: 12.5rem;
     min-height: 9.375rem;
     min-width: 9.375rem;
-    margin: 1rem;
+    margin: 1rem 1rem 1px 1rem;
     background: var(--complementary-color);
     border-radius: 10px;
     box-shadow: var(--box-shadow);
@@ -60,10 +60,15 @@ body {
     justify-content: center;
     cursor: pointer;
     touch-action: manipulation;
-
     font-family: helvetica, sans-serif;
     font-size: 5.5mm;
     -webkit-text-fill-color: var(--primary-color);
+}
+
+.activity-info-button, .section-info-button, .task-info-button {
+    width: 12.5rem;
+    margin-left: 1rem;
+    padding: 5px;
 }
 
 .add-project img, .add-section img, .add-activity img, .add-task img {
