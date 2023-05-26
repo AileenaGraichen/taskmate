@@ -309,6 +309,13 @@ label [for="start-date"], label [for="end-date"] {
 #delete-project-id {
     display: none;
 }
+#delete-profile{
+    display: none;
+}
+
+.tryout{
+    display: none;
+}
 
 .delete-popup {
     display: flex;
@@ -329,6 +336,8 @@ label [for="start-date"], label [for="end-date"] {
     border-radius: 10px;
     z-index: 3200;
 }
+
+
 
 .form-header {
     margin: 10px;
