@@ -103,9 +103,19 @@
 }
 
 .sidebar-buttons {
-    position: absolute;
-    bottom: 5%;
-    right: 2%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 35px 8px 20px 8px;
+}
+
+.section-sidebar-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 35px 8px 20px 8px;
 }
 
 .sidebar-form-wrapper.button-header {
