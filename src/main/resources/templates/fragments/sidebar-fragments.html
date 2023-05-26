@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -12,6 +12,11 @@
 <div th:fragment="section-info-sidebar" class="sidebar-modal-content">
   <span class="close" th:onclick="toggleSectionInfoSideBar([[${section.id}]])">&times;</span>
   <div class="sidebar-form-wrapper" th:insert="fragments/form-fragments :: update-section-form" th:with="section = ${section}"></div>
+  <div class="delete-popup-container modal" id="delete-section-id" th:insert="fragments/form-fragments :: delete-section-popup"></div>
+  <div id="delete-section" class="modal" th:insert="fragments/form-fragments :: delete-section-popup"></div>
+  <div class="section-sidebar-buttons">
+    <button class="button-header" onclick="openDeleteSectionPopUp()">Delete Section</button>
+    <button class="button-header">Open</button>
   <div class="sidebar-buttons">
     <a th:href="@{'/section-page/'+${section.id}}"><button class="button-header">Open</button></a>
   </div>
@@ -36,9 +41,13 @@
       </table>
       <button onclick="toggleActivityAssigneesForm()">Add</button>
       <div class="modal" id="activity-assignee-form" th:insert="fragments/sidebar-fragments :: activity-assignee-form" th:with="activity = ${activity}"></div>
+      <div class="delete-popup-container modal" id="delete-activity-id" th:insert="fragments/form-fragments :: delete-activity-popup"></div>
+      <div id="delete-activity" class="modal" th:insert="fragments/form-fragments :: delete-activity-popup"></div>
     </div>
   </div>
   <div class="sidebar-buttons">
+    <button class="button-header" onclick="openDeleteActivityPopUp()">Delete Activity</button>
+    <button class="button-header">Open</button>
     <a th:href="@{'/activity-page/'+${activity.id}}"><button class="button-header">Open</button></a>
   </div>
 </div>
@@ -64,6 +73,11 @@
       <div class="modal" id="task-assignee-form" th:insert="fragments/sidebar-fragments :: task-assignee-form" th:with="task = ${task}"></div>
     </div>
   </div>
+  <div class="sidebar-buttons">
+    <button class="button-header" onclick="openDeleteTaskPopUp()">Delete Task</button>
+  </div>
+  <div class="delete-popup-container modal" id="delete-task-id" th:insert="fragments/form-fragments :: delete-task-popup"></div>
+  <div id="delete-task" class="modal" th:insert="fragments/form-fragments :: delete-task-popup"></div>
 </div>
 
 <form th:fragment="activity-assignee-form" class="assignees-modal-content" th:action="@{/update-activity-assignment}" method="post">

@@ -30,16 +30,18 @@ body {
 
 .top-section {
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: nowrap;
     margin: 1rem 0 3rem;
     background: var(--complementary-color);
     border-radius: 10px;
     box-shadow: var(--box-shadow);
     border-color: var(--off-color);
 }
+
+
 
 .topRightSection {
     display: flex;
@@ -295,26 +297,6 @@ label [for="start-date"], label [for="end-date"] {
     position: absolute;
 }
 
-#create-project {
-    display: none;
-}
-
-#create-section {
-    display: none;
-}
-
-#create-activity {
-    display: none;
-}
-
-#create-task {
-    display: none;
-}
-
-#delete-project-id {
-    display: none;
-}
-
 .delete-popup {
     display: flex;
     flex-direction: row;
@@ -344,5 +326,28 @@ label [for="start-date"], label [for="end-date"] {
     flex-direction: row;
 }
 
+.project-page .button-header, .projects .button-header, .section-page .button-header, .activity-page .button-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
 
+#create-project {
+    display: none;
+}
 
+#create-section {
+    display: none;
+}
+
+#create-activity {
+    display: none;
+}
+
+#create-task {
+    display: none;
+}
+
+#delete-project-id {
+    display: none;
+}
