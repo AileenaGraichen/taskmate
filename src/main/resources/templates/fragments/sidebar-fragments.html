@@ -12,7 +12,7 @@
   <span class="close" th:onclick="toggleSectionInfoSideBar([[${section.id}]])">&times;</span>
   <div class="sidebar-form-wrapper" th:insert="fragments/form-fragments :: update-section-form" th:with="section = ${section}"></div>
   <div class="sidebar-buttons">
-    <button class="button-header">Open</button>
+    <a th:href="@{'/section-page/'+${section.id}}"><button class="button-header">Open</button></a>
   </div>
 </div>
 
@@ -38,7 +38,7 @@
     </div>
   </div>
   <div class="sidebar-buttons">
-    <button class="button-header">Open</button>
+    <a th:href="@{'/activity-page/'+${activity.id}}"><button class="button-header">Open</button></a>
   </div>
 </div>
 

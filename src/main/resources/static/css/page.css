@@ -313,9 +313,6 @@ label [for="start-date"], label [for="end-date"] {
     display: none;
 }
 
-#delete-project-id {
-    display: none;
-}
 #delete-profile{
     display: none;
 }
@@ -351,6 +348,8 @@ label [for="start-date"], label [for="end-date"] {
 .form-buttons {
     display: flex;
     flex-direction: row;
+    align-items: baseline;
+    flex-wrap: wrap;
 }
 
 .project-page .button-header, .projects .button-header, .section-page .button-header, .activity-page .button-header {
