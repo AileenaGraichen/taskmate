@@ -9,11 +9,10 @@ public class TeamMember {
     public TeamMember() {
     }
 
-    public TeamMember(int userId, int projectId,String userFirstName, String role) {
+    public TeamMember(int userId, int projectId,String userFirstName) {
         this.projectId = projectId;
         this.userId = userId;
         this.userFirstName = userFirstName;
-        this.role = role;
     }
 
     public int getProjectId() {

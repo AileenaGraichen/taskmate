@@ -27,18 +27,26 @@
 <div th:insert="fragments/header-footer-fragments :: side-navigation"></div>
 
     <div id="platform" class="project-wrap">
-        <h1 class="h1proj"> .</h1>
+        <h1 class="h1proj">Projects</h1>
         <div class="p-row1">
             <section class="top-section">
                 <a class="button-header" th:href="@{/dashboard}"><img class="arrow-right.svg" th:src="@{/images/arrow-right.svg}" alt="" src="">Dashboard</a>
             </section>
-            <h4>All your projects</h4>
+            <h4>Your projects</h4>
         </div>
         <div class="p-row2">
             <button onclick="openCreateProjectForm()" class="add-project">
                 <img th:src="@{images/plus.svg}" alt="Add project" src="">
             </button>
             <div th:each="project : ${session.projectsList}">
+                <a href="" th:href="@{'/project-page/'+${project.getId()}}">
+                    <button class="project" th:text="${project.projectName}"></button>
+                </a>
+            </div>
+        </div>
+        <h4>Collaborations</h4>
+        <div class="p-row3">
+            <div th:each="project : ${session.colabProjectList}">
                 <a href="" th:href="@{'/project-page/'+${project.getId()}}">
                     <button class="project" th:text="${project.projectName}"></button>
                 </a>
