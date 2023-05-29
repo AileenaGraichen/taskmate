@@ -36,7 +36,11 @@ public class MainController {
     }
 
     @GetMapping("/")
-    public String getHomePage(){
+    public String getHomePage(HttpSession session){
+
+        if(session.getAttribute("errorMessage") != null){
+            session.removeAttribute("errorMessage");
+        }
         return "index";
     }
 
@@ -68,14 +72,16 @@ public class MainController {
                            @RequestParam("last-name") String lastName,
                            @RequestParam("email") String email,
                            @RequestParam("password") String password,
-                           Model model){
-
+                           HttpSession session){
+        if(session.getAttribute("errorMessage") != null){
+            session.removeAttribute("errorMessage");
+        }
         if(!userRepository.doesUserExist(email)){
             User user = new User(firstName, lastName, email, password);
             userRepository.addUser(user);
         }else{
-            model.addAttribute("errorMessage", "Email already in use");
-            return "redirect://register";
+            session.setAttribute("errorMessage", "Email already in use");
+            return "redirect:/login";
         }
         return "redirect:/login";
     }
@@ -130,7 +136,9 @@ public class MainController {
     public String getProjectsOverview(HttpSession session){
         User user = (User) session.getAttribute("user");
         List<Project> projectsList = projectRepository.getProjectsByUserId(user.getId());
+        List<Project> colabProjectList = teamMemberRepository.getProjectsByUserId(user.getId());
         session.setAttribute("projectsList", projectsList);
+        session.setAttribute("colabProjectList", colabProjectList);
         return "projects";
     }
 
@@ -162,7 +170,7 @@ public class MainController {
 
     @GetMapping("/project-tree-view/{projectId}")
     public String projectListViewPage(@PathVariable("projectId") int projectId,
-                                      Model model){
+                                      Model model, HttpSession session){
         List<Section> listOfSections = sectionRepository.getSectionsByProjectId(projectId);
         for(Section section : listOfSections){
             section.setActivityList(activityRepository.getActivityListById(section.getId()));
@@ -182,7 +190,8 @@ public class MainController {
     public String getProjectSetting(@PathVariable("projectId") int projectId,
                                  HttpSession session){
         List<Section> listOfSections = sectionRepository.getSectionsByProjectId(projectId);
-        session.setAttribute("listOfSections", listOfSections);
+        List<TeamMember> teamList = teamMemberRepository.getTeamByProjectId(projectId);
+        session.setAttribute("teamMembers", teamList);
         session.setAttribute("project", projectRepository.getProjectById(projectId));
         return "project-settings";
     }
@@ -202,7 +211,7 @@ public class MainController {
         project.setEndDate(endDate);
         projectRepository.updateProject(project);
 
-        return "redirect:/project-page/"+project.getId();
+        return "redirect:/project-settings/"+project.getId();
     }
 
     @PostMapping("/create-section")
@@ -412,5 +421,50 @@ public class MainController {
         taskRepository.deleteTaskById(task.getId());
 
         return "redirect:/activity-page/"+activity.getId();
+    }
+
+    @PostMapping("/add-team-member")
+    public String addTeamMember(@RequestParam("member-email") String memberEmail,
+                                Model model,
+                                HttpSession session){
+
+        if(session.getAttribute("teamMemberExist") != null){
+            session.removeAttribute("teamMemberExist");
+        } else if (session.getAttribute("teamMemberDoesNotExist") != null) {
+            session.removeAttribute("teamMemberDoesNotExist");
+        }
+
+        Project project = (Project) session.getAttribute("project");
+        if(userRepository.doesUserExist(memberEmail) && !teamMemberRepository.isCollaborating(userRepository.getUserByEmail(memberEmail).getId(), project.getId())){
+            User teamMember = userRepository.getUserByEmail(memberEmail);
+            session.setAttribute("teamMemberExist", teamMember);
+        }else {
+            session.setAttribute("teamMemberDoesNotExist", "User with email " + memberEmail + " does not exist or is already collaborating.");
+        }
+        return "redirect:/project-settings/"+project.getId();
+    }
+
+    @GetMapping("/add-member-to-team")
+    public String addMemberToTeam(HttpSession session){
+        Project project = (Project) session.getAttribute("project");
+        User user = (User) session.getAttribute("teamMemberExist");
+        TeamMember teamMember = new TeamMember(user.getId(), project.getId(), user.getFirstName());
+        teamMemberRepository.addTeamMember(teamMember);
+
+        if(session.getAttribute("teamMemberExist") != null){
+            session.removeAttribute("teamMemberExist");
+        } else if (session.getAttribute("teamMemberDoesNotExist") != null) {
+            session.removeAttribute("teamMemberDoesNotExist");
+        }
+
+        return "redirect:/project-settings/"+project.getId();
+    }
+
+    @GetMapping("/delete-team-member/{userId}/{projectId}")
+    public String deleteTeamMember(@PathVariable("userId") int userId,
+                                   @PathVariable("projectId") int projectId){
+        teamMemberRepository.deleteTeamMember(userId, projectId);
+
+        return "redirect:/project-settings/"+projectId;
     }
 }
