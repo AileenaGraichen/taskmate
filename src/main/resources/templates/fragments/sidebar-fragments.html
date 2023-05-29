@@ -74,7 +74,7 @@
       <option th:each="member : ${session.team}" th:value="${member.userId}" th:text="${member.userFirstName}"></option>
     </select>
     <label>Hours</label>
-    <input type="number" step="0.25" name="hours-assigned">
+    <input type="number" step="0.25" min="0" th:max="${session.maxHoursForTask}" name="hours-assigned">
   </div>
   <button type="submit">Save</button>
 </form>

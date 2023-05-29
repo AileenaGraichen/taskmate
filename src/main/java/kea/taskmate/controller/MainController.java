@@ -274,6 +274,7 @@ public class MainController {
                                 @RequestParam("description") String description,
                                 @RequestParam("duration") float duration,
                                  @RequestParam("activity-status") int status){
+
         Activity activity = activityRepository.getActivityById(activityId);
         activity.setActivityName(activityName);
         activity.setDescription(description);
@@ -284,16 +285,18 @@ public class MainController {
         return "redirect:/section-page/"+activity.getSectionId();
     }
 
-
-
     // Shows all tasks of an activity
     @GetMapping("/activity-page/{activityId}")
     public String getActivityPage(@PathVariable("activityId") int activityId,
                                  HttpSession session){
+
+        double maxHours = activityRepository.getActivityById(activityId).getDurationInHours();
         List<Task> listOfTasks = taskRepository.getTaskListById(activityId);
         for (Task t : listOfTasks){
             t.setAssignments(assignmentRepository.getTaskAssignmentsById(t.getId()));
+            maxHours = maxHours - t.getDurationInHours();
         }
+        session.setAttribute("maxHoursForTask", maxHours);
         session.setAttribute("listOfTasks", listOfTasks);
         session.setAttribute("activity", activityRepository.getActivityById(activityId));
         return "activity-page";

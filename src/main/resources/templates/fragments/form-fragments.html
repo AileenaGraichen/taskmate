@@ -124,11 +124,11 @@
         <div class="dates">
             <div class="sDate">
                 <label for="start-date">Start date</label>
-                <input type="date" placeholder="Start date" name="start-date" required>
+                <input type="date" placeholder="Start date" th:min="${session.project.startDate}" th:max="${session.project.endDate}" name="start-date" required>
             </div>
             <div class="eDate">
                 <label for="end-date">End date</label>
-                <input type="date" placeholder="End date" name="end-date" required>
+                <input type="date" placeholder="End date" th:min="${session.project.startDate}" th:max="${session.project.endDate}" name="end-date" required>
             </div>
         </div>
     </div>
@@ -168,7 +168,7 @@
         <div class="createDuration">
             <div class="hours">
                 <label for="durationInHours">Duration in hours</label>
-                <input id="durationInHours" type="number" class="createDur" placeholder="Duration in hours" name="duration" required>
+                <input id="durationInHours" type="number" class="createDur" min="0" th:max="${session.maxHoursForTask}" placeholder="Duration in hours" name="duration" required>
             </div>
         </div>
     </div>
@@ -184,9 +184,9 @@
         <h3>Duration</h3>
         <div class="sidebar-info-duration">
             <span>From:</span>
-            <input type="date" placeholder="Start date" name="start-date" th:value="${section.startDate}">
+            <input type="date" placeholder="Start date" th:min="${session.project.startDate}" th:max="${session.project.endDate}" name="start-date" th:value="${section.startDate}">
             <span>To:</span>
-            <input type="date" placeholder="End date" name="end-date" th:value="${section.endDate}">
+            <input type="date" placeholder="End date" th:min="${session.project.startDate}" th:max="${session.project.endDate}" name="end-date" th:value="${section.endDate}">
         </div>
         <h3>Description</h3>
         <div class="sidebar-info-description">
@@ -228,7 +228,7 @@
         <h3>Duration</h3>
         <div class="sidebar-info-duration">
             <span>Hours:</span>
-            <input type="number" step="0.25" placeholder="Hours" name="duration" th:value="${task.durationInHours}">
+            <input type="number" step="0.25" placeholder="Hours" min="0" th:max="${session.maxHoursForTask}" name="duration" th:value="${task.durationInHours}">
         </div>
         <h3>Description</h3>
         <div class="sidebar-info-description">
