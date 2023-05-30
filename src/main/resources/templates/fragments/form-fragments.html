@@ -64,7 +64,7 @@
 
 <form th:fragment="create-project-form" class="createForm" action="/create-project" th:action="@{/create-project}" method="POST">
     <div class="createFormInfo">
-        <span class="closeProj" th:onclick="closeCreateProject()">&times;</span>
+        <span class="closeProj" onclick="closeCreateProject()">&times;</span>
         <h4>Add project</h4>
         <div class="nameDescription">
             <input type="text" placeholder="Project-Name" name="project-name" required>
@@ -115,7 +115,7 @@
 
 <form th:fragment="create-section-form" class="createForm" action="/create-section" th:action="@{/create-section}" method="post">
     <div class="createFormInfo">
-        <span class="closeProj" th:onclick="closeCreateSection()">&times;</span>
+        <span class="closeProj" onclick="closeCreateSection()">&times;</span>
         <h4>Add section</h4>
         <div class="nameDescription">
             <input type="text" placeholder="Section-Name" name="section-name" required>
@@ -139,7 +139,7 @@
 
 <form th:fragment="create-activity-form" class="createForm" action="/create-activity" th:action="@{/create-activity}" method="post">
     <div class="createFormInfo">
-        <span class="closeProj" th:onclick="closeCreateActivity()">&times;</span>
+        <span class="closeProj" onclick="closeCreateActivity()">&times;</span>
         <h4>Add activity</h4>
         <div class="nameDescription">
             <input type="text" placeholder="Activity-Name" name="activity-name" required>
@@ -228,7 +228,7 @@
         <h3>Duration</h3>
         <div class="sidebar-info-duration">
             <span>Hours:</span>
-            <input type="number" step="0.25" placeholder="Hours" min="0" th:max="${session.maxHoursForTask}" name="duration" th:value="${task.durationInHours}">
+            <input type="number" step="0.25" placeholder="Hours" min="0" th:max="${session.maxHoursForTask}+${task.durationInHours}" name="duration" th:value="${task.durationInHours}">
         </div>
         <h3>Description</h3>
         <div class="sidebar-info-description">
@@ -278,7 +278,7 @@
     <span class="closeProj" th:onclick="closeDeleteTaskPopUp()">&times;</span>
     <h1 class="form-header">Are you sure?</h1>
     <div class="form-buttons">
-        <a th:href="@{/delete-task}" class="sureDeleteButton button-header"> Delete task</a>
+        <a th:href="@{'/delete-task/'+${task.id}}" class="sureDeleteButton button-header"> Delete task</a>
         <a class="sureDeleteCancel button-header" onclick="closeDeleteTaskPopUp()">Cancel</a>
     </div>
 </div>

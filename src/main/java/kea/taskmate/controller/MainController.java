@@ -4,12 +4,12 @@ import kea.taskmate.models.*;
 import kea.taskmate.repository.*;
 import jakarta.servlet.http.HttpSession;
 import kea.taskmate.service.DashboardService;
-import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -41,6 +41,7 @@ public class MainController {
         if(session.getAttribute("errorMessage") != null){
             session.removeAttribute("errorMessage");
         }
+
         return "index";
     }
 
@@ -290,13 +291,15 @@ public class MainController {
     public String getActivityPage(@PathVariable("activityId") int activityId,
                                  HttpSession session){
 
-        double maxHours = activityRepository.getActivityById(activityId).getDurationInHours();
+        double maxHoursForTasks = activityRepository.getActivityById(activityId).getDurationInHours();
+        double maxAvailableHours = activityRepository.getActivityById(activityId).getDurationInHours();
+
         List<Task> listOfTasks = taskRepository.getTaskListById(activityId);
         for (Task t : listOfTasks){
             t.setAssignments(assignmentRepository.getTaskAssignmentsById(t.getId()));
-            maxHours = maxHours - t.getDurationInHours();
+            maxHoursForTasks = maxHoursForTasks - t.getDurationInHours();
         }
-        session.setAttribute("maxHoursForTask", maxHours);
+        session.setAttribute("maxHoursForTask", maxHoursForTasks);
         session.setAttribute("listOfTasks", listOfTasks);
         session.setAttribute("activity", activityRepository.getActivityById(activityId));
         return "activity-page";
@@ -416,12 +419,12 @@ public class MainController {
         return "redirect:/section-page/"+section.getId();
     }
 
-    @GetMapping("/delete-task")
-    public String deleteTask(HttpSession session){
+    @GetMapping("/delete-task/{taskId}")
+    public String deleteTask(@PathVariable("taskId") int taskId,
+                             HttpSession session){
 
         Activity activity = (Activity) session.getAttribute("activity");
-        Task task = (Task) session.getAttribute("task");
-        taskRepository.deleteTaskById(task.getId());
+        taskRepository.deleteTaskById(taskId);
 
         return "redirect:/activity-page/"+activity.getId();
     }

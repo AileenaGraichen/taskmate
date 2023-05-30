@@ -32,14 +32,13 @@
 
         <section class="top-section">
             <section class="topLeftSection">
-                <a th:href="@{'/section-page/'+${session.section.id}}"><button class="button-header"><img class="arrow-right.svg" th:src="@{/images/arrow-right.svg}" alt="" src="">Activities</button></a>
+                <a th:href="@{'/section-page/'+${session.section.id}}"><button class="button-header"> << Activities</button></a>
             </section>
 
             <section class="topRightSection">
                 <a th:href="@{'/project-tree-view/'+${session.project.id}}">
                     <button class="button-header">Tree View</button>
                 </a>
-                <button class="button-header" onclick="openEditActivityForm()">Edit Activity</button>
                 <button class="button-header" onclick="openDeleteActivityPopUp()">Delete Activity</button>
             </section>
         </section>

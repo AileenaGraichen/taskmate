@@ -16,10 +16,6 @@ function closeCreateProject() {
     document.getElementById("create-project").style.display = "none";
 }
 
-function openUpdateProjectForm() {
-    document.getElementById("update-project-form").style.display = "block";
-}
-
 function closeDeleteProjectPopUp() {
     console.log("Closing delete project popup");
     document.getElementById("delete-project").style.display = "none";
@@ -46,10 +42,6 @@ function closeCreateSection() {
     document.getElementById("create-section").style.display = "none";
 }
 
-function openEditSectionForm() {
-    document.getElementById("edit-section-form").style.display = "block";
-}
-
 function openDeleteSectionPopUp() {
     document.getElementById("delete-section-id").style.display = "block";
 }
@@ -63,10 +55,6 @@ function closeCreateActivity() {
 
 }
 
-function openEditActivityForm() {
-    document.getElementById("edit-activity-form").style.display = "block";
-}
-
 function openDeleteActivityPopUp() {
     document.getElementById("delete-activity-id").style.display = "block";
 }
@@ -75,24 +63,16 @@ function openCreateTaskForm() {
     document.getElementById("create-task").style.display = "block";
 }
 
-function closeCreateTask() {
-    document.getElementById("create-task").style.display = "none";
-}
-
-function openEditTaskForm() {
-    document.getElementById("edit-task-form").style.display = "block";
-}
-
-function openDeleteTaskPopUp() {
-    document.getElementById("delete-task-id").style.display = "block";
-}
-
 function closeDeleteSectionPopUp() {
     document.getElementById("delete-section-id").style.display = "none";
 }
 
 function closeDeleteActivityPopUp() {
     document.getElementById("delete-activity-id").style.display = "none";
+}
+
+function openDeleteTaskPopUp(){
+    document.getElementById("delete-task-id").style.display = "block";
 }
 
 function closeDeleteTaskPopUp() {
@@ -141,26 +121,6 @@ function toggleTaskInfoSideBar(taskId) {
         sidebar.style.display = "block";
     } else {
         sidebar.style.display = "none";
-    }
-}
-
-function toggleActivityAssigneesForm() {
-    let assigneeForm = document.getElementById("activity-assignee-form");
-    let computedStyle = window.getComputedStyle(assigneeForm);
-    if (computedStyle.display === "none") {
-        assigneeForm.style.display = "block";
-    } else {
-        assigneeForm.style.display = "none";
-    }
-}
-
-function toggleTaskAssigneesForm() {
-    let assigneeForm = document.getElementById("task-assignee-form");
-    let computedStyle = window.getComputedStyle(assigneeForm);
-    if (computedStyle.display === "none") {
-        assigneeForm.style.display = "block";
-    } else {
-        assigneeForm.style.display = "none";
     }
 }
 
