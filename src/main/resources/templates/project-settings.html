@@ -23,27 +23,36 @@
 <body>
 <div th:insert="fragments/header-footer-fragments :: side-navigation"></div>
 <div id="platform" class="settings-wrapper">
-    <div id="settings" class="overview-wrapper">
+    <div class="ps-heading">
+        <h1>Settings</h1>
+    </div>
+    <div id="settings" class="overview-wrapper-project">
         <div id="update-project" th:insert="fragments/form-fragments :: update-project-form"></div>
-    </div>
-    <div class="ps-collaborators">
-        <div th:each="member : ${session.teamMembers}">
-            <span th:text="${member.userFirstName}"></span>
-            <span th:text="${member.role}"></span>
-            <a th:href="@{'/delete-team-member/'+${member.userId}+'/'+${member.projectId}}">&times;</a>
+        <div class="ps-collaborators">
+            <h2 id="collaborations" >Collaborations</h2>
+            <div class="ps-input">
+                <div th:each="member : ${session.teamMembers}">
+                    <span th:text="${member.userFirstName}"></span>
+                    <span th:text="${member.role}"></span>
+                    <a th:href="@{'/delete-team-member/'+${member.userId}+'/'+${member.projectId}}">&times;</a>
+                </div>
+            </div>
+            <form class="add-member-form" th:action="@{/add-team-member}" method="post">
+                <h3>Add member</h3>
+                <div class="ps-input">
+                    <span id="error-message-team-member" th:if="${session.teamMemberDoesNotExist != null}" th:text="${session.teamMemberDoesNotExist}"></span>
+                    <label for="team-member-email">E-mail</label>
+                    <input type="text" name="member-email" id="team-member-email" placeholder="Enter user e-mail">
+                    <button class="button-header" type="submit">Search</button>
+                </div>
+            </form>
+            <div th:if="${session.teamMemberExist != null}">
+                <span>Do you want to add</span><span th:text="${session.teamMemberExist.firstName}"></span>
+                <a th:href="@{/add-member-to-team}">Add</a>
+            </div>
         </div>
-        <form class="add-member-form" th:action="@{/add-team-member}" method="post">
-            <span>Add member</span>
-            <span th:if="${session.teamMemberDoesNotExist != null}" th:text="${session.teamMemberDoesNotExist}"></span>
-            <label for="team-member-email">E-mail</label>
-            <input type="text" name="member-email" id="team-member-email" placeholder="Enter user e-mail">
-            <button type="submit">Search</button>
-        </form>
-        <div th:if="${session.teamMemberExist != null}">
-            <span>Do you want to add</span><span th:text="${session.teamMemberExist.firstName}"></span>
-            <a th:href="@{/add-member-to-team}">Add</a>
-        </div>
     </div>
+
 </div>
 </body>
 </html>

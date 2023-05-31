@@ -44,16 +44,18 @@
                 </a>
             </div>
         </div>
-        <h4>Collaborations</h4>
-        <div class="p-row3">
-            <div th:each="project : ${session.colabProjectList}">
-                <a href="" th:href="@{'/project-page/'+${project.getId()}}">
-                    <button class="project" th:text="${project.projectName}"></button>
-                </a>
+        <div class="collaboration-project">
+            <h4>Collaborations</h4>
+            <div class="p-row3">
+                <div th:each="project : ${session.colabProjectList}">
+                    <a href="" th:href="@{'/project-page/'+${project.getId()}}">
+                        <button class="project" th:text="${project.projectName}"></button>
+                    </a>
+                </div>
             </div>
+            <div id="create-project" class="modal" th:insert="fragments/form-fragments :: create-project-form"></div>
+            <div id="delete-project" class="modal" th:insert="fragments/form-fragments :: delete-project-popup"></div>
         </div>
-        <div id="create-project" class="modal" th:insert="fragments/form-fragments :: create-project-form"></div>
-        <div id="delete-project" class="modal" th:insert="fragments/form-fragments :: delete-project-popup"></div>
     </div>
 </body>
 </html>

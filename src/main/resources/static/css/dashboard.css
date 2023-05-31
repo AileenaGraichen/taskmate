@@ -131,6 +131,13 @@ a.logotype img {
     margin-bottom: 3rem;
 }
 
+.overview-wrapper-project {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    margin-bottom: 3rem;
+}
+
 .dashboard-top {
     display: flex;
     justify-content: space-around;

@@ -29,6 +29,10 @@ h1{
     color: var(--primary-color);
     margin-bottom: 2em;
 }
+
+h1 #collaborations{
+    margin-bottom: 3em;
+}
 h2{
     font-family: Helvetica, sans-serif;
     font-size: large;
@@ -304,4 +308,8 @@ input[type="date" i] {
     margin: 50px 100px 100px 300px;
     transition: margin-left 0.45s cubic-bezier(0.77, 0, 0.175, 1);
     background-color: var(--complementary-color);
+}
+
+.collaboration-project{
+    margin-top: 3em;
 }

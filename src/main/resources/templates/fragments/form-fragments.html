@@ -87,12 +87,8 @@
 
 <form th:fragment="update-project-form" class="" action="/update-project" th:action="@{/update-project}" method="post">
     <div class="ps-heading">
-        <h1>Settings</h1>
-    </div>
-    <div class="ps-heading">
         <input id="project-name" type="text" placeholder="Project-Name" name="project-name" th:value="${session.project.projectName}">
     </div>
-
         <div class="ps-input">
             <div class="ps-input-description">
                 <label for="description">Description</label>
