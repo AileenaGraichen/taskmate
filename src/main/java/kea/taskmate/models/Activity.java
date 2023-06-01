@@ -1,6 +1,5 @@
 package kea.taskmate.models;
 
-
 import java.util.List;
 
 public class Activity {

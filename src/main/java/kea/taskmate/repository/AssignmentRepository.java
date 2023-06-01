@@ -5,7 +5,6 @@ import kea.taskmate.models.TaskAssignment;
 import kea.taskmate.utility.ConnectionManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,63 +21,6 @@ public class AssignmentRepository {
     private String USERNAME;
     @Value("${spring.datasource.password}")
     private String PASSWORD;
-
-
-    //change variables
-    public List<ActivityAssignment> getActivityAssignmentsById(int activityId){
-        List<ActivityAssignment> list = new ArrayList<>();
-        try{
-            final String QUERY = "SELECT aa.*, u.fname " +
-                                 "FROM taskmate.activity_assignment AS aa " +
-                                 "JOIN taskmate.user AS u ON aa.user_id = u.id " +
-                                 "WHERE aa.activity_id = ?";
-            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
-            preparedStatement.setInt(1, activityId);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                int userId = resultSet.getInt(1);
-                float hoursAssigned = resultSet.getFloat(3);
-                String userFirstName = resultSet.getString(4);
-                ActivityAssignment activityAssignment = new ActivityAssignment(userId, activityId, hoursAssigned);
-                activityAssignment.setUserFirstName(userFirstName);
-                list.add(activityAssignment);
-            }
-        }catch (SQLException e){
-            System.out.println("Could not find activity assignments");
-            e.printStackTrace();
-        }
-        return list;
-    }
-
-    public List<TaskAssignment> getTaskAssignmentsById (int taskId){
-        List<TaskAssignment> list = new ArrayList<>();
-        try{
-            final String QUERY = "SELECT ta.*, u.fname " +
-                    "FROM taskmate.task_assignment AS ta " +
-                    "JOIN taskmate.user AS u ON ta.user_id = u.id " +
-                    "WHERE ta.task_id = ?";
-            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
-            preparedStatement.setInt(1, taskId);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                int userId = resultSet.getInt(1);
-                float hoursAssigned = resultSet.getFloat(3);
-                String userFirstName = resultSet.getString(4);
-                TaskAssignment taskAssignment = new TaskAssignment(userId, taskId, hoursAssigned);
-                taskAssignment.setUserFirstName(userFirstName);
-                list.add(taskAssignment);
-            }
-        }catch (SQLException e){
-            System.out.println("Could not find task assignments");
-            e.printStackTrace();
-        }
-        return list;
-    }
-
 
     public void addActivityAssignment(ActivityAssignment activityAssignment){
         final String QUERY = "INSERT INTO taskmate.activity_assignment(user_id, activity_id, hours_assigned) VALUES (?, ?, ?)";
@@ -166,6 +108,60 @@ public class AssignmentRepository {
         }catch (SQLException e){
             e.printStackTrace();
         }
+    }
+
+    public List<ActivityAssignment> getActivityAssignmentsById(int activityId){
+        List<ActivityAssignment> list = new ArrayList<>();
+        try{
+            final String QUERY = "SELECT aa.*, u.fname " +
+                    "FROM taskmate.activity_assignment AS aa " +
+                    "JOIN taskmate.user AS u ON aa.user_id = u.id " +
+                    "WHERE aa.activity_id = ?";
+            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
+            preparedStatement.setInt(1, activityId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                int userId = resultSet.getInt(1);
+                float hoursAssigned = resultSet.getFloat(3);
+                String userFirstName = resultSet.getString(4);
+                ActivityAssignment activityAssignment = new ActivityAssignment(userId, activityId, hoursAssigned);
+                activityAssignment.setUserFirstName(userFirstName);
+                list.add(activityAssignment);
+            }
+        }catch (SQLException e){
+            System.out.println("Could not find activity assignments");
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<TaskAssignment> getTaskAssignmentsById (int taskId){
+        List<TaskAssignment> list = new ArrayList<>();
+        try{
+            final String QUERY = "SELECT ta.*, u.fname " +
+                    "FROM taskmate.task_assignment AS ta " +
+                    "JOIN taskmate.user AS u ON ta.user_id = u.id " +
+                    "WHERE ta.task_id = ?";
+            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
+            preparedStatement.setInt(1, taskId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                int userId = resultSet.getInt(1);
+                float hoursAssigned = resultSet.getFloat(3);
+                String userFirstName = resultSet.getString(4);
+                TaskAssignment taskAssignment = new TaskAssignment(userId, taskId, hoursAssigned);
+                taskAssignment.setUserFirstName(userFirstName);
+                list.add(taskAssignment);
+            }
+        }catch (SQLException e){
+            System.out.println("Could not find task assignments");
+            e.printStackTrace();
+        }
+        return list;
     }
 
 }

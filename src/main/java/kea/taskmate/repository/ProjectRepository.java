@@ -4,7 +4,6 @@ import kea.taskmate.models.*;
 import kea.taskmate.utility.ConnectionManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +17,58 @@ public class ProjectRepository {
     @Value("${spring.datasource.password}")
     private String PASSWORD;
 
+    public void addProject(Project project){
+        final String CREATE_QUERY = "INSERT INTO taskmate.project(user_id, project_name, description, start_date, end_date) VALUES  (?, ?, ?, ?, ?)";
+        try{
+            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(CREATE_QUERY);
+
+            preparedStatement.setInt(1, project.getUserId());
+            preparedStatement.setString(2, project.getProjectName());
+            preparedStatement.setString(3, project.getDescription());
+            preparedStatement.setDate(4, project.getStartDate());
+            preparedStatement.setDate(5, project.getEndDate());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e){
+            System.out.println("Could not create project.");
+            e.printStackTrace();
+        }
+    }
+
+    public void updateProject(Project project){
+        final String UPDATE_QUERY = "UPDATE taskmate.project SET project_name = ?, description = ?, start_date = ?, end_date = ? WHERE id = ?";
+        try{
+            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY);
+
+            preparedStatement.setString(1, project.getProjectName());
+            preparedStatement.setString(2, project.getDescription());
+            preparedStatement.setDate(3, project.getStartDate());
+            preparedStatement.setDate(4, project.getEndDate());
+            preparedStatement.setInt(5, project.getId());
+
+            preparedStatement.executeUpdate();
+
+        }catch (SQLException e){
+            System.out.println("Could not update project.");
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteProjectById(int id){
+        final String DELETE_QUERY = "DELETE FROM taskmate.project WHERE id = ?";
+        try {
+            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_QUERY);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Could not delete project.");
+            e.printStackTrace();
+        }
+    }
 
     public List<Project> getProjectsByUserId(int userId){
         final String QUERY = "SELECT * FROM taskmate.project WHERE user_id = ?";
@@ -45,6 +96,7 @@ public class ProjectRepository {
         }
         return list;
     }
+
     public Project getProjectById(int projectId){
         final String FIND_QUERY = "SELECT * FROM taskmate.project WHERE id = ?";
         Project project = new Project();
@@ -74,58 +126,6 @@ public class ProjectRepository {
             System.out.println("Could not find project");
             e.printStackTrace();
         } return project;
-    }
-
-    // DO IT !!
-    public void addProject(Project project){
-        final String CREATE_QUERY = "INSERT INTO taskmate.project(user_id, project_name, description, start_date, end_date) VALUES  (?, ?, ?, ?, ?)";
-        try{
-            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-             PreparedStatement preparedStatement = connection.prepareStatement(CREATE_QUERY);
-
-            preparedStatement.setInt(1, project.getUserId());
-            preparedStatement.setString(2, project.getProjectName());
-            preparedStatement.setString(3, project.getDescription());
-            preparedStatement.setDate(4, project.getStartDate());
-            preparedStatement.setDate(5, project.getEndDate());
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException e){
-            System.out.println("Could not create project.");
-            e.printStackTrace();
-        }
-    }
-    public void updateProject(Project project){
-        final String UPDATE_QUERY = "UPDATE taskmate.project SET project_name = ?, description = ?, start_date = ?, end_date = ? WHERE id = ?";
-        try{
-            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY);
-
-            preparedStatement.setString(1, project.getProjectName());
-            preparedStatement.setString(2, project.getDescription());
-            preparedStatement.setDate(3, project.getStartDate());
-            preparedStatement.setDate(4, project.getEndDate());
-            preparedStatement.setInt(5, project.getId());
-
-            preparedStatement.executeUpdate();
-
-        }catch (SQLException e){
-            System.out.println("Could not update project.");
-            e.printStackTrace();
-        }
-    }
-    public void deleteProjectById(int id){
-        final String DELETE_QUERY = "DELETE FROM taskmate.project WHERE id = ?";
-        try {
-            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_QUERY);
-            preparedStatement.setInt(1, id);
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-            System.out.println("Could not delete project.");
-            e.printStackTrace();
-        }
     }
 
     public ProjectOverview getActivitiesAndTasksByProjectId(int projectId){

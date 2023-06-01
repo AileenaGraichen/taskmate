@@ -7,9 +7,7 @@ import kea.taskmate.service.DashboardService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -50,7 +48,6 @@ public class MainController {
         return "login";
     }
 
-    //POST MAPPING FOR USER LOGIN
     @PostMapping("/login")
     public String login(@RequestParam("email") String email,
                         @RequestParam("password") String password,
@@ -87,14 +84,12 @@ public class MainController {
         return "redirect:/login";
     }
 
-    //Get MAPPING FOR USER LOGOUT
     @GetMapping("/logout")
     public String logout(HttpSession session){
         session.removeAttribute("user");
         return "redirect:/";
     }
 
-    //Get MAPPING FOR DELETE USER
     @GetMapping("/delete-user")
     public String deleteUser(HttpSession session){
         User user = (User) session.getAttribute("user");
@@ -109,7 +104,6 @@ public class MainController {
         return "profile";
     }
 
-    //POST FOR UPDATING PROFILE
     @PostMapping("/profile")
     public String updateProfile(@RequestParam("firstName") String firstName,
                                 @RequestParam("lastName") String lastName,
@@ -132,7 +126,6 @@ public class MainController {
         return "dashboard";
     }
 
-    //Shows all users projects
     @GetMapping("/projects")
     public String getProjectsOverview(HttpSession session){
         User user = (User) session.getAttribute("user");
@@ -156,7 +149,6 @@ public class MainController {
         return "redirect:/projects";
     }
 
-    //Shows sections in a project
     @GetMapping("/project-page/{projectId}")
     public String getProjectPage(@PathVariable("projectId") int projectId,
                               HttpSession session){
@@ -197,7 +189,6 @@ public class MainController {
         return "project-settings";
     }
 
-
     @PostMapping("/update-project")
     public String updateProject(@RequestParam("project-name") String projectName,
                                 @RequestParam("description") String description,
@@ -227,7 +218,6 @@ public class MainController {
         return "redirect:/project-page/"+project.getId();
     }
 
-    // SKAL IKKE HAVE PATH VARIABLE
     @PostMapping("/update-section")
     public String updateSection(@RequestParam("section-id") int sectionId,
                                 @RequestParam("section-name") String sectionName,
@@ -243,7 +233,6 @@ public class MainController {
         return "redirect:/project-page/"+section.getProject_id();
     }
 
-    //Shows activities of the section
     @GetMapping("/section-page/{sectionId}")
     public String getSectionPage(@PathVariable("sectionId") int sectionId,
                                  HttpSession session){
@@ -268,7 +257,6 @@ public class MainController {
         return "redirect:/section-page/"+section.getId();
     }
 
-    // SKAL IKKE HAVE PATH VARIABLE
     @PostMapping("/update-activity")
     public String updateActivity(@RequestParam("activity-id") int activityId,
                                 @RequestParam("activity-name") String activityName,
@@ -286,7 +274,6 @@ public class MainController {
         return "redirect:/section-page/"+activity.getSectionId();
     }
 
-    // Shows all tasks of an activity
     @GetMapping("/activity-page/{activityId}")
     public String getActivityPage(@PathVariable("activityId") int activityId,
                                  HttpSession session){
@@ -316,7 +303,6 @@ public class MainController {
         return "redirect:/activity-page/"+activity.getId();
     }
 
-    // SKAL IKKE HAVE PATH VARIABLE
     @PostMapping("/update-task")
     public String updateTask(@RequestParam("task-id") int taskId,
                                  @RequestParam("task-name") String taskName,
