@@ -70,3 +70,9 @@ CREATE TABLE taskmate.team_member(
                                   `project_id` INT,
                                   `team_role` VARCHAR(255),
                                    PRIMARY KEY (`user_id`, `project_id`));
+
+ALTER TABLE taskmate.activity
+ADD COLUMN `status` INT DEFAULT 0;
+
+ALTER TABLE taskmate.task
+ADD COLUMN `status` INT DEFAULT 0;

@@ -316,7 +316,6 @@ public class MainController {
         return "redirect:/activity-page/"+activity.getId();
     }
 
-    // SKAL IKKE HAVE PATH VARIABLE
     @PostMapping("/update-task")
     public String updateTask(@RequestParam("task-id") int taskId,
                                  @RequestParam("task-name") String taskName,
@@ -340,14 +339,12 @@ public class MainController {
         List<ActivityAssignment> assignments = assignmentRepository.getActivityAssignmentsById(activityId);
         ActivityAssignment activityAssignment = new ActivityAssignment(userId, activityId, hoursAssigned);
         for (ActivityAssignment assignment : assignments){
-            System.out.println(assignment.getUserId()+ "|" + userId);
             if(assignment.getUserId() == userId) {
                 assignmentRepository.updateActivityAssignment(activityAssignment);
                 return"redirect:/section-page/"+section.getId();
             }
         }
         assignmentRepository.addActivityAssignment(activityAssignment);
-
 
         return "redirect:/section-page/"+section.getId();
     }
