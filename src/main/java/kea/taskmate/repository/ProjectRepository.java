@@ -104,9 +104,7 @@ public class ProjectRepository {
         try{
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_QUERY);
-
             preparedStatement.setInt(1, projectId);
-
             ResultSet resultSet = preparedStatement.executeQuery();
 
             resultSet.next();
@@ -125,7 +123,8 @@ public class ProjectRepository {
         } catch (SQLException e){
             System.out.println("Could not find project");
             e.printStackTrace();
-        } return project;
+        }
+        return project;
     }
 
     public ProjectOverview getActivitiesAndTasksByProjectId(int projectId){
@@ -154,7 +153,6 @@ public class ProjectRepository {
             PreparedStatement preparedStatementTasks = connection.prepareStatement(QUERY_TASKS);
             preparedStatementTasks.setInt(1, projectId);
 
-            //retrieve activities
             List<Activity> activityList = new ArrayList<>();
             ResultSet activitiesResultset = preparedStatementActivities.executeQuery();
             while(activitiesResultset.next()){
@@ -170,7 +168,6 @@ public class ProjectRepository {
                 activityList.add(activity);
             }
 
-            //retrieve tasks
             List<Task> taskList = new ArrayList<>();
             ResultSet taskResultset = preparedStatementTasks.executeQuery();
             while(taskResultset.next()){

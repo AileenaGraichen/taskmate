@@ -23,7 +23,6 @@ public class TaskRepository {
 
     public void addTask(Task task){
         final String CREATE_QUERY = "INSERT INTO taskmate.task(activity_id, task_name, description, duration) VALUES  (?, ?, ?, ?)";
-
         try{
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
             PreparedStatement preparedStatement = connection.prepareStatement(CREATE_QUERY);
@@ -137,7 +136,6 @@ public class TaskRepository {
         try{
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY);
-
             preparedStatement.setInt(1, task.getStatus());
             preparedStatement.setInt(2, task.getId());
 

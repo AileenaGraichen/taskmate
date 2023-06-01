@@ -36,6 +36,7 @@ public class MainController {
     @GetMapping("/")
     public String getHomePage(HttpSession session){
 
+        //Remove error message so that it doesn't reappear
         if(session.getAttribute("errorMessage") != null){
             session.removeAttribute("errorMessage");
         }
@@ -53,7 +54,7 @@ public class MainController {
                         @RequestParam("password") String password,
                         Model model,
                         HttpSession session){
-        //Check if user with mail already exists
+
         if(!userRepository.verifyLogin(email, password)){
             model.addAttribute("errorMessage", "Email or password invalid");
             return "redirect:/login";
@@ -71,9 +72,12 @@ public class MainController {
                            @RequestParam("email") String email,
                            @RequestParam("password") String password,
                            HttpSession session){
+
+        //Remove error message so that it doesn't reappear
         if(session.getAttribute("errorMessage") != null){
             session.removeAttribute("errorMessage");
         }
+
         if(!userRepository.doesUserExist(email)){
             User user = new User(firstName, lastName, email, password);
             userRepository.addUser(user);
@@ -81,6 +85,7 @@ public class MainController {
             session.setAttribute("errorMessage", "Email already in use");
             return "redirect:/login";
         }
+
         return "redirect:/login";
     }
 
@@ -109,6 +114,7 @@ public class MainController {
                                 @RequestParam("lastName") String lastName,
                                 @RequestParam("email") String email,
                                 HttpSession session){
+
         User user = (User) session.getAttribute("user");
         user.setFirstName(firstName);
         user.setLastName(lastName);
@@ -142,6 +148,7 @@ public class MainController {
                                 @RequestParam("start-date") Date startDate,
                                 @RequestParam("end-date") Date endDate,
                                 HttpSession session){
+
         System.out.println(endDate);
         User user = (User) session.getAttribute("user");
         Project project = new Project(user.getId(), projectName, description, startDate, endDate);
@@ -279,9 +286,9 @@ public class MainController {
                                  HttpSession session){
 
         double maxHoursForTasks = activityRepository.getActivityById(activityId).getDurationInHours();
-        double maxAvailableHours = activityRepository.getActivityById(activityId).getDurationInHours();
 
         List<Task> listOfTasks = taskRepository.getTaskListById(activityId);
+        //Decrement the hours for activity, so that task hours cannot be greater than activity's
         for (Task t : listOfTasks){
             t.setAssignments(assignmentRepository.getTaskAssignmentsById(t.getId()));
             maxHoursForTasks = maxHoursForTasks - t.getDurationInHours();
@@ -378,7 +385,6 @@ public class MainController {
     public String deleteProject(HttpSession session) {
 
         Project project = (Project) session.getAttribute("project");
-        System.out.println("KANIN TEST2: "+project.getId());
         projectRepository.deleteProjectById(project.getId());
 
         return "redirect:/projects";
@@ -454,7 +460,6 @@ public class MainController {
     public String deleteTeamMember(@PathVariable("userId") int userId,
                                    @PathVariable("projectId") int projectId){
         teamMemberRepository.deleteTeamMember(userId, projectId);
-
         return "redirect:/project-settings/"+projectId;
     }
 }

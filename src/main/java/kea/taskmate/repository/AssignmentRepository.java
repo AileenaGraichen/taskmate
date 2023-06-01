@@ -26,12 +26,12 @@ public class AssignmentRepository {
         final String QUERY = "INSERT INTO taskmate.activity_assignment(user_id, activity_id, hours_assigned) VALUES (?, ?, ?)";
         try {
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement ps = connection.prepareStatement(QUERY);
-            ps.setInt(1, activityAssignment.getUserId());
-            ps.setInt(2, activityAssignment.getActivityId());
-            ps.setFloat(3, activityAssignment.getHoursAssigned());
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
+            preparedStatement.setInt(1, activityAssignment.getUserId());
+            preparedStatement.setInt(2, activityAssignment.getActivityId());
+            preparedStatement.setFloat(3, activityAssignment.getHoursAssigned());
 
-            ps.executeUpdate();
+            preparedStatement.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -41,12 +41,12 @@ public class AssignmentRepository {
         final String QUERY = "INSERT INTO taskmate.task_assignment(user_id, task_id, hours_assigned) VALUES (?, ?, ?)";
         try {
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement ps = connection.prepareStatement(QUERY);
-            ps.setInt(1, taskAssignment.getUserId());
-            ps.setInt(2, taskAssignment.getTaskId());
-            ps.setFloat(3, taskAssignment.getHoursAssigned());
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
+            preparedStatement.setInt(1, taskAssignment.getUserId());
+            preparedStatement.setInt(2, taskAssignment.getTaskId());
+            preparedStatement.setFloat(3, taskAssignment.getHoursAssigned());
 
-            ps.executeUpdate();
+            preparedStatement.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -56,12 +56,12 @@ public class AssignmentRepository {
         final String QUERY = "UPDATE taskmate.activity_assignment SET hours_assigned = ? WHERE user_id = ? AND activity_id = ?";
         try {
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement ps = connection.prepareStatement(QUERY);
-            ps.setFloat(1, activityAssignment.getHoursAssigned());
-            ps.setInt(2, activityAssignment.getUserId());
-            ps.setInt(3, activityAssignment.getActivityId());
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
+            preparedStatement.setFloat(1, activityAssignment.getHoursAssigned());
+            preparedStatement.setInt(2, activityAssignment.getUserId());
+            preparedStatement.setInt(3, activityAssignment.getActivityId());
 
-            ps.executeUpdate();
+            preparedStatement.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -71,12 +71,12 @@ public class AssignmentRepository {
         final String QUERY = "UPDATE taskmate.task_assignment SET hours_assigned = ? WHERE user_id = ? AND task_id = ?";
         try {
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement ps = connection.prepareStatement(QUERY);
-            ps.setFloat(1, taskAssignment.getHoursAssigned());
-            ps.setInt(2, taskAssignment.getUserId());
-            ps.setInt(3, taskAssignment.getTaskId());
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
+            preparedStatement.setFloat(1, taskAssignment.getHoursAssigned());
+            preparedStatement.setInt(2, taskAssignment.getUserId());
+            preparedStatement.setInt(3, taskAssignment.getTaskId());
 
-            ps.executeUpdate();
+            preparedStatement.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -86,10 +86,10 @@ public class AssignmentRepository {
         final String QUERY = "DELETE FROM taskmate.activity_assignment WHERE user_id = ? AND activity_id = ?";
         try{
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement ps = connection.prepareStatement(QUERY);
-            ps.setInt(1, userId);
-            ps.setInt(2, activityId);
-            ps.executeUpdate();
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
+            preparedStatement.setInt(1, userId);
+            preparedStatement.setInt(2, activityId);
+            preparedStatement.executeUpdate();
 
         }catch (SQLException e){
             e.printStackTrace();
@@ -100,10 +100,10 @@ public class AssignmentRepository {
         final String QUERY = "DELETE FROM taskmate.task_assignment WHERE user_id = ? AND task_id = ?";
         try{
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement ps = connection.prepareStatement(QUERY);
-            ps.setInt(1, userId);
-            ps.setInt(2, taskId);
-            ps.executeUpdate();
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
+            preparedStatement.setInt(1, userId);
+            preparedStatement.setInt(2, taskId);
+            preparedStatement.executeUpdate();
 
         }catch (SQLException e){
             e.printStackTrace();
@@ -111,12 +111,12 @@ public class AssignmentRepository {
     }
 
     public List<ActivityAssignment> getActivityAssignmentsById(int activityId){
+        final String QUERY = "SELECT aa.*, u.fname " +
+                "FROM taskmate.activity_assignment AS aa " +
+                "JOIN taskmate.user AS u ON aa.user_id = u.id " +
+                "WHERE aa.activity_id = ?";
         List<ActivityAssignment> list = new ArrayList<>();
         try{
-            final String QUERY = "SELECT aa.*, u.fname " +
-                    "FROM taskmate.activity_assignment AS aa " +
-                    "JOIN taskmate.user AS u ON aa.user_id = u.id " +
-                    "WHERE aa.activity_id = ?";
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
             preparedStatement.setInt(1, activityId);
@@ -138,12 +138,12 @@ public class AssignmentRepository {
     }
 
     public List<TaskAssignment> getTaskAssignmentsById (int taskId){
+        final String QUERY = "SELECT ta.*, u.fname " +
+                "FROM taskmate.task_assignment AS ta " +
+                "JOIN taskmate.user AS u ON ta.user_id = u.id " +
+                "WHERE ta.task_id = ?";
         List<TaskAssignment> list = new ArrayList<>();
         try{
-            final String QUERY = "SELECT ta.*, u.fname " +
-                    "FROM taskmate.task_assignment AS ta " +
-                    "JOIN taskmate.user AS u ON ta.user_id = u.id " +
-                    "WHERE ta.task_id = ?";
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
             preparedStatement.setInt(1, taskId);

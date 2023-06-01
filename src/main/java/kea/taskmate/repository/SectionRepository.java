@@ -25,14 +25,14 @@ public class SectionRepository {
         final String QUERY = "INSERT INTO taskmate.section(project_id, section_name, description, start_date, end_date) VALUES (?, ?, ?, ?, ?)";
         try{
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement ps = connection.prepareStatement(QUERY);
-            ps.setInt(1, section.getProject_id());
-            ps.setString(2, section.getSectionName());
-            ps.setString(3, section.getDescription());
-            ps.setDate(4, section.getStartDate());
-            ps.setDate(5, section.getEndDate());
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
+            preparedStatement.setInt(1, section.getProject_id());
+            preparedStatement.setString(2, section.getSectionName());
+            preparedStatement.setString(3, section.getDescription());
+            preparedStatement.setDate(4, section.getStartDate());
+            preparedStatement.setDate(5, section.getEndDate());
 
-            ps.executeUpdate();
+            preparedStatement.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -42,14 +42,14 @@ public class SectionRepository {
         final String QUERY = "UPDATE taskmate.section SET section_name = ?, description = ?, start_date = ?, end_date = ? WHERE id = ?";
         try{
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement ps = connection.prepareStatement(QUERY);
-            ps.setString(1, section.getSectionName());
-            ps.setString(2, section.getDescription());
-            ps.setDate(3, section.getStartDate());
-            ps.setDate(4, section.getEndDate());
-            ps.setInt(5, section.getId());
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
+            preparedStatement.setString(1, section.getSectionName());
+            preparedStatement.setString(2, section.getDescription());
+            preparedStatement.setDate(3, section.getStartDate());
+            preparedStatement.setDate(4, section.getEndDate());
+            preparedStatement.setInt(5, section.getId());
 
-            ps.executeUpdate();
+            preparedStatement.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -59,9 +59,9 @@ public class SectionRepository {
         final String QUERY = "DELETE FROM taskmate.section WHERE id = ?";
         try{
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement ps = connection.prepareStatement(QUERY);
-            ps.setInt(1, sectionId);
-            ps.executeUpdate();
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
+            preparedStatement.setInt(1, sectionId);
+            preparedStatement.executeUpdate();
 
         }catch (SQLException e){
             e.printStackTrace();
@@ -73,13 +73,13 @@ public class SectionRepository {
         List<Section> listOfSections = new ArrayList<>();
         try{
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement ps = connection.prepareStatement(QUERY);
-            ps.setInt(1, projectId);
-            ResultSet rs = ps.executeQuery();
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
+            preparedStatement.setInt(1, projectId);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-            while (rs.next()){
-                int id = rs.getInt(1);
-                Section section = new Section(projectId, rs.getString(3), rs.getString(4), rs.getDate(5), rs.getDate(6));
+            while (resultSet.next()){
+                int id = resultSet.getInt(1);
+                Section section = new Section(projectId, resultSet.getString(3), resultSet.getString(4), resultSet.getDate(5), resultSet.getDate(6));
                 section.setId(id);
                 listOfSections.add(section);
             }
@@ -95,17 +95,17 @@ public class SectionRepository {
         Section section = new Section();
         try{
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement ps = connection.prepareStatement(QUERY);
-            ps.setInt(1, sectionId);
-            ResultSet rs = ps.executeQuery();
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
+            preparedStatement.setInt(1, sectionId);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-            rs.next();
+            resultSet.next();
             section.setId(sectionId);
-            section.setProject_id(rs.getInt(2));
-            section.setSectionName(rs.getString(3));
-            section.setDescription(rs.getString(4));
-            section.setStartDate(rs.getDate(5));
-            section.setEndDate(rs.getDate(6));
+            section.setProject_id(resultSet.getInt(2));
+            section.setSectionName(resultSet.getString(3));
+            section.setDescription(resultSet.getString(4));
+            section.setStartDate(resultSet.getDate(5));
+            section.setEndDate(resultSet.getDate(6));
 
         }catch (SQLException e){
             e.printStackTrace();

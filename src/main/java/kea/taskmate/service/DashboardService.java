@@ -38,10 +38,8 @@ public class DashboardService {
                     case 1 -> inProgress++;
                     case 2 -> done++;
                 }
-                System.out.println(task.getTaskName());
             }
             projectOverview.setProjectStatus(new ProjectStatus(done, inProgress, notStarted));
-            System.out.println("percent: "+projectOverview.getProjectStatus().getPersentageDone());
         }
         return projectOverviews;
     }

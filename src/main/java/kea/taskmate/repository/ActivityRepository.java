@@ -106,9 +106,9 @@ public class ActivityRepository {
     }
 
     public List<Activity> getActivityListById(int secId){
+        final String QUERY = "SELECT * FROM taskmate.activity WHERE section_id = ?";
         List<Activity> list = new ArrayList<>();
         try{
-            final String QUERY = "SELECT * FROM taskmate.activity WHERE section_id = ?";
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
             preparedStatement.setInt(1, secId);
@@ -124,8 +124,6 @@ public class ActivityRepository {
                 activity.setId(id);
                 activity.setStatus(status);
                 list.add(activity);
-
-
             }
 
         }catch (SQLException e){

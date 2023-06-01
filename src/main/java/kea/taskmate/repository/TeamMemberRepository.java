@@ -22,13 +22,13 @@ public class TeamMemberRepository {
         final String QUERY = "INSERT INTO taskmate.team_member(user_id, project_id, user_name, team_role) VALUES (?, ?, ?, ?)";
         try{
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement ps = connection.prepareStatement(QUERY);
-            ps.setInt(1, teamMember.getUserId());
-            ps.setInt(2, teamMember.getProjectId());
-            ps.setString(3, teamMember.getUserFirstName());
-            ps.setString(4, teamMember.getRole());
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
+            preparedStatement.setInt(1, teamMember.getUserId());
+            preparedStatement.setInt(2, teamMember.getProjectId());
+            preparedStatement.setString(3, teamMember.getUserFirstName());
+            preparedStatement.setString(4, teamMember.getRole());
 
-            ps.executeUpdate();
+            preparedStatement.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -38,12 +38,12 @@ public class TeamMemberRepository {
         final String QUERY = "UPDATE taskmate.team_member SET team_role = ? WHERE project_id = ? AND user_id = ?";
         try{
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement ps = connection.prepareStatement(QUERY);
-            ps.setString(1, teamMember.getRole());
-            ps.setInt(2, teamMember.getProjectId());
-            ps.setInt(3, teamMember.getUserId());
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
+            preparedStatement.setString(1, teamMember.getRole());
+            preparedStatement.setInt(2, teamMember.getProjectId());
+            preparedStatement.setInt(3, teamMember.getUserId());
 
-            ps.executeUpdate();
+            preparedStatement.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -53,11 +53,11 @@ public class TeamMemberRepository {
         final String QUERY = "DELETE FROM taskmate.team_member WHERE project_id = ? AND user_id = ?";
         try{
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement ps = connection.prepareStatement(QUERY);
-            ps.setInt(1, projectId);
-            ps.setInt(2, userId);
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
+            preparedStatement.setInt(1, projectId);
+            preparedStatement.setInt(2, userId);
 
-            ps.executeUpdate();
+            preparedStatement.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -68,14 +68,13 @@ public class TeamMemberRepository {
         List<TeamMember> listOfTeamMembers = new ArrayList<>();
         try{
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement ps = connection.prepareStatement(QUERY);
-            ps.setInt(1, projectId);
-            ResultSet rs = ps.executeQuery();
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
+            preparedStatement.setInt(1, projectId);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-            while (rs.next()){
-
-                TeamMember teamMember = new TeamMember(rs.getInt(1), rs.getInt(2), rs.getString(3));
-                teamMember.setRole(rs.getString(4));
+            while (resultSet.next()){
+                TeamMember teamMember = new TeamMember(resultSet.getInt(1), resultSet.getInt(2), resultSet.getString(3));
+                teamMember.setRole(resultSet.getString(4));
                 listOfTeamMembers.add(teamMember);
             }
         }catch (SQLException e){
@@ -88,12 +87,12 @@ public class TeamMemberRepository {
         final String QUERY = "SELECT * FROM taskmate.team_member WHERE user_id = ? AND project_id = ?";
         try {
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement ps = connection.prepareStatement(QUERY);
-            ps.setInt(1, userId);
-            ps.setInt(2, projectId);
-            ResultSet rs = ps.executeQuery();
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
+            preparedStatement.setInt(1, userId);
+            preparedStatement.setInt(2, projectId);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-            if(rs.next()){
+            if(resultSet.next()){
                 return true;
             }
 
@@ -139,16 +138,16 @@ public class TeamMemberRepository {
         TeamMember teamMember = new TeamMember();
         try{
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement ps = connection.prepareStatement(QUERY);
-            ps.setInt(1, projectId);
-            ps.setInt(2, userId);
-            ResultSet rs = ps.executeQuery();
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
+            preparedStatement.setInt(1, projectId);
+            preparedStatement.setInt(2, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-            rs.next();
+            resultSet.next();
             teamMember.setUserId(userId);
             teamMember.setProjectId(projectId);
-            teamMember.setUserFirstName(rs.getString(3));
-            teamMember.setRole(rs.getString(4));
+            teamMember.setUserFirstName(resultSet.getString(3));
+            teamMember.setRole(resultSet.getString(4));
 
         }catch (SQLException e){
             e.printStackTrace();
