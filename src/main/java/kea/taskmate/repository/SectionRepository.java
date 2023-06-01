@@ -4,7 +4,6 @@ import kea.taskmate.models.Section;
 import kea.taskmate.utility.ConnectionManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,51 +20,6 @@ public class SectionRepository {
     private String USERNAME;
     @Value("${spring.datasource.password}")
     private String PASSWORD;
-
-    public List<Section> getSectionsByProjectId(int projectId){
-        final String QUERY = "SELECT * FROM taskmate.section WHERE project_id = ?";
-        List<Section> listOfSections = new ArrayList<>();
-        try{
-            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement ps = connection.prepareStatement(QUERY);
-            ps.setInt(1, projectId);
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()){
-                int id = rs.getInt(1);
-                Section section = new Section(projectId, rs.getString(3), rs.getString(4), rs.getDate(5), rs.getDate(6));
-                section.setId(id);
-                listOfSections.add(section);
-            }
-
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-        return listOfSections;
-    }
-
-    public Section getSectionById(int sectionId){
-        final String QUERY = "SELECT * FROM taskmate.section WHERE id = ?";
-        Section section = new Section();
-        try{
-            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement ps = connection.prepareStatement(QUERY);
-            ps.setInt(1, sectionId);
-            ResultSet rs = ps.executeQuery();
-
-            rs.next();
-            section.setId(sectionId);
-            section.setProject_id(rs.getInt(2));
-            section.setSectionName(rs.getString(3));
-            section.setDescription(rs.getString(4));
-            section.setStartDate(rs.getDate(5));
-            section.setEndDate(rs.getDate(6));
-
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-        return section;
-    }
 
     public void addSection(Section section){
         final String QUERY = "INSERT INTO taskmate.section(project_id, section_name, description, start_date, end_date) VALUES (?, ?, ?, ?, ?)";
@@ -112,5 +66,50 @@ public class SectionRepository {
         }catch (SQLException e){
             e.printStackTrace();
         }
+    }
+
+    public List<Section> getSectionsByProjectId(int projectId){
+        final String QUERY = "SELECT * FROM taskmate.section WHERE project_id = ?";
+        List<Section> listOfSections = new ArrayList<>();
+        try{
+            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            PreparedStatement ps = connection.prepareStatement(QUERY);
+            ps.setInt(1, projectId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+                int id = rs.getInt(1);
+                Section section = new Section(projectId, rs.getString(3), rs.getString(4), rs.getDate(5), rs.getDate(6));
+                section.setId(id);
+                listOfSections.add(section);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return listOfSections;
+    }
+
+    public Section getSectionById(int sectionId){
+        final String QUERY = "SELECT * FROM taskmate.section WHERE id = ?";
+        Section section = new Section();
+        try{
+            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            PreparedStatement ps = connection.prepareStatement(QUERY);
+            ps.setInt(1, sectionId);
+            ResultSet rs = ps.executeQuery();
+
+            rs.next();
+            section.setId(sectionId);
+            section.setProject_id(rs.getInt(2));
+            section.setSectionName(rs.getString(3));
+            section.setDescription(rs.getString(4));
+            section.setStartDate(rs.getDate(5));
+            section.setEndDate(rs.getDate(6));
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return section;
     }
 }

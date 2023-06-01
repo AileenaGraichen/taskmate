@@ -5,7 +5,6 @@ import kea.taskmate.utility.ConnectionManager;
 import kea.taskmate.utility.PasswordEncrypter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,48 +20,6 @@ public class UserRepository {
     @Value("${spring.datasource.password}")
     private String PASSWORD;
 
-
-    public boolean doesUserExist(String eMail){
-        final String QUERY = "SELECT * FROM taskmate.user WHERE email = ?";
-        try {
-            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement ps = connection.prepareStatement(QUERY);
-            ps.setString(1, eMail);
-            ResultSet rs = ps.executeQuery();
-
-            while(rs.next()){
-                String email = rs.getString(4);
-                if (email != null){
-                    return true;
-                }
-            }
-
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public boolean verifyLogin(String eMail, String passWord){
-        final String QUERY = "SELECT * FROM taskmate.user WHERE email = ?";
-        try {
-            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement ps = connection.prepareStatement(QUERY);
-            ps.setString(1, eMail);
-            ResultSet rs = ps.executeQuery();
-
-            while(rs.next()){
-                String email = rs.getString(4);
-                if(PasswordEncrypter.validatePassword(passWord, rs.getString(5))){
-                    return true;
-                }
-            }
-
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-        return false;
-    }
 
     public void addUser(User user){
         final String QUERY = "INSERT INTO taskmate.user(fname, lname, email, password) VALUES (?, ?, ?, ?)";
@@ -93,6 +50,19 @@ public class UserRepository {
             ps.setInt(4, user.getId());
 
             ps.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteUserById(int userId){
+        final String QUERY = "DELETE FROM taskmate.user WHERE id = ?";
+        try{
+            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            PreparedStatement ps = connection.prepareStatement(QUERY);
+            ps.setInt(1, userId);
+            ps.executeUpdate();
+
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -148,16 +118,46 @@ public class UserRepository {
         return user;
     }
 
-    public void deleteUserById(int userId){
-        final String QUERY = "DELETE FROM taskmate.user WHERE id = ?";
-        try{
+    public boolean doesUserExist(String eMail){
+        final String QUERY = "SELECT * FROM taskmate.user WHERE email = ?";
+        try {
             Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
             PreparedStatement ps = connection.prepareStatement(QUERY);
-            ps.setInt(1, userId);
-            ps.executeUpdate();
+            ps.setString(1, eMail);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                String email = rs.getString(4);
+                if (email != null){
+                    return true;
+                }
+            }
 
         }catch (SQLException e){
             e.printStackTrace();
         }
+        return false;
     }
+
+    public boolean verifyLogin(String eMail, String passWord){
+        final String QUERY = "SELECT * FROM taskmate.user WHERE email = ?";
+        try {
+            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            PreparedStatement ps = connection.prepareStatement(QUERY);
+            ps.setString(1, eMail);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                String email = rs.getString(4);
+                if(PasswordEncrypter.validatePassword(passWord, rs.getString(5))){
+                    return true;
+                }
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

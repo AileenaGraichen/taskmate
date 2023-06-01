@@ -1,11 +1,9 @@
 package kea.taskmate.repository;
 
-import kea.taskmate.models.Activity;
 import kea.taskmate.models.Task;
 import kea.taskmate.utility.ConnectionManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,6 +20,58 @@ public class TaskRepository {
     @Value("${spring.datasource.password}")
     private String PASSWORD;
 
+
+    public void addTask(Task task){
+        final String CREATE_QUERY = "INSERT INTO taskmate.task(activity_id, task_name, description, duration) VALUES  (?, ?, ?, ?)";
+
+        try{
+            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(CREATE_QUERY);
+
+            preparedStatement.setInt(1, task.getActivityId());
+            preparedStatement.setString(2, task.getTaskName());
+            preparedStatement.setString(3, task.getDescription());
+            preparedStatement.setFloat(4, task.getDurationInHours());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e){
+            System.out.println("Could not create task");
+            e.printStackTrace();
+        }
+    }
+
+    public void updateTask(Task task){
+        final String UPDATE_QUERY = "UPDATE taskmate.task SET task_name = ?, description = ?, duration = ? WHERE id = ?";
+        try{
+            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY);
+
+            preparedStatement.setString(1, task.getTaskName());
+            preparedStatement.setString(2, task.getDescription());
+            preparedStatement.setFloat(3, task.getDurationInHours());
+            preparedStatement.setInt(4, task.getId());
+
+            preparedStatement.executeUpdate();
+
+        }catch (SQLException e){
+            System.out.println("Could not update task.");
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteTaskById(int id) {
+        final String DELETE_QUERY = "DELETE FROM taskmate.task WHERE id = ?";
+        try {
+            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_QUERY);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Could not delete task");
+            e.printStackTrace();
+        }
+    }
 
     public Task getTaskById(int taskId) {
         final String FIND_QUERY = "SELECT * FROM taskmate.task WHERE id = ?";
@@ -82,44 +132,6 @@ public class TaskRepository {
         return list;
     }
 
-    public void addTask(Task task){
-        final String CREATE_QUERY = "INSERT INTO taskmate.task(activity_id, task_name, description, duration) VALUES  (?, ?, ?, ?)";
-
-        try{
-            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement preparedStatement = connection.prepareStatement(CREATE_QUERY);
-
-            preparedStatement.setInt(1, task.getActivityId());
-            preparedStatement.setString(2, task.getTaskName());
-            preparedStatement.setString(3, task.getDescription());
-            preparedStatement.setFloat(4, task.getDurationInHours());
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException e){
-            System.out.println("Could not create task");
-            e.printStackTrace();
-        }
-    }
-
-    public void updateTask(Task task){
-        final String UPDATE_QUERY = "UPDATE taskmate.task SET task_name = ?, description = ?, duration = ? WHERE id = ?";
-        try{
-            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY);
-
-            preparedStatement.setString(1, task.getTaskName());
-            preparedStatement.setString(2, task.getDescription());
-            preparedStatement.setFloat(3, task.getDurationInHours());
-            preparedStatement.setInt(4, task.getId());
-
-            preparedStatement.executeUpdate();
-
-        }catch (SQLException e){
-            System.out.println("Could not update task.");
-            e.printStackTrace();
-        }
-    }
-
     public void updateTaskStatus(Task task){
         final String UPDATE_QUERY = "UPDATE taskmate.task SET status = ? WHERE id = ?";
         try{
@@ -133,20 +145,6 @@ public class TaskRepository {
 
         }catch (SQLException e){
             System.out.println("Could not update task status");
-            e.printStackTrace();
-        }
-    }
-
-    public void deleteTaskById(int id) {
-        final String DELETE_QUERY = "DELETE FROM taskmate.task WHERE id = ?";
-        try {
-            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_QUERY);
-            preparedStatement.setInt(1, id);
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-            System.out.println("Could not delete task");
             e.printStackTrace();
         }
     }

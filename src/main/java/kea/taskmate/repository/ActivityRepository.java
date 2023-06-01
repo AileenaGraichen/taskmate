@@ -4,7 +4,6 @@ import kea.taskmate.models.Activity;
 import kea.taskmate.utility.ConnectionManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,6 +20,59 @@ public class ActivityRepository {
     @Value("${spring.datasource.password}")
     private String PASSWORD;
 
+    public void addActivity(Activity activity){
+        final String CREATE_QUERY = "INSERT INTO taskmate.activity(section_id, activity_name, description, duration, status) VALUES  (?, ?, ?, ?, ?)";
+        try{
+            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(CREATE_QUERY);
+
+            preparedStatement.setInt(1, activity.getSectionId());
+            preparedStatement.setString(2, activity.getActivityName());
+            preparedStatement.setString(3, activity.getDescription());
+            preparedStatement.setFloat(4, activity.getDurationInHours());
+            preparedStatement.setInt(5, activity.getStatus());
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e){
+            System.out.println("Could not create activity");
+            e.printStackTrace();
+        }
+    }
+
+    public void updateActivity(Activity activity){
+        final String UPDATE_QUERY = "UPDATE taskmate.activity SET activity_name = ?, description = ?, duration = ?, status = ? WHERE id = ?";
+        try{
+            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY);
+
+            preparedStatement.setString(1, activity.getActivityName());
+            preparedStatement.setString(2, activity.getDescription());
+            preparedStatement.setFloat(3, activity.getDurationInHours());
+            preparedStatement.setInt(4, activity.getStatus());
+            preparedStatement.setInt(5, activity.getId());
+
+            preparedStatement.executeUpdate();
+
+        }catch (SQLException e){
+            System.out.println("Could not update activity.");
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteActivityById(int id) {
+        final String DELETE_QUERY = "DELETE FROM taskmate.activity WHERE id = ?";
+        try {
+            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_QUERY);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Could not delete activity");
+            e.printStackTrace();
+        }
+    }
 
     public Activity getActivityById(int activityId) {
         final String FIND_QUERY = "SELECT * FROM taskmate.activity WHERE id = ?";
@@ -83,46 +135,6 @@ public class ActivityRepository {
         return list;
     }
 
-    public void addActivity(Activity activity){
-        final String CREATE_QUERY = "INSERT INTO taskmate.activity(section_id, activity_name, description, duration, status) VALUES  (?, ?, ?, ?, ?)";
-        try{
-            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement preparedStatement = connection.prepareStatement(CREATE_QUERY);
-
-            preparedStatement.setInt(1, activity.getSectionId());
-            preparedStatement.setString(2, activity.getActivityName());
-            preparedStatement.setString(3, activity.getDescription());
-            preparedStatement.setFloat(4, activity.getDurationInHours());
-            preparedStatement.setInt(5, activity.getStatus());
-
-            preparedStatement.executeUpdate();
-
-    } catch (SQLException e){
-            System.out.println("Could not create activity");
-            e.printStackTrace();
-        }
-    }
-
-    public void updateActivity(Activity activity){
-        final String UPDATE_QUERY = "UPDATE taskmate.activity SET activity_name = ?, description = ?, duration = ?, status = ? WHERE id = ?";
-        try{
-            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY);
-
-            preparedStatement.setString(1, activity.getActivityName());
-            preparedStatement.setString(2, activity.getDescription());
-            preparedStatement.setFloat(3, activity.getDurationInHours());
-            preparedStatement.setInt(4, activity.getStatus());
-            preparedStatement.setInt(5, activity.getId());
-
-            preparedStatement.executeUpdate();
-
-        }catch (SQLException e){
-            System.out.println("Could not update activity.");
-            e.printStackTrace();
-        }
-    }
-
     public void updateActivityStatus(Activity activity){
         final String UPDATE_QUERY = "UPDATE taskmate.activity SET status = ? WHERE id = ?";
         try{
@@ -140,17 +152,4 @@ public class ActivityRepository {
         }
     }
 
-    public void deleteActivityById(int id) {
-        final String DELETE_QUERY = "DELETE FROM taskmate.activity WHERE id = ?";
-        try {
-            Connection connection = ConnectionManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_QUERY);
-            preparedStatement.setInt(1, id);
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-            System.out.println("Could not delete activity");
-            e.printStackTrace();
-        }
-    }
 }

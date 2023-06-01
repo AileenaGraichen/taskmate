@@ -7,11 +7,8 @@ import java.sql.SQLException;
 public class ConnectionManager {
     private static Connection connection = null;
 
-    //giv connection til database
     public static Connection getConnection(String db_url, String uid, String pwd){
-        //connection initialised?
         if (connection == null) {
-            //initialize connection
             try {
                 connection = DriverManager.getConnection(db_url, uid, pwd);
             } catch (SQLException e) {

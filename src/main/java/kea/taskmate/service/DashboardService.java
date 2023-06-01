@@ -1,13 +1,9 @@
 package kea.taskmate.service;
 
 import kea.taskmate.models.*;
-import kea.taskmate.repository.ActivityRepository;
 import kea.taskmate.repository.ProjectRepository;
-import kea.taskmate.repository.SectionRepository;
-import kea.taskmate.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
